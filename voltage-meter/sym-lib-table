@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "esp32c3-mini")(type "KiCad")(uri "${KIPRJMOD}/../components/esp32c3-mini.kicad_sym")(options "")(descr ""))
+)

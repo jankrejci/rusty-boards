@@ -1,0 +1,34 @@
+name: voltage-meter
+
+on:
+  pull_request:
+    paths:
+    - 'voltage-meter/*.kicad_sch'
+    - 'voltage-meter/*.kicad_pcb'
+    - '.github/workflows/voltage-meter-jlcpcb.yaml'
+    - 'voltage-meter/*.kibot.yaml'
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Workflow run name'
+        required: false
+        default: 'Voltage meter gerbers'
+  
+jobs:
+  jlcpcb:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: INTI-CMNB/KiBot@v2_k9
+      with:
+        config: jlcpcb.kibot.yaml
+        dir: output
+        schema: 'voltage-meter/voltage-meter.kicad_sch'
+        board: 'voltage-meter/voltage-meter.kicad_pcb'
+    - name: 'Cleanup build folder'
+      run: sudo rm -rf ./output/tmp
+    - name: 'Upload results'
+      uses: actions/upload-artifact@v4
+      with:
+        name: voltage-meter-jlcpcb
+        path: output
