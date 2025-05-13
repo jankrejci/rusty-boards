@@ -10477,7 +10477,7 @@
 			(uuid "a0681190-f046-4f3f-9a8a-433caf0e9e4f")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/TQFN-16-1EP_3x3mm_P0.5mm_EP1.23x1.23mm.wrl"
+		(model "${KICAD9_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/QFN-16-1EP_3x3mm_P0.5mm_EP1.8x1.8mm.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -12181,7 +12181,7 @@
 			(uuid "30903fcf-4295-4a25-980e-d4c739b11895")
 		)
 		(embedded_fonts no)
-		(model "/home/jkr/projects/rusty-boards/components/PEC11R-4215F-S0024/PEC11R-4215F-S0024.step"
+		(model "/home/jkr/Projects/rusty-boards/components/PEC11R-4215F-S0024/PEC11R-4215F-S0024.step"
 			(offset
 				(xyz 7.5 -2.4 6.5)
 			)
@@ -13842,7 +13842,7 @@
 			(uuid "56eda351-3f49-473c-8b9d-f8ccfaca7cac")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/LED_SMD.3dshapes/LED_SK6812MINI_PLCC4_3.5x3.5mm_P1.75mm.wrl"
+		(model "${KICAD9_3DMODEL_DIR}/LED_SMD.3dshapes/LED_WS2812B-Mini_PLCC4_3.5x3.5mm.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -14514,7 +14514,7 @@
 			(uuid "6c636155-a44d-4d49-86c7-672b4559b3dd")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/LED_SMD.3dshapes/LED_SK6812MINI_PLCC4_3.5x3.5mm_P1.75mm.wrl"
+		(model "${KICAD9_3DMODEL_DIR}/LED_SMD.3dshapes/LED_WS2812B-Mini_PLCC4_3.5x3.5mm.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -15603,7 +15603,7 @@
 			(uuid "4ade27b2-39fe-4fe4-8e5d-0fa320101c4e")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/LED_SMD.3dshapes/LED_SK6812MINI_PLCC4_3.5x3.5mm_P1.75mm.wrl"
+		(model "${KICAD9_3DMODEL_DIR}/LED_SMD.3dshapes/LED_WS2812B-Mini_PLCC4_3.5x3.5mm.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -20887,7 +20887,7 @@
 			(uuid "831e1475-0d6c-438b-87e0-f3b92207dc6c")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/LED_SMD.3dshapes/LED_SK6812MINI_PLCC4_3.5x3.5mm_P1.75mm.wrl"
+		(model "${KICAD9_3DMODEL_DIR}/LED_SMD.3dshapes/LED_WS2812B-Mini_PLCC4_3.5x3.5mm.stpZ"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -22527,15 +22527,15 @@
 			(uuid "72c3384c-4e90-4bdb-97fc-50a3b9b3dbba")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.wrl"
+		(model "/home/jkr/Projects/rusty-boards/components/HRO TYPE-C-31-M-12.step"
 			(offset
-				(xyz 0 0 0)
+				(xyz -4.5 -3.7 0)
 			)
 			(scale
 				(xyz 1 1 1)
 			)
 			(rotate
-				(xyz 0 0 0)
+				(xyz -90 -0 -0)
 			)
 		)
 		(model "/home/jkr/projects/rusty-boards/components/HRO TYPE-C-31-M-12.step"

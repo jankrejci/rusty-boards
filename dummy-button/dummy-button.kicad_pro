@@ -612,7 +612,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "dummy-button.step",
+      "step": "../../../dummy-button.step",
       "svg": "",
       "vrml": ""
     },
