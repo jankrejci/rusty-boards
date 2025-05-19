@@ -8,10 +8,10 @@ use esp_hal::clock::CpuClock;
 use esp_hal::timer::systimer::SystemTimer;
 use {esp_backtrace as _, esp_println as _};
 
-#[esp_hal_embassy::main]
-async fn main(spawner: Spawner) {
-    // generator version: 0.3.1
+mod lm75;
 
+#[esp_hal_embassy::main]
+async fn main(_spawner: Spawner) {
     let config = esp_hal::Config::default().with_cpu_clock(CpuClock::max());
     let peripherals = esp_hal::init(config);
 
@@ -20,13 +20,8 @@ async fn main(spawner: Spawner) {
 
     info!("Embassy initialized!");
 
-    // TODO: Spawn some tasks
-    let _ = spawner;
-
     loop {
         info!("Hello world!");
         Timer::after(Duration::from_secs(1)).await;
     }
-
-    // for inspiration have a look at the examples at https://github.com/esp-rs/esp-hal/tree/esp-hal-v1.0.0-beta.0/examples/src/bin
 }
