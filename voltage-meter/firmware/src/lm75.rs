@@ -2,6 +2,7 @@ use defmt::{self, debug, error, info, trace};
 use embassy_time::{Duration, Ticker};
 use embedded_hal::i2c;
 
+use crate::metrics::{AmbientTemperature, MetricsPublisher};
 use crate::I2cDevice;
 
 pub const LM75_I2C_ADDRESS: u8 = 0x48;
@@ -53,7 +54,11 @@ where
 }
 
 #[embassy_executor::task]
-pub async fn reader_task(mut reader: Lm75Reader<I2cDevice>, reading_period: Duration) {
+pub async fn reader_task(
+    mut reader: Lm75Reader<I2cDevice>,
+    reading_period: Duration,
+    metrics_publisher: MetricsPublisher,
+) {
     if let Err(e) = reader.init().await {
         error!("Failed to initialize LM75 sensor, {}", e);
         return;
@@ -73,6 +78,8 @@ pub async fn reader_task(mut reader: Lm75Reader<I2cDevice>, reading_period: Dura
                 continue;
             }
         };
-        info!("LM75 temperature {}", temperature)
+
+        let metrics = AmbientTemperature::build(temperature);
+        metrics_publisher.publish(metrics).await;
     }
 }

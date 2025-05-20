@@ -20,8 +20,10 @@ use esp_backtrace as _;
 use esp_println as _;
 
 use lm75::{Lm75Reader, LM75_I2C_ADDRESS};
+use metrics::{MetricsHandler, METRICS_CHANNEL};
 
 mod lm75;
+mod metrics;
 
 pub type I2cDevice = CriticalSectionDevice<'static, I2c<'static, Async>>;
 
@@ -42,6 +44,15 @@ async fn main(spawner: Spawner) {
 
     info!("Embassy initialized!");
 
+    let metrics_handler = MetricsHandler::new(
+        METRICS_CHANNEL
+            .subscriber()
+            .expect("BUG: Not enough subscribers left"),
+    );
+    spawner
+        .spawn(metrics::metrics_handler_task(metrics_handler))
+        .expect("BUG: Failed to spawn metrics task");
+
     let i2c_bus = I2C_BUS.init(Mutex::new(RefCell::new(
         I2c::new(
             peripherals.I2C0,
@@ -56,6 +67,12 @@ async fn main(spawner: Spawner) {
     let lm75_reader = Lm75Reader::new(CriticalSectionDevice::new(i2c_bus), LM75_I2C_ADDRESS);
     let lm75_reading_period = Duration::from_millis(1000);
     spawner
-        .spawn(lm75::reader_task(lm75_reader, lm75_reading_period))
+        .spawn(lm75::reader_task(
+            lm75_reader,
+            lm75_reading_period,
+            METRICS_CHANNEL
+                .publisher()
+                .expect("BUG: Not enough publishers left"),
+        ))
         .expect("BUG: Failed to spawn LM75 reader task");
 }
