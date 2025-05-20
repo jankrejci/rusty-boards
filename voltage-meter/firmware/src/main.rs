@@ -4,11 +4,15 @@
 use defmt::info;
 use embassy_executor::Spawner;
 use embassy_time::{Duration, Timer};
+use embedded_hal_bus::i2c::CriticalSectionDevice;
 use esp_hal::clock::CpuClock;
 use esp_hal::timer::systimer::SystemTimer;
+use esp_hal::{i2c::master::I2c, Async};
 use {esp_backtrace as _, esp_println as _};
 
 mod lm75;
+
+pub type I2cDevice = CriticalSectionDevice<'static, I2c<'static, Async>>;
 
 #[esp_hal_embassy::main]
 async fn main(_spawner: Spawner) {

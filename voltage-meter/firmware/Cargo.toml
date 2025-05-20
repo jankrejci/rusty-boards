@@ -5,7 +5,11 @@ version = "0.1.0"
 
 [[bin]]
 name = "voltage-meter"
-path = "./src/bin/main.rs"
+path = "./src/main.rs"
+
+[lib]
+name = "voltage_meter"
+path = "./src/lib.rs"
 
 [dependencies]
 critical-section = "1.2.0"
@@ -29,6 +33,8 @@ esp-hal = { version = "1.0.0-beta.0", features = [
 esp-hal-embassy = { version = "0.7.0", features = ["esp32c3"] }
 esp-println = { version = "0.13.0", features = ["defmt-espflash", "esp32c3"] }
 static_cell = { version = "2.1.0", features = ["nightly"] }
+embedded-hal = { version="1.0.0", features=["defmt-03"] }
+embedded-hal-bus = "0.2.0"
 
 [profile.dev]
 # Rust debug is too slow.
