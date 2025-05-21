@@ -23,9 +23,11 @@ use static_cell::StaticCell;
 use esp_backtrace as _;
 use esp_println as _;
 
+use adc::AdcReader;
 use lm75::{Lm75Reader, LM75_I2C_ADDRESS};
 use metrics::{MetricsExporter, METRICS_CHANNEL};
 
+mod adc;
 mod lm75;
 mod metrics;
 
@@ -73,12 +75,27 @@ async fn main(spawner: Spawner) {
         .into_async(),
     )));
 
+    const LM75_READING_PERIOD: Duration = Duration::from_millis(1000);
     let lm75_reader = Lm75Reader::new(CriticalSectionDevice::new(i2c_bus), LM75_I2C_ADDRESS);
-    let lm75_reading_period = Duration::from_millis(1000);
     spawner
         .spawn(lm75::reader_task(
             lm75_reader,
-            lm75_reading_period,
+            LM75_READING_PERIOD,
+            METRICS_CHANNEL
+                .publisher()
+                .expect("BUG: Not enough publishers left"),
+        ))
+        .expect("BUG: Failed to spawn LM75 reader task");
+
+    const RESISTOR_A: f32 = 12_000.0;
+    const RESISTOR_B: f32 = 1_000.0;
+    const ADC_READING_PERIOD: Duration = Duration::from_millis(1000);
+    let divider_ratio = (RESISTOR_A + RESISTOR_B) / RESISTOR_B;
+    let adc_reader = AdcReader::new(peripherals.ADC1, peripherals.GPIO0, divider_ratio);
+    spawner
+        .spawn(adc::reader_task(
+            adc_reader,
+            ADC_READING_PERIOD,
             METRICS_CHANNEL
                 .publisher()
                 .expect("BUG: Not enough publishers left"),
