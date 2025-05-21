@@ -19,10 +19,7 @@ use static_cell::StaticCell;
 use esp_backtrace as _;
 use esp_println as _;
 
-use voltage_meter::{
-    lm75::{Lm75Reader, LM75_I2C_ADDRESS},
-    I2cDevice,
-};
+use voltage_meter::{lm75::Lm75Reader, I2cDevice};
 
 static I2C_BUS: StaticCell<Mutex<RefCell<I2c<'static, Async>>>> = StaticCell::new();
 
@@ -40,10 +37,11 @@ async fn main(spawner: Spawner) {
 
     info!("Embassy runtime initialized");
 
+    const I2C_BUS_SPEED: Rate = Rate::from_khz(400);
     let i2c_bus = I2C_BUS.init(Mutex::new(RefCell::new(
         I2c::new(
             peripherals.I2C0,
-            Config::default().with_frequency(Rate::from_khz(400)),
+            Config::default().with_frequency(I2C_BUS_SPEED),
         )
         .expect("Failed to build I2C bus")
         .with_sda(peripherals.GPIO8)
@@ -51,6 +49,7 @@ async fn main(spawner: Spawner) {
         .into_async(),
     )));
 
+    const LM75_I2C_ADDRESS: u8 = 0x48;
     let lm75_reader = Lm75Reader::new(CriticalSectionDevice::new(i2c_bus), LM75_I2C_ADDRESS);
     spawner
         .spawn(simple_reader_task(lm75_reader))

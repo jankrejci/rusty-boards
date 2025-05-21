@@ -5,13 +5,13 @@ use core::cell::RefCell;
 use critical_section::Mutex;
 use defmt::{info, trace};
 use embassy_executor::Spawner;
-use embassy_time::{Duration, Timer};
+use embassy_time::Timer;
 use embedded_hal_bus::i2c::CriticalSectionDevice;
 use esp_hal::{
     clock::CpuClock,
     i2c::master::{Config, I2c},
     peripherals::TIMG0,
-    time::{self, Rate},
+    time::{self},
     timer::{
         systimer::SystemTimer,
         timg::{MwdtStage, TimerGroup, Wdt},
@@ -24,10 +24,12 @@ use esp_backtrace as _;
 use esp_println as _;
 
 use adc::AdcReader;
-use lm75::{Lm75Reader, LM75_I2C_ADDRESS};
+use config::{AdcConfig, BoardConfig, I2cConfig, Lm75Config};
+use lm75::Lm75Reader;
 use metrics::{MetricsExporter, METRICS_CHANNEL};
 
 mod adc;
+mod config;
 mod lm75;
 mod metrics;
 
@@ -44,13 +46,14 @@ defmt::timestamp!(
 async fn main(spawner: Spawner) {
     let config = esp_hal::Config::default().with_cpu_clock(CpuClock::max());
     let peripherals = esp_hal::init(config);
+    let board = BoardConfig::new(peripherals);
 
-    let timer0 = SystemTimer::new(peripherals.SYSTIMER);
+    let timer0 = SystemTimer::new(board.embassy.timer);
     esp_hal_embassy::init(timer0.alarm0);
 
     info!("Embassy initialized!");
 
-    let timg0 = TimerGroup::new(peripherals.TIMG0);
+    let timg0 = TimerGroup::new(board.watchdog.timer);
     spawner
         .spawn(watchdog_feed_task(timg0.wdt))
         .expect("BUG: Failed to spawn watchdog task");
@@ -66,36 +69,29 @@ async fn main(spawner: Spawner) {
 
     let i2c_bus = I2C_BUS.init(Mutex::new(RefCell::new(
         I2c::new(
-            peripherals.I2C0,
-            Config::default().with_frequency(Rate::from_khz(400)),
+            board.i2c.device,
+            Config::default().with_frequency(I2cConfig::BUS_SPEED),
         )
         .expect("Failed to build I2C bus")
-        .with_sda(peripherals.GPIO8)
-        .with_scl(peripherals.GPIO9)
+        .with_sda(board.i2c.sda_pin)
+        .with_scl(board.i2c.scl_pin)
         .into_async(),
     )));
 
-    const LM75_READING_PERIOD: Duration = Duration::from_millis(1000);
-    let lm75_reader = Lm75Reader::new(CriticalSectionDevice::new(i2c_bus), LM75_I2C_ADDRESS);
     spawner
         .spawn(lm75::reader_task(
-            lm75_reader,
-            LM75_READING_PERIOD,
+            Lm75Reader::new(CriticalSectionDevice::new(i2c_bus), Lm75Config::I2C_ADDRESS),
+            Lm75Config::READING_PERIOD,
             METRICS_CHANNEL
                 .publisher()
                 .expect("BUG: Not enough publishers left"),
         ))
         .expect("BUG: Failed to spawn LM75 reader task");
 
-    const RESISTOR_A: f32 = 12_000.0;
-    const RESISTOR_B: f32 = 1_000.0;
-    const ADC_READING_PERIOD: Duration = Duration::from_millis(1000);
-    let divider_ratio = (RESISTOR_A + RESISTOR_B) / RESISTOR_B;
-    let adc_reader = AdcReader::new(peripherals.ADC1, peripherals.GPIO0, divider_ratio);
     spawner
         .spawn(adc::reader_task(
-            adc_reader,
-            ADC_READING_PERIOD,
+            AdcReader::new(board.adc.device, board.adc.pin, AdcConfig::divider_ratio()),
+            AdcConfig::READING_PERIOD,
             METRICS_CHANNEL
                 .publisher()
                 .expect("BUG: Not enough publishers left"),

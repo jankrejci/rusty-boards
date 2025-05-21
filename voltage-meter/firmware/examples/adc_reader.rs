@@ -25,8 +25,8 @@ async fn main(spawner: Spawner) {
 
     info!("Embassy runtime initialized");
 
-    let divider_ratio = (12_000.0 + 1_000.0) / 1_000.0;
-    let adc_reader = AdcReader::new(peripherals.ADC1, peripherals.GPIO0, divider_ratio);
+    const ADC_DIVIDER_RATIO: f32 = 13.0;
+    let adc_reader = AdcReader::new(peripherals.ADC1, peripherals.GPIO0, ADC_DIVIDER_RATIO);
     spawner
         .spawn(simple_reader_task(adc_reader))
         .expect("BUG: Failed to spawn LM75 reader task");

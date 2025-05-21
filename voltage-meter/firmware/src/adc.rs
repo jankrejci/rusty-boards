@@ -2,18 +2,15 @@ use defmt::{debug, info, trace};
 use embassy_time::{Duration, Ticker};
 use esp_hal::{
     analog::adc::{Adc, AdcCalCurve, AdcChannel, AdcConfig, AdcPin, Attenuation},
-    gpio::{AnalogPin, GpioPin},
-    peripherals::ADC1,
+    gpio::AnalogPin,
     Async,
 };
 
+use crate::config as cfg;
 use crate::metrics::{MetricsPublisher, VoltageFeedback};
 
-pub type AdcReaderPin = GpioPin<0>;
-pub type AdcReaderDevice = ADC1;
-pub type AdcCalibration = AdcCalCurve<AdcReaderDevice>;
-
-pub type VoltageReader = AdcReader<'static, AdcReaderDevice, AdcReaderPin, AdcCalibration>;
+pub type AdcCal = AdcCalCurve<cfg::AdcDevice>;
+pub type VoltageReader = AdcReader<'static, cfg::AdcDevice, cfg::AdcPin, AdcCal>;
 
 pub struct AdcReader<'d, ADCI, PIN, CS> {
     device: Adc<'d, ADCI, Async>,
@@ -21,14 +18,13 @@ pub struct AdcReader<'d, ADCI, PIN, CS> {
     divider_ratio: f32,
 }
 
-impl<'d, PIN> AdcReader<'d, AdcReaderDevice, PIN, AdcCalibration>
+impl<'d, PIN> AdcReader<'d, cfg::AdcDevice, PIN, AdcCal>
 where
     PIN: AnalogPin + AdcChannel,
 {
-    pub fn new(adc_deivce: AdcReaderDevice, gpio_pin: PIN, divider_ratio: f32) -> Self {
+    pub fn new(adc_deivce: cfg::AdcDevice, gpio_pin: PIN, divider_ratio: f32) -> Self {
         let mut adc_config = AdcConfig::new();
-        let pin =
-            adc_config.enable_pin_with_cal::<PIN, AdcCalibration>(gpio_pin, Attenuation::_11dB);
+        let pin = adc_config.enable_pin_with_cal::<PIN, AdcCal>(gpio_pin, Attenuation::_11dB);
         let device = Adc::new(adc_deivce, adc_config).into_async();
 
         debug!("AdcReader initialized successfully");

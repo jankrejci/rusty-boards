@@ -5,7 +5,6 @@ use embedded_hal::i2c;
 use crate::metrics::{AmbientTemperature, MetricsPublisher};
 use crate::I2cDevice;
 
-pub const LM75_I2C_ADDRESS: u8 = 0x48;
 pub const BIT_MASK_RESOLUTION_11BIT: u16 = 0b1111_1111_1110_0000;
 
 pub struct Lm75Reader<I2C> {

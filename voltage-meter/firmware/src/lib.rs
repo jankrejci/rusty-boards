@@ -5,6 +5,7 @@ use embedded_hal_bus::i2c::CriticalSectionDevice;
 use esp_hal::{i2c::master::I2c, Async};
 
 pub mod adc;
+pub mod config;
 pub mod lm75;
 pub mod metrics;
 
