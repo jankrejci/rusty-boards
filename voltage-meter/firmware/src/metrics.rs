@@ -54,7 +54,7 @@ macro_rules! create_metrics {
     };
 }
 
-create_metrics!(AmbientTemperature);
+create_metrics!(VoltageFeedback, AmbientTemperature);
 
 #[derive(Clone)]
 pub struct AmbientTemperature {
@@ -78,6 +78,32 @@ impl core::fmt::Display for AmbientTemperature {
             f,
             "ambient_temperature{{unit=\"C\"}} {} {}",
             self.temperature, self.timestamp_ms,
+        )
+    }
+}
+
+#[derive(Clone)]
+pub struct VoltageFeedback {
+    pub timestamp_ms: u64,
+    pub voltage: f32,
+}
+
+impl VoltageFeedback {
+    pub fn build(voltage: f32) -> Metrics {
+        let timestamp_ms = Instant::now().as_millis();
+        Metrics::VoltageFeedback(Self {
+            timestamp_ms,
+            voltage,
+        })
+    }
+}
+
+impl core::fmt::Display for VoltageFeedback {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(
+            f,
+            "voltage_feedback{{unit=\"V\"}} {} {}",
+            self.voltage, self.timestamp_ms,
         )
     }
 }
