@@ -3,15 +3,19 @@
 
 use core::cell::RefCell;
 use critical_section::Mutex;
-use defmt::info;
+use defmt::{info, trace};
 use embassy_executor::Spawner;
-use embassy_time::Duration;
+use embassy_time::{Duration, Timer};
 use embedded_hal_bus::i2c::CriticalSectionDevice;
 use esp_hal::{
     clock::CpuClock,
     i2c::master::{Config, I2c},
+    peripherals::TIMG0,
     time::{self, Rate},
-    timer::systimer::SystemTimer,
+    timer::{
+        systimer::SystemTimer,
+        timg::{MwdtStage, TimerGroup, Wdt},
+    },
     Async,
 };
 use static_cell::StaticCell;
@@ -44,6 +48,11 @@ async fn main(spawner: Spawner) {
 
     info!("Embassy initialized!");
 
+    let timg0 = TimerGroup::new(peripherals.TIMG0);
+    spawner
+        .spawn(watchdog_feed_task(timg0.wdt))
+        .expect("BUG: Failed to spawn watchdog task");
+
     let metrics_handler = MetricsHandler::new(
         METRICS_CHANNEL
             .subscriber()
@@ -75,4 +84,20 @@ async fn main(spawner: Spawner) {
                 .expect("BUG: Not enough publishers left"),
         ))
         .expect("BUG: Failed to spawn LM75 reader task");
+}
+
+#[embassy_executor::task]
+pub async fn watchdog_feed_task(mut watchdog: Wdt<TIMG0>) {
+    const WATCHDOG_TIMEOUT: esp_hal::time::Duration = esp_hal::time::Duration::from_millis(2000);
+    const WATCHDOG_FEED_PERIOD: embassy_time::Duration = embassy_time::Duration::from_millis(500);
+
+    watchdog.enable();
+    watchdog.set_timeout(MwdtStage::Stage0, WATCHDOG_TIMEOUT);
+
+    info!("Watchdog feeding task started");
+    loop {
+        watchdog.feed();
+        trace!("Feeding the watchdog");
+        Timer::after(WATCHDOG_FEED_PERIOD).await;
+    }
 }
