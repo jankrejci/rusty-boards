@@ -24,7 +24,7 @@ use esp_backtrace as _;
 use esp_println as _;
 
 use lm75::{Lm75Reader, LM75_I2C_ADDRESS};
-use metrics::{MetricsHandler, METRICS_CHANNEL};
+use metrics::{MetricsExporter, METRICS_CHANNEL};
 
 mod lm75;
 mod metrics;
@@ -53,13 +53,13 @@ async fn main(spawner: Spawner) {
         .spawn(watchdog_feed_task(timg0.wdt))
         .expect("BUG: Failed to spawn watchdog task");
 
-    let metrics_handler = MetricsHandler::new(
+    let metrics_exporter = MetricsExporter::new(
         METRICS_CHANNEL
             .subscriber()
             .expect("BUG: Not enough subscribers left"),
     );
     spawner
-        .spawn(metrics::metrics_handler_task(metrics_handler))
+        .spawn(metrics::metrics_exporter_task(metrics_exporter))
         .expect("BUG: Failed to spawn metrics task");
 
     let i2c_bus = I2C_BUS.init(Mutex::new(RefCell::new(

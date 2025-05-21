@@ -11,7 +11,7 @@ use esp_backtrace as _;
 use esp_println as _;
 
 use voltage_meter::metrics::{
-    self, AmbientTemperature, MetricsHandler, MetricsPublisher, METRICS_CHANNEL,
+    self, AmbientTemperature, MetricsExporter, MetricsPublisher, METRICS_CHANNEL,
 };
 
 defmt::timestamp!(
@@ -36,13 +36,13 @@ async fn main(spawner: Spawner) {
         ))
         .expect("BUG: Failed to spawn ADC reader task");
 
-    let metrics_handler = MetricsHandler::new(
+    let metrics_handler = MetricsExporter::new(
         METRICS_CHANNEL
             .subscriber()
             .expect("BUG: Not enough subscribers left"),
     );
     spawner
-        .spawn(metrics::metrics_handler_task(metrics_handler))
+        .spawn(metrics::metrics_exporter_task(metrics_handler))
         .expect("BUG: Failed to spawn metrics task");
 }
 

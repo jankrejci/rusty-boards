@@ -82,11 +82,11 @@ impl core::fmt::Display for AmbientTemperature {
     }
 }
 
-pub struct MetricsHandler {
+pub struct MetricsExporter {
     metrics_subscriber: MetricsSubscriber,
 }
 
-impl MetricsHandler {
+impl MetricsExporter {
     pub fn new(metrics_subscriber: MetricsSubscriber) -> Self {
         debug!("MetricsPublisher initialized succesfully");
         Self { metrics_subscriber }
@@ -94,7 +94,7 @@ impl MetricsHandler {
 }
 
 #[embassy_executor::task]
-pub async fn metrics_handler_task(mut handler: MetricsHandler) {
+pub async fn metrics_exporter_task(mut handler: MetricsExporter) {
     info!("MetricsHandler task started");
 
     loop {
