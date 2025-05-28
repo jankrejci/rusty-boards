@@ -9,8 +9,11 @@ use embassy_time::Timer;
 use embedded_hal_bus::i2c::CriticalSectionDevice;
 use esp_hal::{
     clock::CpuClock,
-    i2c::master::{Config, I2c},
+    dma::{DmaRxBuf, DmaTxBuf},
+    dma_buffers,
+    i2c::{self, master::I2c},
     peripherals::TIMG0,
+    spi::{self, master::Spi},
     time::{self},
     timer::{
         systimer::SystemTimer,
@@ -24,18 +27,20 @@ use esp_backtrace as _;
 use esp_println as _;
 
 use adc::AdcReader;
-use config::{AdcConfig, BoardConfig, I2cConfig, Lm75Config};
+use config::{AdcConfig, BoardConfig, I2cConfig, Lm75Config, SpiConfig};
 use lm75::Lm75Reader;
 use metrics::{MetricsExporter, METRICS_CHANNEL};
 
 mod adc;
 mod config;
+mod display;
 mod lm75;
 mod metrics;
 
 pub type I2cDevice = CriticalSectionDevice<'static, I2c<'static, Async>>;
 
 static I2C_BUS: StaticCell<Mutex<RefCell<I2c<'static, Async>>>> = StaticCell::new();
+static DISPLAY_BUFFER: StaticCell<[u8; 32000]> = StaticCell::new();
 
 defmt::timestamp!(
     "{=u64:us}",
@@ -70,7 +75,7 @@ async fn main(spawner: Spawner) {
     let i2c_bus = I2C_BUS.init(Mutex::new(RefCell::new(
         I2c::new(
             board.i2c.device,
-            Config::default().with_frequency(I2cConfig::BUS_SPEED),
+            i2c::master::Config::default().with_frequency(I2cConfig::BUS_SPEED),
         )
         .expect("Failed to build I2C bus")
         .with_sda(board.i2c.sda_pin)
@@ -97,6 +102,39 @@ async fn main(spawner: Spawner) {
                 .expect("BUG: Not enough publishers left"),
         ))
         .expect("BUG: Failed to spawn LM75 reader task");
+
+    let (rx_buffer, rx_descriptors, tx_buffer, tx_descriptors) =
+        dma_buffers!(SpiConfig::DMA_BUFFER_SIZE);
+    let dma_rx_buf =
+        DmaRxBuf::new(rx_descriptors, rx_buffer).expect("BUG: Failed to create dma rx buffer");
+    let dma_tx_buf =
+        DmaTxBuf::new(tx_descriptors, tx_buffer).expect("BUG: Failed to create dma tx buffer");
+
+    let spi_bus = Spi::new(
+        board.spi.device,
+        spi::master::Config::default()
+            .with_frequency(SpiConfig::BUS_SPEED)
+            .with_mode(board.spi.mode),
+    )
+    .expect("BUG: Failed to create spi device")
+    .with_sck(board.spi.sclk_pin)
+    .with_mosi(board.spi.mosi_pin)
+    .with_dma(board.spi.dma_channel)
+    .with_buffers(dma_rx_buf, dma_tx_buf)
+    .into_async();
+
+    let buffer = DISPLAY_BUFFER.init([0_u8; 32000]);
+    display::setup_display(
+        spi_bus,
+        board.display.cs_pin,
+        board.display.rst_pin,
+        board.display.dc_pin,
+        buffer,
+        spawner,
+        METRICS_CHANNEL
+            .subscriber()
+            .expect("BUG: Not enough subscribers left"),
+    );
 }
 
 #[embassy_executor::task]
