@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-commits:
+    name: Commit messages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install gitlint
+        run: pip install gitlint
+
+      - name: Validate commit messages
+        run: gitlint --commits origin/main..HEAD
+
+  firmware:
+    name: Firmware (${{ matrix.crate }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        crate: [temp-sensor/firmware]
+    defaults:
+      run:
+        working-directory: ${{ matrix.crate }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: riscv32imc-unknown-none-elf
+          components: rustfmt, clippy, rust-src, llvm-tools
+
+      - name: Check formatting
+        run: cargo fmt -- --check
+
+      - name: Clippy
+        run: cargo clippy -- -D warnings
+
+      - name: Check
+        run: cargo check
+
+      - name: Build
+        run: cargo build --release
