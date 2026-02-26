@@ -1,0 +1,15 @@
+[general]
+extra-path=.gitlint-rules/
+regex-style-search=true
+
+# Body is optional
+ignore=B5,B6
+
+[title-match-regex]
+regex=^rusty-boards(: [a-z][a-z0-9-]*)?: [A-Z]
+
+[title-must-not-contain-word]
+words=WIP,TMP
+
+[body-max-line-length]
+line-length=120
