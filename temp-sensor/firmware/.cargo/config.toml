@@ -1,0 +1,21 @@
+[target.riscv32imc-unknown-none-elf]
+runner = [
+  "probe-rs", "run",
+  "--chip", "esp32c3",
+  "--log-format", "{t:>10} {f:<14} [{L}] {s}",
+]
+
+[env]
+DEFMT_LOG = "debug"
+
+[build]
+rustflags = [
+  "-C", "link-arg=-Tlinkall.x",
+  "-C", "link-arg=-Tdefmt.x",
+  "-C", "force-frame-pointers",
+]
+
+target = "riscv32imc-unknown-none-elf"
+
+[unstable]
+build-std = ["core"]
