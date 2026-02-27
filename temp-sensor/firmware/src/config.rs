@@ -1,15 +1,10 @@
-//! Hardware and runtime constants for the temp-sensor firmware.
-//!
-//! Each struct groups related constants as associated items. All values are
-//! compile-time constants with no runtime cost.
-
 use embassy_time::Duration;
 
 pub struct OneWireConfig;
 
 impl OneWireConfig {
-    /// RMT peripheral source clock frequency.
-    pub const RMT_FREQ: esp_hal::time::Rate = esp_hal::time::Rate::from_mhz(80);
+    /// RMT peripheral source clock frequency on the ESP32-C3, in MHz.
+    pub const RMT_FREQ_MHZ: u32 = 80;
 
     /// 80 MHz APB clock / 80 = 1 microsecond per RMT tick.
     pub const CLK_DIVIDER: u8 = 80;

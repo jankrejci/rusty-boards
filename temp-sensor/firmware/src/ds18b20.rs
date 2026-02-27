@@ -1,9 +1,3 @@
-//! DS18B20 digital temperature sensor driver.
-//!
-//! Provides discovery, broadcast conversion trigger, and per-sensor temperature
-//! reads over a OneWire bus. Returns integer millidegrees Celsius to avoid
-//! software float emulation on ESP32-C3.
-
 use defmt::warn;
 
 use crate::onewire::{Error, OneWireBus, RomCode, SearchResult};

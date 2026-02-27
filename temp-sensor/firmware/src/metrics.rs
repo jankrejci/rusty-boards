@@ -1,11 +1,9 @@
-//! Prometheus metrics collection and serial export.
-//!
-//! Two independent output channels carry different data:
-//! - defmt over RTT/JTAG for compressed binary debug logging
-//! - esp_println over USB-serial for plain-text Prometheus metrics
-//!
-//! The serial output is dependency-free: any host can read metrics by opening
-//! the serial port. No special tooling or protocol decoding required.
+// Metrics use two independent output channels:
+// - defmt over RTT/JTAG for compressed binary debug logging
+// - esp_println over USB-serial for plain-text Prometheus metrics
+//
+// The serial output must be dependency-free: any host can read metrics by
+// opening the serial port. No special tooling or protocol decoding required.
 
 use defmt::{debug, info};
 use embassy_sync::blocking_mutex::raw::CriticalSectionRawMutex;
