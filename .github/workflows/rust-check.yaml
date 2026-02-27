@@ -31,8 +31,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: dtolnay/rust-toolchain@stable
+      # Nightly is required for build-std (building core from source for
+      # riscv32imc-unknown-none-elf). Local dev uses stable with the
+      # [unstable] Cargo key, which enables the same feature.
+      - uses: dtolnay/rust-toolchain@nightly
         with:
+          toolchain: nightly-2026-02-01
           targets: riscv32imc-unknown-none-elf
           components: rustfmt, clippy, rust-src, llvm-tools
 
@@ -42,8 +46,5 @@ jobs:
       - name: Clippy
         run: cargo clippy -- -D warnings
 
-      - name: Check
-        run: cargo check
-
       - name: Build
-        run: cargo build --release
+        run: cargo build --release --locked
