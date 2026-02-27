@@ -1,74 +1,53 @@
 ---
 name: review-branch
 description: Review all branch changes against origin/main for correctness and patterns
-allowed-tools: Bash, Read, Grep, Glob, Task, WebSearch, WebFetch
+context: fork
+disable-model-invocation: true
+allowed-tools: Bash, Read, Grep, Glob
 ---
 
 Review all commits on the current branch compared to origin/main.
 
 ## Process
 
-1. **Get branch overview**: Run `git log --oneline origin/main..HEAD` and `git diff origin/main...HEAD --stat`
-2. **Read the full diff**: Run `git diff origin/main...HEAD` to see all changes
-3. **Read modified files**: For non-trivial changes, read full files for context
-4. **Verify builds**: Run `cargo check` for each affected firmware crate
-5. **Report findings**: Group by file or feature with file:line references
+1. Run `git log --oneline origin/main..HEAD` and `git diff origin/main...HEAD --stat`
+2. Run `git diff origin/main...HEAD` to see all changes
+3. For non-trivial changes, read full files for context beyond the diff
+4. Run `cargo check` for each affected crate
+5. Report findings in the format below
 
-## Review Checklist
+## Review Criteria
 
-**General:**
-- [ ] Code does what commit messages claim
-- [ ] No obvious bugs or logic errors
-- [ ] Error handling is appropriate
-- [ ] No security issues introduced
-- [ ] No hardcoded values that should be configurable
-- [ ] No stale references after renames
+Evaluate against the standards in `.claude/rules/` and `CLAUDE.md` principles. Additionally for embedded code:
 
-**Embedded Rust specific:**
-- [ ] No heap allocation (no `alloc`, no `Vec`, no `String`)
-- [ ] Proper `unsafe` usage with clear safety comments
-- [ ] No blocking operations in async tasks
-- [ ] Peripheral access follows ownership model
-- [ ] Embassy task spawning uses correct static lifetimes
-- [ ] Metrics follow Prometheus text format convention
-- [ ] PubSub channel dimensions match actual publisher/subscriber count
-- [ ] Watchdog timeout is appropriate for task duration
+- No heap allocation (`alloc`, `Vec`, `String`) in firmware crates
+- All `unsafe` blocks have safety comments justifying correctness
+- No blocking operations in async tasks
+- Peripheral access follows ownership model
+- Embassy task spawning uses correct static lifetimes
+- PubSub channel dimensions match actual publisher/subscriber count
 
-**Firmware patterns:**
-- [ ] Follows voltage-meter reference architecture
-- [ ] Config constants in config.rs, not scattered across modules
-- [ ] Proper defmt logging levels (trace for periodic, info for startup)
-- [ ] probe-rs runner configured correctly in .cargo/config.toml
-- [ ] `cargo check` passes for affected crates
-
-**Branch hygiene:**
-- [ ] Commits are logically grouped
-- [ ] No unrelated changes mixed together
-- [ ] Fixup commits reference correct targets
-
-## Reporting Format
+## Output Format
 
 ```
-## Branch Review: <branch-name>
+## Review: <branch-name> (<N> commits)
 
-### Commits
-- List of commits reviewed
+BLOCKING file.rs:42 — Description of the issue
+BLOCKING file.rs:58 — Description of the issue
 
-### Issues
-- file.rs:42 - Issue description
-- file.rs:58 - Another issue
-
-### Suggestions
-- Optional improvement idea
-
-### Verified
-- cargo check passes
+NIT file.rs:100 — Description of the issue
 ```
+
+Severity levels:
+- `BLOCKING` — Must fix before merge: bugs, security issues, rule violations, build failures
+- `NIT` — Optional improvement, take it or leave it
+
+If no issues are found, output: `No issues found.`
 
 ## Rules
 
 - Review ALL commits on the branch, not just the latest
-- Reference specific lines when reporting issues
-- Distinguish blocking issues from suggestions
-- Run cargo check for any firmware changes
-- Use `Task` agents for heavy exploration to save context
+- Every finding MUST include a file:line reference
+- No praise, no "looks good" summaries, no filler text
+- No suggestions without file:line references
+- Report only concrete issues found in the actual code

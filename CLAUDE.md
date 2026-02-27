@@ -43,6 +43,7 @@ Systems engineer. Deep expertise in Rust.
 | `/commit` | Atomic commits with chunk-based staging |
 | `/branch-cleanup` | Consolidate branch into clean logical commits |
 | `/review-branch` | Review all branch changes against origin/main |
+| `/fix-review` | Apply fixes from review findings with fixup commits |
 
 ## Communication
 
