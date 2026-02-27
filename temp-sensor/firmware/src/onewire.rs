@@ -1,16 +1,3 @@
-//! OneWire bus driver using ESP32-C3 RMT peripheral for bit-banged timing.
-//!
-//! The RMT (Remote Control Transceiver) generates and captures precise pulse
-//! waveforms without CPU intervention. TX drives the bus with timed low/high
-//! pulses, RX captures device responses. Both channels share one GPIO pin via
-//! open-drain output with internal pull-up.
-//!
-//! ESP32-C3 RMT has no hardware RX stop. esp-hal works around this by
-//! manipulating idle threshold and filter registers, then spin-waiting for an
-//! end event. After many rapid RMT operations this stop hack may leave
-//! residual state, causing subsequent transactions to see zero-length pulses.
-//! A settle delay before each reset mitigates this.
-
 use defmt::trace;
 use embassy_futures::join::join;
 use embassy_time::Timer;
@@ -25,11 +12,9 @@ use esp_hal::{
 
 use crate::config::OneWireConfig;
 
-// OneWire timing constants in RMT ticks. With CLK_DIVIDER=80 on a 80 MHz
-// APB clock, each tick is exactly 1 microsecond.
+// OneWire timing constants in microseconds. With CLK_DIVIDER=80 on a 80 MHz
+// APB clock, each RMT tick is exactly 1 microsecond.
 const RESET_LOW: u16 = 500;
-// Master release window must cover the full presence response: devices wait
-// 15-60 us after release, then pull low for 60-240 us. Total up to 300 us.
 const RESET_RELEASE: u16 = 480;
 const WRITE_0_LOW: u16 = 62;
 const WRITE_0_RELEASE: u16 = 5;
@@ -46,10 +31,8 @@ const PRESENCE_MAX_US: u16 = 240;
 // If device holds line low longer than this, it is a 0 bit.
 const READ_BIT_THRESHOLD: u16 = 10;
 
-// RMT RX idle threshold in ticks. When the line stays idle this long, the
-// receiver considers the signal complete. Must exceed the longest expected
-// bus idle gap, which is the presence response window (~300 us after reset
-// release). 1000 us provides generous margin.
+// RMT RX idle threshold. When the line stays idle for this many ticks, the
+// receiver considers the signal complete and stops.
 const RX_IDLE_THRESHOLD: u16 = 1000;
 
 // RMT RX filter threshold. Pulses shorter than this many ticks are filtered
@@ -219,7 +202,11 @@ impl<'a> OneWireBus<'a> {
     /// registers are patched to enable open-drain mode and internal pull-up,
     /// which is required for the OneWire protocol.
     pub fn new(rmt: esp_hal::peripherals::RMT<'a>, pin: impl Pin + 'a) -> Result<Self, Error> {
-        let rmt = esp_hal::rmt::Rmt::new(rmt, OneWireConfig::RMT_FREQ)?.into_async();
+        let rmt = esp_hal::rmt::Rmt::new(
+            rmt,
+            esp_hal::time::Rate::from_mhz(OneWireConfig::RMT_FREQ_MHZ),
+        )?
+        .into_async();
 
         let pin_number = pin.number();
         let flex = Flex::new(pin);
@@ -254,10 +241,7 @@ impl<'a> OneWireBus<'a> {
         // Re-apply open-drain config in case RMT operations reset the GPIO.
         set_open_drain_with_pullup(self.pin_number);
 
-        // Let the RMT hardware settle after prior operations. The ESP32-C3
-        // RX stop hack manipulates idle threshold and filter registers, then
-        // spin-waits for completion. After many rapid operations this can leave
-        // residual state that causes the next transaction to capture garbage.
+        // Let the bus and RMT hardware settle after prior operations.
         Timer::after(OneWireConfig::SETTLE_DELAY).await;
 
         let tx_data = [
@@ -266,10 +250,10 @@ impl<'a> OneWireBus<'a> {
         ];
         let mut rx_data = [PulseCode::default(); 4];
 
-        // join() polls futures in argument order. TX is first so the 500 us
-        // reset pulse is already on the bus before RX starts listening. This
-        // is safe because the reset pulse is long enough for RX to catch the
-        // subsequent presence response even with a slight start delay.
+        // TX and RX run concurrently. TX is first in the join so it gets
+        // polled first, ensuring the bus is driven low before RX starts
+        // listening. This ordering matters because join() polls futures in
+        // argument order.
         let (tx_result, rx_result) =
             join(self.tx.transmit(&tx_data), self.rx.receive(&mut rx_data)).await;
         tx_result?;
@@ -351,11 +335,11 @@ impl<'a> OneWireBus<'a> {
         }
         tx_data[bit_count] = PulseCode::end_marker();
 
-        // RX must be polled before TX here. Read slots have a 2 us master
-        // low pulse — too brief for RX to catch if it starts after TX. Unlike
-        // reset (500 us pulse), RX must already be listening when the bus is
-        // driven low. This RX-first ordering is a known fragility that can
-        // cause issues after 128+ rapid RMT ops. See onewire-rmt-debug.md.
+        // RX is polled before TX in this join. Ideally TX would be first so
+        // the bus is driven low before RX listens, but esp-hal's async RMT RX
+        // on ESP32-C3 requires RX to start before TX to capture the response.
+        // This is a known fragility that can cause issues after 128+ rapid
+        // RMT operations. See onewire-rmt-debug.md for full analysis.
         let (rx_result, tx_result) = join(
             self.rx.receive(&mut rx_data[..bit_count]),
             self.tx.transmit(&tx_data[..=bit_count]),
@@ -401,8 +385,8 @@ impl<'a> OneWireBus<'a> {
         ];
         let mut rx_data = [PulseCode::default(); 1];
 
-        // RX before TX: 2 us read slot is too brief for late RX start.
-        // See read_bytes comment for full rationale.
+        // Same RX-before-TX ordering as read_bytes. See comment there for
+        // rationale and known fragility.
         let (rx_result, tx_result) =
             join(self.rx.receive(&mut rx_data), self.tx.transmit(&tx_data)).await;
         tx_result?;

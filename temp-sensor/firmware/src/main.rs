@@ -1,9 +1,3 @@
-//! DS18B20 temperature sensor firmware for ESP32-C3.
-//!
-//! Discovers sensors on a OneWire bus, reads temperatures periodically, and
-//! exports Prometheus metrics over USB-serial. A cooperative watchdog resets
-//! the MCU if the sensor task stalls.
-
 #![no_std]
 #![no_main]
 
@@ -52,10 +46,19 @@ async fn main(spawner: Spawner) {
 
     let sw_int = SoftwareInterruptControl::new(peripherals.SW_INTERRUPT);
     let timg0 = TimerGroup::new(peripherals.TIMG0);
-    // Spin idle instead of WFI to keep USB-JTAG alive for probe-rs RTT.
+    // In debug builds, spin idle to keep USB-JTAG alive for probe-rs RTT.
+    // In release builds, use WFI to save power when no debugger is attached.
     extern "C" fn idle() -> ! {
         #[allow(clippy::empty_loop)]
-        loop {}
+        loop {
+            #[cfg(not(debug_assertions))]
+            // SAFETY: WFI is a hint instruction on RISC-V that suspends the
+            // hart until an interrupt arrives. It has no side effects beyond
+            // reducing power consumption.
+            unsafe {
+                core::arch::asm!("wfi");
+            }
+        }
     }
     esp_rtos::start_with_idle_hook(timg0.timer0, sw_int.software_interrupt0, idle);
 
