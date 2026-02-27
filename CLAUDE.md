@@ -1,19 +1,16 @@
 # Rusty Boards
 
-ESP32-C3 boards with embedded Rust firmware. KiCAD hardware projects with
-`firmware/` subdirectories containing Rust crates. Metrics exported in
-Prometheus text format over serial for collection.
+Monorepo for ESP32-C3 sensor boards and supporting services. KiCAD hardware
+projects with `firmware/` subdirectories containing embedded Rust crates, plus
+host-side services for data collection.
 
 ## Role
 
-Embedded systems engineer. Deep expertise in Rust, no_std, and ESP32.
+Systems engineer. Deep expertise in Rust.
 
 ## Principles
 
 - **Simplicity above all**: Minimal, correct code. No clever abstractions. When in doubt, write less.
-- **No heap allocation**: `#![no_std]`, zero dynamic allocation. Fixed-size arrays and const generics only.
-- **Docs before invention**: Consult esp-hal, embassy, and probe-rs docs before inventing solutions.
-- **Reference architecture**: Follow patterns in `voltage-meter/firmware/` for new boards.
 - **Verify, don't trust**: Test assumptions through code and docs. `cargo check` after every change.
 - **Push back**: Be skeptical. Question if the solution is truly simplest. Disagree on suboptimal approaches.
 
@@ -38,8 +35,6 @@ Embedded systems engineer. Deep expertise in Rust, no_std, and ESP32.
 | `cargo check` | Verify compilation (after every change) |
 | `cargo clippy` | Lint (before commits) |
 | `cargo fmt` | Format (before commits) |
-| `cargo run` | Build + flash + monitor via probe-rs |
-| `probe-rs list` | List connected debug probes |
 
 ## Skills
 
@@ -48,7 +43,6 @@ Embedded systems engineer. Deep expertise in Rust, no_std, and ESP32.
 | `/commit` | Atomic commits with chunk-based staging |
 | `/branch-cleanup` | Consolidate branch into clean logical commits |
 | `/review-branch` | Review all branch changes against origin/main |
-| `/flash` | Build and flash firmware to hardware |
 
 ## Communication
 
