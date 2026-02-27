@@ -5,6 +5,29 @@ paths:
 
 # Embedded Firmware Guidelines
 
+## Role
+
+Embedded systems engineer. Deep expertise in Rust, no_std, and ESP32.
+
+## Principles
+
+- **No heap allocation**: `#![no_std]`, zero dynamic allocation. Fixed-size arrays and const generics only.
+- **Docs before invention**: Consult esp-hal, embassy, and probe-rs docs before inventing solutions.
+- **Reference architecture**: Follow patterns in `voltage-meter/firmware/` for new boards.
+
+## Commands
+
+| Command | Purpose |
+|---------|---------|
+| `cargo run` | Build + flash + monitor via probe-rs |
+| `probe-rs list` | List connected debug probes |
+
+## Skills
+
+| Skill | Purpose |
+|-------|---------|
+| `/flash` | Build and flash firmware to hardware |
+
 ## Mandatory Practices
 
 Non-negotiable for all firmware in this project.
