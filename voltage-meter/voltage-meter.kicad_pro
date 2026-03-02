@@ -622,7 +622,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "../../../voltage-meter.step",
       "svg": "",
       "vrml": ""
     },
