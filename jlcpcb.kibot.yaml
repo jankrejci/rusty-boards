@@ -10,7 +10,7 @@ preflight:
     enabled: true
     # TODO resolve issues and enable this again
     warnings_as_errors: false
-  drc: 
+  drc:
     dir: tmp
     enabled: true
     warnings_as_errors: true
