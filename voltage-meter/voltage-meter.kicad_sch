@@ -3335,9 +3335,7 @@
 							)
 						)
 					)
-					(alternate "" input line)
 					(alternate "A5" input line)
-					(alternate "" input line)
 					(alternate "MISO" input line)
 				)
 				(pin bidirectional line
@@ -11372,7 +11370,6 @@
 		)
 		(pin "1"
 			(uuid "f755fbe4-b165-4807-a50d-d0b6af204869")
-			(alternate "GPIO5")
 		)
 		(instances
 			(project ""
