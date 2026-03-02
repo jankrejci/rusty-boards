@@ -23461,7 +23461,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "8,6000 mm"
+		(gr_text "8.6000 mm"
 			(at 179.35 92.287685 90)
 			(layer "Dwgs.User")
 			(uuid "67c248a3-6e6f-4b52-8659-e69a45e6c21c")
@@ -23498,7 +23498,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "8,6000 mm"
+		(gr_text "8.6000 mm"
 			(at 179.35 110.687684 90)
 			(layer "Dwgs.User")
 			(uuid "d9e91b28-0e30-4c4b-b05b-7f30606c95a9")
@@ -23535,7 +23535,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "16,6000 mm"
+		(gr_text "16.6000 mm"
 			(at 183.95 109.7875 90)
 			(layer "Dwgs.User")
 			(uuid "f6ff1b67-8a38-4f68-8f62-be1c2584b988")
