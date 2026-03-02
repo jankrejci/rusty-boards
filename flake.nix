@@ -30,6 +30,9 @@
       {
         formatter = treefmtEval.config.build.wrapper;
         checks.formatting = treefmtEval.config.build.check self;
+        devShells.hardware = pkgs.mkShell {
+          packages = [ pkgs.kicad-small ];
+        };
       }
     );
 }
