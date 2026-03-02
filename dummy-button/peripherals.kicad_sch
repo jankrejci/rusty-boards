@@ -10462,7 +10462,7 @@
 				)
 			)
 		)
-		(property "Value" "SK812"
+		(property "Value" "SK6812"
 			(at 56.134 143.51 0)
 			(effects
 				(font
