@@ -33,3 +33,9 @@ target/
 # Nix build output symlinks
 result
 result-*
+
+# Nix dev shell local toolchains (not root-anchored — applies at any depth,
+# e.g. boards/dummy-button/.cargo/ created by espup/nix dev shells).
+# Already-tracked files like firmware/.cargo/config.toml are unaffected.
+.cargo/
+.rustup/
