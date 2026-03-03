@@ -1,6 +1,5 @@
 ---
-paths:
-  - "**/firmware/**"
+paths: **/firmware/**
 ---
 
 # Embedded Firmware Guidelines
@@ -50,7 +49,7 @@ on unrecoverable errors.
 
 - `Result<T, E>` for all fallible operations, propagate with `?`
 - Custom error enums with `#[derive(Debug, defmt::Format)]`
-- Never use `unwrap()`, `expect()`, or `panic!()` outside of tests
+- Never use `panic!()` outside of tests
 - All bus operations (I2C, SPI, UART, OneWire) must have timeouts
 - At hardware boundaries: validate inputs, retry with backoff, then degrade gracefully
 
@@ -75,11 +74,19 @@ Four ecosystems only. No C code. No workarounds.
 | defmt | `defmt` (logging via defmt-rtt, metrics via esp-println) |
 | probe-rs | Flash/debug tooling (not a Cargo dependency) |
 
-## Hardware Platform
+## Hardware Platforms
 
-- MCU: ESP32-C3 (RISC-V), target `riscv32imc-unknown-none-elf`
+### ESP32-C3 (RISC-V)
+
+- Target: `riscv32imc-unknown-none-elf`
 - Dev board: ESP32-C3 Super Mini, USB-JTAG on `/dev/ttyACM0`
 - Toolchain: stable Rust, no Xtensa/espup needed
+- Flash/monitor: `cargo run` via probe-rs runner in `.cargo/config.toml`
+
+### ESP32-S3 (Xtensa)
+
+- Target: `xtensa-esp32s3-none-elf`
+- Toolchain: requires espup/Xtensa toolchain via nix dev shell
 - Flash/monitor: `cargo run` via probe-rs runner in `.cargo/config.toml`
 
 ## Initialization Sequence
@@ -145,4 +152,3 @@ specific to embedded and this project.
 ### Build
 
 - Always use release profile for hardware testing (debug builds cause timing failures on ESP32)
-- `cargo check` after every change, `cargo clippy` before commits
