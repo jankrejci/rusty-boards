@@ -2,7 +2,7 @@ use crate::kalman::Kalman;
 use defmt::{debug, info, trace};
 use embassy_time::{Duration, Ticker};
 use esp_hal::{
-    analog::adc::{Adc, AdcCalCurve, AdcCalLine, AdcConfig, AdcPin, Attenuation},
+    analog::adc::{Adc, AdcCalCurve, AdcConfig, AdcPin, Attenuation},
     peripherals::{ADC1, GPIO0},
     Async,
 };

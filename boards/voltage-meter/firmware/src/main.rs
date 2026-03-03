@@ -104,6 +104,8 @@ async fn main(spawner: Spawner) {
         ))
         .expect("BUG: Failed to spawn ADC reader task");
 
+    // Upstream: esp-hal dma_buffers! macro uses manual div-ceil internally.
+    #[allow(clippy::manual_div_ceil)]
     let (rx_buffer, rx_descriptors, tx_buffer, tx_descriptors) =
         dma_buffers!(SpiConfig::DMA_BUFFER_SIZE);
     let dma_rx_buf =
