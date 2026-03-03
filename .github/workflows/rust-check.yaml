@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        crate: [temp-sensor/firmware]
+        crate: [boards/temp-sensor/firmware, boards/voltage-meter/firmware]
     defaults:
       run:
         working-directory: ${{ matrix.crate }}
@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        crate: [sensor-server]
+        crate: [tools/sensor-server]
     defaults:
       run:
         working-directory: ${{ matrix.crate }}

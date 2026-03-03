@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "TP5400")(type "KiCad")(uri "${KIPRJMOD}/../../../lib/kicad/TP5400.kicad_sym")(options "")(descr ""))
+)

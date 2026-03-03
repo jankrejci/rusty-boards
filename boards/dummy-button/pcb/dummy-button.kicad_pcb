@@ -12181,7 +12181,7 @@
 			(uuid "30903fcf-4295-4a25-980e-d4c739b11895")
 		)
 		(embedded_fonts no)
-		(model "/home/jkr/projects/rusty-boards/components/PEC11R-4215F-S0024/PEC11R-4215F-S0024.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/PEC11R-4215F-S0024/PEC11R-4215F-S0024.step"
 			(offset
 				(xyz 7.5 -2.4 6.5)
 			)
@@ -22538,7 +22538,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "/home/jkr/projects/rusty-boards/components/HRO TYPE-C-31-M-12.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/HRO TYPE-C-31-M-12.step"
 			(offset
 				(xyz -4.5 -3.5 0)
 			)
