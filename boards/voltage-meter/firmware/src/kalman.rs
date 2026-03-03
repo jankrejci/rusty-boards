@@ -14,16 +14,16 @@ impl Kalman {
     /// process_variance: How fast your measurement moves. Usually 0.001 - 1
     /// initial_value: Where the filter starts calculation
     pub fn new(measurement_error: f32, process_variance: f32, initial_value: f32) -> Self {
-        // Can be initilized with the same value as measurement_error,
+        // Can be initialized with the same value as measurement_error,
         // since the kalman filter will adjust its value.
         let estimation_error = measurement_error;
         let gain = estimation_error / (estimation_error + measurement_error);
 
         Self {
             gain,
-            process_variance: process_variance,
+            process_variance,
             estimation_error,
-            measurement_error: measurement_error,
+            measurement_error,
             current_estimation: initial_value,
             last_estimation: initial_value,
         }

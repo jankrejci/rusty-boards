@@ -183,12 +183,12 @@ pub async fn display_updater_task(
 
         match metrics_subscriber.next_message_pure().await {
             Metrics::VoltageFeedback(metrics) => {
-                if let Err(_) = display.write_voltage(metrics.voltage) {
+                if display.write_voltage(metrics.voltage).is_err() {
                     error!("Failed to write voltage");
                 }
             }
             Metrics::AmbientTemperature(metrics) => {
-                if let Err(_) = display.write_temperature(metrics.temperature) {
+                if display.write_temperature(metrics.temperature).is_err() {
                     error!("Failed to write temperature");
                 }
             }
