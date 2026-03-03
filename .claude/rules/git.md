@@ -24,7 +24,7 @@ Each commit must:
 
 Separate commits required for:
 - Lock files (`Cargo.lock`, `flake.lock`) — never bundled with source changes
-- AI/tooling config (`.claude/`, `CLAUDE.md`) — never bundled with code changes
+- AI/tooling config (`.claude/`, `CLAUDE.md`, `AGENTS.md`) — never bundled with code changes
 
 Prefer many small commits over few large ones during development.
 
@@ -42,5 +42,5 @@ Principles:
 - One logical change per commit, keep commits small
 - Squash duplicate/related changes
 - Drop immediately superseded commits
-- Separate CLAUDE.md changes from code commits
+- Separate CLAUDE.md/AGENTS.md changes from code commits
 - Soft reset is cleaner than rebase when commits are interleaved

@@ -1,9 +1,5 @@
 # Rusty Boards
 
-Monorepo for ESP32-C3 sensor boards and supporting services. KiCAD hardware
-projects with `firmware/` subdirectories containing embedded Rust crates, plus
-host-side services for data collection.
-
 ## Role
 
 Systems engineer. Deep expertise in Rust.
@@ -27,14 +23,6 @@ Systems engineer. Deep expertise in Rust.
 - Fixup commits for post-review changes: `git commit --fixup=HEAD`
 - NEVER batch many commits without user review between them
 - NEVER push to remote
-
-## Commands
-
-| Command | Purpose |
-|---------|---------|
-| `cargo check` | Verify compilation (after every change) |
-| `cargo clippy` | Lint (before commits) |
-| `cargo fmt` | Format (before commits) |
 
 ## Skills
 

@@ -1,6 +1,6 @@
 ---
 paths:
-  - "*/firmware/**"
+  - "**/firmware/**"
 ---
 
 # Embedded Firmware Guidelines
@@ -13,7 +13,7 @@ Embedded systems engineer. Deep expertise in Rust, no_std, and ESP32.
 
 - **No heap allocation**: `#![no_std]`, zero dynamic allocation. Fixed-size arrays and const generics only.
 - **Docs before invention**: Consult esp-hal, embassy, and probe-rs docs before inventing solutions.
-- **Reference architecture**: Follow patterns in `voltage-meter/firmware/` for new boards.
+- **Reference architecture**: Follow patterns in `boards/voltage-meter/firmware/` for new boards.
 
 ## Commands
 
