@@ -782,7 +782,7 @@
 			(uuid "abd23f8c-0ff6-4ccb-b37c-3568b95561f0")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1600,7 +1600,7 @@
 			(uuid "73d4962f-4897-4893-a5aa-8efa5d552e74")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1815,7 +1815,7 @@
 			(uuid "b2766819-1398-4e41-a9ce-cb55a0e951f1")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -2483,7 +2483,7 @@
 			)
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/esp32c3-mini.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/esp32c3-mini.step"
 			(offset
 				(xyz -19.95 5.1 -3.25)
 			)
@@ -2829,7 +2829,7 @@
 			(uuid "273d5431-ca70-4204-b6d3-d27b845f97e4")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/SOT-23.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/SOT-23.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -3178,7 +3178,7 @@
 			(uuid "ceaa307d-dc4d-47fc-b35b-0e9b24f5c607")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/SOT-23.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/SOT-23.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4237,7 +4237,7 @@
 			(uuid "348e9872-ac89-4b94-b291-1380ad7626ef")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4452,7 +4452,7 @@
 			(uuid "a520efb9-1222-4794-8ea3-7b318dc74000")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4667,7 +4667,7 @@
 			(uuid "de50f2c1-1768-4e26-9f4b-941284820535")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4882,7 +4882,7 @@
 			(uuid "3457d312-b67b-4966-86d5-96bc83da0f10")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -5097,7 +5097,7 @@
 			(uuid "167f4e09-99c6-4653-9228-34346459c51f")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -5437,7 +5437,7 @@
 			(uuid "80c176d4-47e5-48b8-924f-cb145782da02")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -6289,7 +6289,7 @@
 			(uuid "63a263c4-6107-4afe-b954-58a298d0c5da")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -6504,7 +6504,7 @@
 			(uuid "8c8673f1-a2dc-4924-a97f-be6c8f9e876c")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -7025,7 +7025,7 @@
 			(uuid "24a13360-90b6-4676-ab47-216e375d6ae3")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -7240,7 +7240,7 @@
 			(uuid "e7799e43-4510-4d2b-9d21-9af08b7bb36a")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -7455,7 +7455,7 @@
 			(uuid "83503de9-f4cc-41fd-acd0-af5d693a90f0")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -7670,7 +7670,7 @@
 			(uuid "e171a5de-d103-468d-bc4a-448a6f3d205b")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9415,7 +9415,7 @@
 			(uuid "13d325a2-d694-436f-a874-dd288016e7ad")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9630,7 +9630,7 @@
 			(uuid "5cfc0580-42ef-4076-9d69-e4bdd0f38e69")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9845,7 +9845,7 @@
 			(uuid "95cdd3d4-e024-4a59-af33-25fa1523b219")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -10060,7 +10060,7 @@
 			(uuid "20a42219-f955-4468-a258-3f2565a35407")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -10275,7 +10275,7 @@
 			(uuid "20c0e239-a07f-4e3f-abe3-cf50b3db1645")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -10624,7 +10624,7 @@
 			(uuid "2f55a06b-2883-4c48-84fb-55b1ca8b5bac")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/SOT-23.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/SOT-23.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -11153,7 +11153,7 @@
 			(uuid "1296b9fd-c230-497b-bc9e-730e552a6a52")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -11368,7 +11368,7 @@
 			(uuid "fdc16e8f-94eb-42cb-8ed2-cd6a2f11290f")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -11583,7 +11583,7 @@
 			(uuid "adddd08b-524f-40e5-87e3-7282108bd6eb")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -11798,7 +11798,7 @@
 			(uuid "f04d7a47-d38b-47fc-b2aa-e7bcce5740f6")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -12013,7 +12013,7 @@
 			(uuid "5764cba8-e75f-40e3-87b1-9bb68e26c129")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -13090,7 +13090,7 @@
 			(uuid "83480bf9-7cc6-4864-af4e-21f18519ddcd")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -13436,7 +13436,7 @@
 			(uuid "0c82a26b-e704-4d43-9df2-58a70b3fcfa2")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/SOT-23.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/SOT-23.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -13651,7 +13651,7 @@
 			(uuid "d5102891-e543-4eb7-a6d6-df6094cb7ede")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -13866,7 +13866,7 @@
 			(uuid "710c556a-9c83-4f68-a0a4-ef60f0e84e28")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/R-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/R-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -14081,7 +14081,7 @@
 			(uuid "fbc60f8c-34b7-4f6d-a965-a1bfaf237756")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/../components/packages/C-0603.step"
+		(model "${KIPRJMOD}/../../../lib/kicad/packages/C-0603.step"
 			(offset
 				(xyz 0 0 0)
 			)

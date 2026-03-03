@@ -3,10 +3,10 @@ name: voltage-meter
 on:
   pull_request:
     paths:
-    - 'voltage-meter/*.kicad_sch'
-    - 'voltage-meter/*.kicad_pcb'
+    - 'boards/voltage-meter/pcb/*.kicad_sch'
+    - 'boards/voltage-meter/pcb/*.kicad_pcb'
     - '.github/workflows/voltage-meter-jlcpcb.yaml'
-    - 'voltage-meter/*.kibot.yaml'
+    - 'boards/voltage-meter/pcb/*.kibot.yaml'
   workflow_dispatch:
     inputs:
       name:
@@ -23,8 +23,8 @@ jobs:
       with:
         config: jlcpcb.kibot.yaml
         dir: output
-        schema: 'voltage-meter/voltage-meter.kicad_sch'
-        board: 'voltage-meter/voltage-meter.kicad_pcb'
+        schema: 'boards/voltage-meter/pcb/voltage-meter.kicad_sch'
+        board: 'boards/voltage-meter/pcb/voltage-meter.kicad_pcb'
     - name: 'Cleanup build folder'
       run: sudo rm -rf ./output/tmp
     - name: 'Upload results'
