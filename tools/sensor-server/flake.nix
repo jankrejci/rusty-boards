@@ -8,6 +8,7 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    crane.url = "github:ipetkov/crane";
   };
 
   outputs = {
@@ -15,6 +16,7 @@
     nixpkgs,
     flake-utils,
     rust-overlay,
+    crane,
   }:
     flake-utils.lib.eachDefaultSystem (system: let
       overlays = [(import rust-overlay)];
@@ -30,12 +32,33 @@
         ];
       };
 
+      craneLib = (crane.mkLib pkgs).overrideToolchain rustToolchain;
+      src = craneLib.cleanCargoSource ./.;
+
+      commonArgs = {
+        inherit src;
+        nativeBuildInputs = [pkgs.pkg-config];
+        buildInputs = [pkgs.libudev-zero];
+      };
+
+      cargoArtifacts = craneLib.buildDepsOnly commonArgs;
+
       x86MuslCC = pkgs.pkgsCross.musl64.stdenv.cc;
       x86MuslLibudev = pkgs.pkgsCross.musl64.libudev-zero;
 
       aarch64MuslCC = pkgs.pkgsCross.aarch64-multiplatform-musl.stdenv.cc;
       aarch64MuslLibudev = pkgs.pkgsCross.aarch64-multiplatform-musl.libudev-zero;
     in {
+      checks = {
+        clippy = craneLib.cargoClippy (commonArgs
+          // {
+            inherit cargoArtifacts;
+            cargoClippyExtraArgs = "-- -D warnings";
+          });
+        fmt = craneLib.cargoFmt {inherit src;};
+        test = craneLib.cargoTest (commonArgs // {inherit cargoArtifacts;});
+      };
+
       devShells.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           rustToolchain
