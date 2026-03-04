@@ -1,0 +1,15 @@
+[Unit]
+Description=Sensor metrics server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/sensor-server
+Restart=on-failure
+RestartSec=5
+Environment=RUST_LOG=info
+DynamicUser=yes
+SupplementaryGroups=dialout
+
+[Install]
+WantedBy=multi-user.target
