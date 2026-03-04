@@ -1,5 +1,5 @@
 {
-  description = "Sensor server development environment";
+  description = "Sensor server";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -23,6 +23,9 @@
       pkgs = import nixpkgs {
         inherit system overlays;
       };
+
+      cargoToml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
+      version = cargoToml.package.version;
 
       rustToolchain = pkgs.rust-bin.stable.latest.default.override {
         extensions = ["rust-src" "rust-analyzer" "rustfmt"];
@@ -48,6 +51,15 @@
 
       aarch64MuslCC = pkgs.pkgsCross.aarch64-multiplatform-musl.stdenv.cc;
       aarch64MuslLibudev = pkgs.pkgsCross.aarch64-multiplatform-musl.libudev-zero;
+
+      staticPkgs = pkgs.pkgsStatic;
+
+      isLinux = pkgs.lib.hasSuffix "-linux" system;
+
+      debArch = {
+        "x86_64-linux" = "amd64";
+        "aarch64-linux" = "arm64";
+      };
     in {
       checks = {
         clippy = craneLib.cargoClippy (commonArgs
@@ -57,6 +69,69 @@
           });
         fmt = craneLib.cargoFmt {inherit src;};
         test = craneLib.cargoTest (commonArgs // {inherit cargoArtifacts;});
+      } // pkgs.lib.optionalAttrs isLinux {
+        package = self.packages.${system}.default;
+        deb = self.packages.${system}.deb;
+      };
+
+      packages = pkgs.lib.optionalAttrs isLinux {
+        default = staticPkgs.rustPlatform.buildRustPackage {
+          pname = "sensor-server";
+          inherit version;
+          src = pkgs.lib.cleanSource ./.;
+          cargoLock.lockFile = ./Cargo.lock;
+          nativeBuildInputs = [staticPkgs.pkg-config];
+          buildInputs = [staticPkgs.libudev-zero];
+        };
+
+        deb = let
+          bin = self.packages.${system}.default;
+
+          postinst = pkgs.writeScript "postinst" ''
+            #!/bin/sh
+            set -e
+            systemctl daemon-reload
+            systemctl enable sensor-server
+            systemctl restart sensor-server || true
+          '';
+
+          prerm = pkgs.writeScript "prerm" ''
+            #!/bin/sh
+            set -e
+            systemctl stop sensor-server || true
+          '';
+
+          postrm = pkgs.writeScript "postrm" ''
+            #!/bin/sh
+            set -e
+            systemctl daemon-reload
+          '';
+
+          config = pkgs.writeText "nfpm.yaml" ''
+            name: sensor-server
+            version: "${version}"
+            arch: ${debArch.${system} or (throw "unsupported deb arch: ${system}")}
+            maintainer: jkr
+            description: |
+              Sensor metrics server.
+              Bridges serial sensor data to Prometheus over HTTP.
+            contents:
+              - src: ${bin}/bin/sensor-server
+                dst: /usr/local/bin/sensor-server
+              - src: ${./sensor-server.service}
+                dst: /lib/systemd/system/sensor-server.service
+            scripts:
+              postinstall: ${postinst}
+              preremove: ${prerm}
+              postremove: ${postrm}
+          '';
+        in
+          pkgs.runCommand "sensor-server-${version}.deb" {
+            nativeBuildInputs = [pkgs.nfpm];
+          } ''
+            mkdir -p $out
+            nfpm package --config ${config} --packager deb --target $out/
+          '';
       };
 
       devShells.default = pkgs.mkShell {
@@ -74,7 +149,11 @@
           echo "  cargo run                   Start the server"
           echo "  cargo test                  Run tests"
           echo ""
-          echo "Static builds:"
+          echo "Packages:"
+          echo "  nix build                   Build static x86_64 binary"
+          echo "  nix build .#deb             Build Debian package"
+          echo ""
+          echo "Static build shells:"
           echo "  nix develop .#x86_64-static   x86_64 musl static binary"
           echo "  nix develop .#aarch64-static  aarch64 musl cross binary"
           echo ""
