@@ -5,6 +5,7 @@ runner = "probe-rs run --chip esp32c3"
 DEFMT_LOG="info"
 
 [build]
+target-dir = "../../../build/voltage-meter/target"
 rustflags = [
   # Required to obtain backtraces (e.g. when using the "esp-backtrace" crate.)
   # NOTE: May negatively impact performance of produced code

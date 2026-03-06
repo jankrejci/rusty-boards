@@ -5,6 +5,7 @@ runner = "probe-rs run --chip=esp32s3 --always-print-stacktrace --no-location --
 DEFMT_LOG = "debug"
 
 [build]
+target-dir = "../../../build/dummy-button/target"
 rustflags = [
   "-C", "link-arg=-Tlinkall.x",
   "-C", "link-arg=-Tdefmt.x",

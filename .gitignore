@@ -28,6 +28,7 @@ fp-info-cache
 *.csv
 
 # Rust / Cargo build output directory
+build/
 target/
 
 # Nix build output symlinks
