@@ -60,6 +60,15 @@
         "x86_64-linux" = "amd64";
         "aarch64-linux" = "arm64";
       };
+
+      mkBuildApp = name: flakeRef: {
+        type = "app";
+        program = toString (pkgs.writeShellScript "build-${name}" ''
+          link="$(git rev-parse --show-toplevel)/build/sensor-server/${name}"
+          nix build ${flakeRef} --out-link "$link"
+          echo "Build output: $(readlink -f "$link")"
+        '');
+      };
     in {
       checks = {
         clippy = craneLib.cargoClippy (commonArgs
@@ -72,6 +81,11 @@
       } // pkgs.lib.optionalAttrs isLinux {
         package = self.packages.${system}.default;
         deb = self.packages.${system}.deb;
+      };
+
+      apps = pkgs.lib.optionalAttrs isLinux {
+        build = mkBuildApp "result" ".#default";
+        build-deb = mkBuildApp "result-deb" ".#deb";
       };
 
       packages = pkgs.lib.optionalAttrs isLinux {
@@ -150,8 +164,8 @@
           echo "  cargo test                  Run tests"
           echo ""
           echo "Packages:"
-          echo "  nix build                   Build static x86_64 binary"
-          echo "  nix build .#deb             Build Debian package"
+          echo "  nix run .#build             Build static x86_64 binary"
+          echo "  nix run .#build-deb         Build Debian package"
           echo ""
           echo "Static build shells:"
           echo "  nix develop .#x86_64-static   x86_64 musl static binary"
