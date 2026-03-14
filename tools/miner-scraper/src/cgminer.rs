@@ -228,8 +228,8 @@ fn parse_dash_array(s: &str) -> Option<Vec<Value>> {
 /// preprocesses dash-separated strings into arrays, then emits each numeric
 /// field as a gauge metric. The section name is lowercased and prepended to
 /// each metric name (e.g. FANS.RPM becomes `fans_rpm`).
-pub fn parse_response(host: &str, response: &Value) -> Vec<String> {
-    let Some(obj) = response.as_object() else {
+pub fn parse_response(host: &str, response: &mut Value) -> Vec<String> {
+    let Some(obj) = response.as_object_mut() else {
         return Vec::new();
     };
 
