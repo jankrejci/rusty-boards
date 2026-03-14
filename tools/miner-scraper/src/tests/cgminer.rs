@@ -496,8 +496,8 @@ fn detect_fallback_to_stock() {
 fn stock_all_dumps_produce_metrics() {
     let mut lines = Vec::new();
     for data in [STOCK_STATS, STOCK_SUMMARY] {
-        let value = parse_json(data);
-        lines.extend(parse_response("10.0.0.1", &value));
+        let mut value = parse_json(data);
+        lines.extend(parse_response("10.0.0.1", &mut value));
     }
     assert!(
         lines.len() > 50,
