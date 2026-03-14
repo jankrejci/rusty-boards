@@ -7,23 +7,7 @@ allowed-tools: Bash, Read, Grep, Glob
 
 Create atomic commits for staged/unstaged changes using chunk-based staging.
 
-## Commit Format
-
-Title: `module: Verb in imperative style`
-- Must match regex: `^[a-z][a-z0-9-]+(: [a-z][a-z0-9-]+)*: [A-Z]`
-- Max 72 characters
-- NO WIP/TMP
-- Imperative verb: Add, Fix, Update, Remove, Refactor
-- Module is `rusty-boards` for repo-level, `rusty-boards: <subproject>` for boards
-- Module examples: `rusty-boards`, `rusty-boards: temp-sensor`, `rusty-boards: voltage-meter`
-
-Body: Bullet points only
-- Lines must be blank, start with `- `, or be indented continuation
-- Max 120 characters per line
-- NO prose paragraphs
-- NO Co-Authored-By
-- NO Claude signatures
-- NO emojis
+Follow the commit format from CLAUDE.md. Title must match `^[a-z][a-z0-9-]+(: [a-z][a-z0-9-]+)*: [A-Z]`, max 72 chars. Body must explain WHY, not WHAT.
 
 ## Process
 
@@ -34,14 +18,14 @@ Body: Bullet points only
    - Stage specific chunks with `git add -p <file>` for modified files
    - For new files: `git add -N <file> && git add -p <file>`
    - Verify staged changes: `git diff --cached`
-   - Run `cargo check` in the affected firmware crate directory
+   - Run `cargo check` in the affected crate directory (skip if no Rust changes)
    - Create commit using HEREDOC:
      ```bash
      git commit -m "$(cat <<'EOF'
      module: Title here
 
-     - bullet point describing what changed
-     - another bullet if needed
+     - why this change was needed
+     - why this approach if non-obvious
      EOF
      )"
      ```
@@ -77,4 +61,4 @@ Interactive patch mode (`git add -p`) commands:
 - AI/tooling config (`.claude/`, `CLAUDE.md`) gets its own commit, never bundled with code
 - NEVER push to remote
 - NEVER use --amend unless explicitly requested
-- NEVER skip cargo check
+- NEVER skip cargo check when Rust code changed
