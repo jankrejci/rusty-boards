@@ -18,8 +18,7 @@ use crate::store::MetricsStore;
 const MAX_FAILURES: u32 = 3;
 
 /// Timeout for a single host scrape.
-/// Intentionally less than worst-case command duration to prevent slow miners
-/// from delaying the next scrape cycle.
+/// Prevents slow miners from delaying the next scrape cycle.
 const SCRAPE_TIMEOUT: Duration = Duration::from_secs(10);
 
 /// Manage per-target scrape loops, spawning and cancelling as the config changes.
