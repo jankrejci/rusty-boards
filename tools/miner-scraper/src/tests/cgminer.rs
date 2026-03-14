@@ -532,7 +532,7 @@ fn braiins_all_dumps_produce_metrics() {
 fn luxos_all_dumps_produce_metrics() {
     let mut lines = Vec::new();
     for data in [LUXOS_STATS, LUXOS_TEMPS, LUXOS_FANS, LUXOS_POWER] {
-        let value = parse_json(data);
+        let mut value = parse_json(data);
         if !is_error(&value) {
             lines.extend(parse_response("10.0.0.1", &value));
         }
