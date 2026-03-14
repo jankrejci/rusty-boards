@@ -251,8 +251,8 @@ pub fn parse_response(host: &str, response: &mut Value) -> Vec<String> {
     lines
 }
 
-fn parse_entry(host: &str, prefix: &str, entry: &Value) -> Vec<String> {
-    let Some(entry_obj) = entry.as_object() else {
+fn parse_entry(host: &str, prefix: &str, entry: &mut Value) -> Vec<String> {
+    let Some(entry_obj) = entry.as_object_mut() else {
         return Vec::new();
     };
 
