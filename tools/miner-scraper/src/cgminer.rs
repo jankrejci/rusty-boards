@@ -261,8 +261,7 @@ fn parse_entry(host: &str, prefix: &str, entry: &mut Value) -> Vec<String> {
         .and_then(serde_json::Value::as_u64)
         .map(|id| id.to_string());
 
-    let mut preprocessed = entry_obj.clone();
-    preprocess(&mut preprocessed);
+    preprocess(entry_obj);
 
     let mut lines = Vec::new();
     for (key, val) in &preprocessed {
