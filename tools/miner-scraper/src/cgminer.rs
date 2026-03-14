@@ -240,7 +240,7 @@ pub fn parse_response(host: &str, response: &mut Value) -> Vec<String> {
         }
 
         let prefix = section.to_lowercase();
-        let Some(entries) = value.as_array() else {
+        let Some(entries) = value.as_array_mut() else {
             continue;
         };
 
