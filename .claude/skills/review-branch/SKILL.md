@@ -3,7 +3,7 @@ name: review-branch
 description: Deep review of all branch changes against origin/main — code, commits, and CI readiness
 context: fork
 disable-model-invocation: true
-allowed-tools: Bash, Read, Grep, Glob
+allowed-tools: Bash, Read, Grep, Glob, Skill, Task, WebSearch, WebFetch
 ---
 
 Deep, exhaustive review of all commits on the current branch compared to origin/main. The goal is that after all findings are fixed, the branch is merge-ready and all pipeline checks will pass. Do not leave anything for a second pass — find everything in one review.
@@ -31,28 +31,40 @@ For each board/tool with a Nix flake:
 
 If a crate cannot be checked (e.g. missing Xtensa toolchain), note this explicitly rather than silently skipping it.
 
-### Phase 3: Review commit messages
+### Phase 3: Per-commit review
 
-For each commit, verify:
-- Follows format from `.claude/rules/git.md` (module prefix, imperative title, bullet body)
-- Every claim in the commit body (dependency versions, API names, what changed) matches the actual diff
+For each commit, verify against CLAUDE.md commit format rules:
+- Title: module prefix, imperative verb, high-level summary
+- Body explains WHY the change was needed, not WHAT changed in the code
+- Body does NOT enumerate code changes the reviewer can see in the diff
 - One logical change per commit
 - Lock files not bundled with source changes
 - AI/tooling config not bundled with code changes
 - No Co-Authored-By, no AI signatures, no emojis
 
-### Phase 4: Review code
+**Diff-vs-body verification:**
+- Every claim in the commit body matches the actual diff
+- No diff content missing from the body description
+- No body claims that are not evidenced by the diff
 
-Evaluate against `.claude/rules/` and `CLAUDE.md` principles.
+### Phase 4: Code correctness
 
-General:
-- Correctness: logic errors, off-by-one, race conditions, missing error handling
+Review the full diff (`git diff origin/main...HEAD`) for:
+
+**Logic and safety:**
+- Logic errors, off-by-one, race conditions
+- Missing error handling at system boundaries
 - Security: injection, unsafe without justification, secrets in code
-- Consistency: follows existing patterns in the codebase
-- Dead code: unused imports, unreachable branches, commented-out code
-- Duplication: same content defined in multiple places (single source of truth)
+- Edge cases and failure modes
 
-Embedded firmware (when applicable):
+**Rust-specific:**
+- No `unwrap()` or `expect()` in production code where error handling is appropriate
+- Proper use of `Result` and `Option`
+- No unnecessary allocations or clones
+- Correct lifetime annotations
+- Async tasks do not block
+
+**Embedded firmware (when applicable):**
 - No heap allocation (`alloc`, `Vec`, `String`, `Box`)
 - No `unwrap()`, `expect()`, `panic!()` outside tests
 - No blocking operations in async tasks
@@ -62,12 +74,37 @@ Embedded firmware (when applicable):
 - Integer arithmetic for MCUs without FPU
 - Cooperative watchdog implementation
 
-### Phase 5: Cross-cutting concerns
+### Phase 5: Style and cross-cutting
 
-- Are new files/modules properly integrated (imports, mod declarations)?
-- Do Nix flakes reference correct paths after any restructuring?
-- Are `.cargo/config.toml` runner and target settings correct?
-- Do `rust-toolchain.toml` channels match the target architecture?
+**CLAUDE.md compliance:**
+- Comments are proper sentences, no parenthetical asides, no size claims
+- Code follows existing patterns in the codebase
+- Dead code: unused imports, unreachable branches, commented-out code
+- Duplication: same content defined in multiple places
+- No stale references after renames
+
+**Integration:**
+- New files/modules properly integrated (imports, mod declarations)
+- Nix flakes reference correct paths after any restructuring
+- `.cargo/config.toml` runner and target settings correct
+- `rust-toolchain.toml` channels match the target architecture
+
+### Phase 6: Verification checklist
+
+Before producing output, verify every category was checked. For each item below, confirm it was evaluated for every commit and every changed file. If any item was skipped or only partially checked, go back and complete the relevant phase before continuing.
+
+- [ ] All checks ran (Phase 2)
+- [ ] Every commit message verified against its diff (Phase 3)
+- [ ] Every commit is a single logical change (Phase 3)
+- [ ] No bundled unrelated changes (Phase 3)
+- [ ] Logic errors and edge cases checked (Phase 4)
+- [ ] Security reviewed (Phase 4)
+- [ ] Rust patterns verified (Phase 4)
+- [ ] CLAUDE.md style rules checked (Phase 5)
+- [ ] Cross-cutting integration verified (Phase 5)
+- [ ] No stale references from renames (Phase 5)
+
+Only produce the final output after all items are confirmed.
 
 ## Output Format
 
@@ -105,3 +142,4 @@ If no issues are found, output: `No issues found. Branch is merge-ready.`
 - No suggestions without file:line references
 - Report only concrete issues found in the actual code or checks
 - Do not invent issues that are not evidenced by code, diffs, or check output
+- Use `Task` agents for heavy exploration to save context
