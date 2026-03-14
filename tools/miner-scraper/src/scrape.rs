@@ -100,13 +100,12 @@ async fn scrape_host(
     cached_fw: Option<Firmware>,
 ) -> anyhow::Result<(Firmware, Vec<String>)> {
     tokio::time::timeout(SCRAPE_TIMEOUT, async {
-        let fw = match cached_fw {
-            Some(fw) => fw,
-            None => {
-                let detected = Firmware::detect(host).await;
-                log::info!("detected {detected} firmware on {host}");
-                detected
-            }
+        let fw = if let Some(fw) = cached_fw {
+            fw
+        } else {
+            let detected = Firmware::detect(host).await;
+            log::info!("detected {detected} firmware on {host}");
+            detected
         };
 
         let lines = cgminer::scrape(host, fw).await?;
