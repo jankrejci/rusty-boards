@@ -52,8 +52,8 @@ fn parse_json(data: &str) -> Value {
 }
 
 fn parse_to_lines(host: &str, data: &str) -> Vec<String> {
-    let value = parse_json(data);
-    parse_response(host, &value)
+    let mut value = parse_json(data);
+    parse_response(host, &mut value)
 }
 
 // --- FieldName tests ---
