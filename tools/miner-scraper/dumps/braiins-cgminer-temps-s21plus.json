@@ -1,0 +1,1 @@
+{"STATUS":[{"STATUS":"S","When":1773425026,"Code":201,"Msg":"3 Temp(s)","Description":"BOSer boser-buildroot 0.1.0-f8935b4e"}],"TEMPS":[{"Board":50.0,"Chip":65.0,"ID":1,"TEMP":0},{"Board":47.0,"Chip":62.0,"ID":2,"TEMP":1},{"Board":48.5,"Chip":63.5,"ID":3,"TEMP":2}],"id":1}
