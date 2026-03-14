@@ -99,8 +99,8 @@ impl Firmware {
 pub async fn scrape(host: &str, fw: Firmware) -> Result<Vec<String>> {
     let mut lines = Vec::new();
     for cmd in fw.commands() {
-        let resp = command(host, DEFAULT_PORT, cmd).await?;
-        lines.extend(parse_response(host, &resp));
+        let mut resp = command(host, DEFAULT_PORT, cmd).await?;
+        lines.extend(parse_response(host, &mut resp));
     }
     Ok(lines)
 }
