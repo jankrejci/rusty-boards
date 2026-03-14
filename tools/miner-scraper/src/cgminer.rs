@@ -264,7 +264,7 @@ fn parse_entry(host: &str, prefix: &str, entry: &mut Value) -> Vec<String> {
     preprocess(entry_obj);
 
     let mut lines = Vec::new();
-    for (key, val) in &preprocessed {
+    for (key, val) in entry_obj.iter() {
         if key == "ID" {
             continue;
         }
