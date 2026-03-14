@@ -38,6 +38,7 @@ impl MetricsStore {
     }
 
     /// Return all hosts currently in the store.
+    #[cfg(test)]
     pub async fn hosts(&self) -> Vec<String> {
         let store = self.inner.read().await;
         store.keys().cloned().collect()
