@@ -516,7 +516,7 @@ fn braiins_all_dumps_produce_metrics() {
         BRAIINS_DEVS,
         BRAIINS_DEVDETAILS,
     ] {
-        let value = parse_json(data);
+        let mut value = parse_json(data);
         if !is_error(&value) {
             lines.extend(parse_response("10.0.0.1", &value));
         }
