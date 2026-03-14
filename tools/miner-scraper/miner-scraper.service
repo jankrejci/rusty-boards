@@ -1,0 +1,13 @@
+[Unit]
+Description=Miner metrics scraper
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/miner-scraper --config /etc/miner-scraper/config.toml
+Restart=on-failure
+RestartSec=60
+Environment=RUST_LOG=info
+
+[Install]
+WantedBy=multi-user.target
