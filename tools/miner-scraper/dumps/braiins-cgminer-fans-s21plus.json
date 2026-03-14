@@ -1,0 +1,1 @@
+{"STATUS":[{"STATUS":"S","When":1773425026,"Code":202,"Msg":"4 Fan(s)","Description":"BOSer boser-buildroot 0.1.0-f8935b4e"}],"FANS":[{"FAN":0,"ID":0,"RPM":3389,"Speed":46},{"FAN":1,"ID":1,"RPM":3419,"Speed":46},{"FAN":2,"ID":2,"RPM":3389,"Speed":46},{"FAN":3,"ID":3,"RPM":3419,"Speed":46}],"id":1}

@@ -1,0 +1,21 @@
+[package]
+edition = "2021"
+name    = "miner-scraper"
+version = "0.1.0"
+
+[dependencies]
+anyhow     = "1"
+axum       = "0.8"
+clap       = { version = "4", features = ["derive"] }
+env_logger = "0.11"
+futures-util = "0.3"
+inotify    = { version = "0.11", default-features = false, features = ["stream"] }
+log        = "0.4"
+serde      = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio      = { version = "1", features = ["rt-multi-thread", "macros", "sync", "time", "signal", "net", "io-util"] }
+toml       = "0.8"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "deny"
