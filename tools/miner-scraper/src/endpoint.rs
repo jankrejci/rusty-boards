@@ -53,7 +53,7 @@ pub enum Response {
 /// Represents a specific command or path to query on a miner, paired with
 /// its scrape tier. The cgminer variant sends JSON commands over TCP port
 /// 4028. The HTTP variant sends GET requests to a firmware-specific port.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Endpoint {
     /// Cgminer TCP API command (e.g. "stats", "summary").
     Cgminer(&'static str, ScrapeTier),
