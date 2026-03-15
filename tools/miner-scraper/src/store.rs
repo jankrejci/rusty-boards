@@ -1,6 +1,6 @@
 //! Per-host Prometheus metrics storage.
 //!
-//! `Store` owns the channel receiver and writes incoming metrics. `StoreHandle`
+//! `Store` owns the channel receiver and writes incoming metrics. `StoreState`
 //! is a lightweight read-only clone handed to the HTTP layer.
 
 use std::collections::HashMap;
@@ -16,11 +16,11 @@ mod tests;
 
 /// Read-only handle for the HTTP handler.
 #[derive(Clone)]
-pub struct StoreHandle {
+pub struct StoreState {
     inner: Arc<RwLock<HashMap<String, Vec<Metric>>>>,
 }
 
-impl StoreHandle {
+impl StoreState {
     /// Render all stored metrics into a single Prometheus-compatible response.
     pub async fn render(&self) -> String {
         let store = self.inner.read().await;
@@ -56,14 +56,14 @@ impl StoreHandle {
 
 /// Metric storage that receives batches from scrapers via a channel.
 pub struct Store {
-    handle: StoreHandle,
+    handle: StoreState,
     rx: mpsc::Receiver<(String, Vec<Metric>)>,
 }
 
 impl Store {
     pub fn new(rx: mpsc::Receiver<(String, Vec<Metric>)>) -> Self {
         Self {
-            handle: StoreHandle {
+            handle: StoreState {
                 inner: Arc::new(RwLock::new(HashMap::new())),
             },
             rx,
@@ -71,7 +71,7 @@ impl Store {
     }
 
     /// Return a read-only handle for the HTTP handler.
-    pub fn handle(&self) -> StoreHandle {
+    pub fn handle(&self) -> StoreState {
         self.handle.clone()
     }
 

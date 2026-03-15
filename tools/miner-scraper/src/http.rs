@@ -9,17 +9,17 @@ use axum::response::IntoResponse;
 use axum::routing::get;
 use axum::Router;
 
-use crate::store::StoreHandle;
+use crate::store::StoreState;
 
 /// Prometheus text exposition content type.
 const PROMETHEUS_CONTENT_TYPE: &str = "text/plain; version=0.0.4; charset=utf-8";
 
-async fn metrics(State(handle): State<StoreHandle>) -> impl IntoResponse {
+async fn metrics(State(handle): State<StoreState>) -> impl IntoResponse {
     let body = handle.render().await;
     ([(header::CONTENT_TYPE, PROMETHEUS_CONTENT_TYPE)], body)
 }
 
-pub fn router(handle: StoreHandle) -> Router {
+pub fn router(handle: StoreState) -> Router {
     Router::new()
         .route("/metrics", get(metrics))
         .with_state(handle)
