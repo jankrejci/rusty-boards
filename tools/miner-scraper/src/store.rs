@@ -56,23 +56,23 @@ impl StoreHandle {
 
 /// Metric storage that receives batches from scrapers via a channel.
 pub struct Store {
-    inner: Arc<RwLock<HashMap<String, Vec<Metric>>>>,
+    handle: StoreHandle,
     rx: mpsc::Receiver<(String, Vec<Metric>)>,
 }
 
 impl Store {
     pub fn new(rx: mpsc::Receiver<(String, Vec<Metric>)>) -> Self {
         Self {
-            inner: Arc::new(RwLock::new(HashMap::new())),
+            handle: StoreHandle {
+                inner: Arc::new(RwLock::new(HashMap::new())),
+            },
             rx,
         }
     }
 
     /// Return a read-only handle for the HTTP handler.
     pub fn handle(&self) -> StoreHandle {
-        StoreHandle {
-            inner: Arc::clone(&self.inner),
-        }
+        self.handle.clone()
     }
 
     /// Receive metrics from scrapers and write them to the store.
@@ -81,7 +81,7 @@ impl Store {
     /// vec removes the host from the store.
     pub async fn run(mut self) {
         while let Some((host, metrics)) = self.rx.recv().await {
-            let mut store = self.inner.write().await;
+            let mut store = self.handle.inner.write().await;
             if metrics.is_empty() {
                 store.remove(&host);
             } else {
