@@ -69,12 +69,9 @@ async fn main() {
 
 async fn run() -> anyhow::Result<()> {
     let args = Args::parse();
-    let mut cfg = config::Config::load(&args.config).unwrap_or_else(|e| {
-        log::warn!(
-            "config file {}: {}, using defaults",
-            args.config.display(),
-            e
-        );
+    let config_file = config::ConfigFile::new(args.config);
+    let mut cfg = config_file.load().unwrap_or_else(|e| {
+        log::warn!("failed to load config: {e}, using defaults");
         config::Config::default()
     });
 
@@ -107,11 +104,8 @@ async fn run() -> anyhow::Result<()> {
     });
 
     // Watch config file for hot reload.
-    let config_path = args.config;
     let watcher_tx = config_tx.clone();
-    let watcher_handle = tokio::spawn(async move {
-        config::watch_config(config_path, watcher_tx).await;
-    });
+    let watcher_handle = tokio::spawn(async move { config_file.watch(watcher_tx).await });
 
     // Manage per-host scrapers: spawn on new targets, cancel on removed ones.
     let manager = scraper::ScraperManager::new(config_rx, metrics_tx);

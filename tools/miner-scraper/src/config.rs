@@ -3,7 +3,7 @@
 //! Reads a TOML config file specifying the listen address, target miner IPs,
 //! and scrape tier intervals. Watches the file with inotify for live changes.
 
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::time::Duration;
 
 use futures_util::StreamExt;
@@ -107,69 +107,79 @@ impl Default for Config {
     }
 }
 
-impl Config {
-    pub fn load(path: &Path) -> anyhow::Result<Self> {
-        let contents = std::fs::read_to_string(path)?;
-        let config: Config = toml::from_str(&contents)?;
-        Ok(config)
-    }
+/// Path-aware config file handle for loading and watching.
+pub struct ConfigFile {
+    path: PathBuf,
 }
 
 /// Buffer size for inotify event reads.
 const INOTIFY_BUF_SIZE: usize = 256;
 
-/// Watch a config file for changes and send updates through the watch channel.
-///
-/// Uses inotify `CLOSE_WRITE` to detect when editors finish writing the file.
-/// On inotify failure, logs a warning and returns without watching.
-pub async fn watch_config(path: PathBuf, tx: watch::Sender<Config>) {
-    let inotify = match Inotify::init() {
-        Ok(i) => i,
-        Err(e) => {
-            log::warn!("failed to init inotify for config watch: {e}");
-            // Park forever so the caller does not need to handle None.
-            std::future::pending::<()>().await;
-            return;
-        }
-    };
-
-    if let Err(e) = inotify.watches().add(&path, WatchMask::CLOSE_WRITE) {
-        log::warn!("failed to watch config file: {e}");
-        std::future::pending::<()>().await;
-        return;
+impl ConfigFile {
+    pub fn new(path: PathBuf) -> Self {
+        Self { path }
     }
 
-    log::info!("watching {} for changes", path.display());
+    /// Load configuration from the file.
+    pub fn load(&self) -> anyhow::Result<Config> {
+        let contents = std::fs::read_to_string(&self.path)?;
+        let config: Config = toml::from_str(&contents)?;
+        Ok(config)
+    }
 
-    let mut stream = match inotify.into_event_stream([0u8; INOTIFY_BUF_SIZE]) {
-        Ok(s) => s,
-        Err(e) => {
-            log::warn!("failed to create inotify event stream: {e}");
+    /// Watch the config file for changes and send updates through the channel.
+    ///
+    /// Uses inotify `CLOSE_WRITE` to detect when editors finish writing the file.
+    /// On inotify failure, logs a warning and parks forever.
+    pub async fn watch(self, tx: watch::Sender<Config>) {
+        let inotify = match Inotify::init() {
+            Ok(i) => i,
+            Err(e) => {
+                log::warn!("failed to init inotify for config watch: {e}");
+                // Park forever so the caller does not need to handle None.
+                std::future::pending::<()>().await;
+                return;
+            }
+        };
+
+        if let Err(e) = inotify.watches().add(&self.path, WatchMask::CLOSE_WRITE) {
+            log::warn!("failed to watch config file: {e}");
             std::future::pending::<()>().await;
             return;
         }
-    };
 
-    loop {
-        match stream.next().await {
-            Some(Ok(_event)) => {}
-            Some(Err(e)) => {
-                log::warn!("inotify error: {e}");
-                return;
-            }
-            None => {
-                log::warn!("inotify stream ended, stopping config watch");
-                return;
-            }
-        }
+        log::info!("watching {} for changes", self.path.display());
 
-        match Config::load(&path) {
-            Ok(new_config) => {
-                log::info!("config reloaded from {}", path.display());
-                let _ = tx.send(new_config);
-            }
+        let mut stream = match inotify.into_event_stream([0u8; INOTIFY_BUF_SIZE]) {
+            Ok(s) => s,
             Err(e) => {
-                log::warn!("failed to reload config: {e}");
+                log::warn!("failed to create inotify event stream: {e}");
+                std::future::pending::<()>().await;
+                return;
+            }
+        };
+
+        loop {
+            match stream.next().await {
+                Some(Ok(_event)) => {}
+                Some(Err(e)) => {
+                    log::warn!("inotify error: {e}");
+                    return;
+                }
+                None => {
+                    log::warn!("inotify stream ended, stopping config watch");
+                    return;
+                }
+            }
+
+            match self.load() {
+                Ok(new_config) => {
+                    log::info!("config reloaded from {}", self.path.display());
+                    let _ = tx.send(new_config);
+                }
+                Err(e) => {
+                    log::warn!("failed to reload config: {e}");
+                }
             }
         }
     }
