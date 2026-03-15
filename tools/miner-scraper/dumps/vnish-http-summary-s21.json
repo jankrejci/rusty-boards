@@ -1,0 +1,193 @@
+{
+  "miner": {
+    "miner_status": {
+      "miner_state": "mining",
+      "miner_state_time": 122594
+    },
+    "miner_type": "Antminer S21 (Vnish 1.2.7)",
+    "hr_stock": 202577.0,
+    "average_hashrate": 193.353,
+    "instant_hashrate": 193.34921,
+    "hr_realtime": 193349.22,
+    "hr_nominal": 200109.62,
+    "hr_average": 193353.0,
+    "pcb_temp": {
+      "min": 40,
+      "max": 55
+    },
+    "chip_temp": {
+      "min": 50,
+      "max": 82
+    },
+    "power_consumption": 3415,
+    "power_usage": 3415,
+    "power_efficiency": 17.661997,
+    "hw_errors_percent": 0.007,
+    "hr_error": 14.284,
+    "hw_errors": 33,
+    "devfee_percent": 2.687,
+    "devfee": 5195.6914,
+    "pools": [
+      {
+        "id": 0,
+        "url": "stratum.slushpool.com:3333",
+        "pool_type": "UserPool",
+        "user": "*****",
+        "status": "active",
+        "asic_boost": true,
+        "diff": "262K",
+        "accepted": 22182,
+        "rejected": 7,
+        "stale": 0,
+        "ls_diff": 262144.0,
+        "ls_time": "0:00:06",
+        "diffa": 5488498688.0,
+        "ping": 8
+      },
+      {
+        "id": 1,
+        "url": "DevFee",
+        "pool_type": "DevFee",
+        "user": "*****",
+        "status": "working",
+        "asic_boost": true,
+        "diff": "32.8K",
+        "accepted": 5263,
+        "rejected": 23,
+        "stale": 0,
+        "ls_diff": 16384.0,
+        "ls_time": "0:09:32",
+        "diffa": 153513600.0,
+        "ping": 0
+      }
+    ],
+    "cooling": {
+      "fan_num": 4,
+      "fans": [
+        {
+          "id": 0,
+          "rpm": 0,
+          "status": "ok",
+          "max_rpm": 7000
+        },
+        {
+          "id": 1,
+          "rpm": 0,
+          "status": "ok",
+          "max_rpm": 7000
+        },
+        {
+          "id": 2,
+          "rpm": 0,
+          "status": "ok",
+          "max_rpm": 7000
+        },
+        {
+          "id": 3,
+          "rpm": 0,
+          "status": "ok",
+          "max_rpm": 7000
+        }
+      ],
+      "settings": {
+        "mode": {
+          "name": "immersion"
+        }
+      },
+      "fan_duty": 100
+    },
+    "chains": [
+      {
+        "id": 1,
+        "frequency": 485.0,
+        "voltage": 13700,
+        "power_consumption": 1138,
+        "hashrate_ideal": 66703.2,
+        "hashrate_rt": 63012.902,
+        "hashrate_percentage": 95.35,
+        "hr_error": 0.0,
+        "hw_errors": 16,
+        "pcb_temp": {
+          "min": 40,
+          "max": 55
+        },
+        "chip_temp": {
+          "min": 51,
+          "max": 81
+        },
+        "chip_statuses": {
+          "red": 0,
+          "orange": 1,
+          "grey": 107
+        },
+        "status": {
+          "state": "mining"
+        }
+      },
+      {
+        "id": 2,
+        "frequency": 485.0,
+        "voltage": 13700,
+        "power_consumption": 1138,
+        "hashrate_ideal": 66703.2,
+        "hashrate_rt": 64598.44,
+        "hashrate_percentage": 96.69,
+        "hr_error": 14.28,
+        "hw_errors": 13,
+        "pcb_temp": {
+          "min": 40,
+          "max": 51
+        },
+        "chip_temp": {
+          "min": 50,
+          "max": 82
+        },
+        "chip_statuses": {
+          "red": 0,
+          "orange": 0,
+          "grey": 108
+        },
+        "status": {
+          "state": "mining"
+        }
+      },
+      {
+        "id": 3,
+        "frequency": 485.0,
+        "voltage": 13700,
+        "power_consumption": 1138,
+        "hashrate_ideal": 66703.2,
+        "hashrate_rt": 65737.88,
+        "hashrate_percentage": 97.82,
+        "hr_error": 0.0,
+        "hw_errors": 4,
+        "pcb_temp": {
+          "min": 41,
+          "max": 54
+        },
+        "chip_temp": {
+          "min": 51,
+          "max": 80
+        },
+        "chip_statuses": {
+          "red": 0,
+          "orange": 1,
+          "grey": 107
+        },
+        "status": {
+          "state": "mining"
+        }
+      }
+    ],
+    "found_blocks": 0,
+    "best_share": 9308018885,
+    "psu": {
+      "temps": {
+        "pfc_temp": 41,
+        "llc1_temp": 49,
+        "llc2_temp": 42
+      },
+      "psu_power_metering": true
+    }
+  }
+}

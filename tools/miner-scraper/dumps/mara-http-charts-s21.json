@@ -1,0 +1,722 @@
+[
+  {
+    "timestamp": "2026-03-14 10:43:09 +0000 UTC",
+    "temperature_avg": 43.341984,
+    "power_consumption": 4077.9482,
+    "hashrate_chains": [
+      {
+        "0": 74766.79
+      },
+      {
+        "1": 85028.9
+      },
+      {
+        "2": 79751.24
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 10:52:55 +0000 UTC",
+    "temperature_avg": 44.134365,
+    "power_consumption": 4100.902,
+    "hashrate_chains": [
+      {
+        "0": 78871.63
+      },
+      {
+        "1": 81319.88
+      },
+      {
+        "2": 81056
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 11:02:55 +0000 UTC",
+    "temperature_avg": 43.465748,
+    "power_consumption": 4089.7134,
+    "hashrate_chains": [
+      {
+        "0": 79567.99
+      },
+      {
+        "1": 80440.27
+      },
+      {
+        "2": 80066.44
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 11:12:55 +0000 UTC",
+    "temperature_avg": 43.566097,
+    "power_consumption": 4076.3496,
+    "hashrate_chains": [
+      {
+        "0": 79985.805
+      },
+      {
+        "1": 79179.5
+      },
+      {
+        "2": 80960.7
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 11:22:55 +0000 UTC",
+    "temperature_avg": 44.011395,
+    "power_consumption": 4097.088,
+    "hashrate_chains": [
+      {
+        "0": 79714.59
+      },
+      {
+        "1": 81451.82
+      },
+      {
+        "2": 80235.03
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 11:32:54 +0000 UTC",
+    "temperature_avg": 44.122356,
+    "power_consumption": 4088.897,
+    "hashrate_chains": [
+      {
+        "0": 80476.92
+      },
+      {
+        "1": 80579.54
+      },
+      {
+        "2": 80748.13
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 11:42:54 +0000 UTC",
+    "temperature_avg": 44.487865,
+    "power_consumption": 4113.689,
+    "hashrate_chains": [
+      {
+        "0": 79458.04
+      },
+      {
+        "1": 80711.484
+      },
+      {
+        "2": 80315.66
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 11:52:54 +0000 UTC",
+    "temperature_avg": 44.290222,
+    "power_consumption": 4104.0977,
+    "hashrate_chains": [
+      {
+        "0": 80279.01
+      },
+      {
+        "1": 80652.84
+      },
+      {
+        "2": 80103.086
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 12:02:54 +0000 UTC",
+    "temperature_avg": 44.52399,
+    "power_consumption": 4106.876,
+    "hashrate_chains": [
+      {
+        "0": 82536.67
+      },
+      {
+        "1": 81759.69
+      },
+      {
+        "2": 79780.56
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 12:12:54 +0000 UTC",
+    "temperature_avg": 44.48691,
+    "power_consumption": 4101.0273,
+    "hashrate_chains": [
+      {
+        "0": 81209.93
+      },
+      {
+        "1": 79267.46
+      },
+      {
+        "2": 80293.67
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 12:22:54 +0000 UTC",
+    "temperature_avg": 44.409817,
+    "power_consumption": 4099.375,
+    "hashrate_chains": [
+      {
+        "0": 79802.555
+      },
+      {
+        "1": 80037.12
+      },
+      {
+        "2": 81539.78
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 12:32:54 +0000 UTC",
+    "temperature_avg": 44.46816,
+    "power_consumption": 4111.293,
+    "hashrate_chains": [
+      {
+        "0": 80073.766
+      },
+      {
+        "1": 79817.21
+      },
+      {
+        "2": 81466.484
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 12:42:54 +0000 UTC",
+    "temperature_avg": 44.247784,
+    "power_consumption": 4103.8135,
+    "hashrate_chains": [
+      {
+        "0": 79729.25
+      },
+      {
+        "1": 79663.28
+      },
+      {
+        "2": 81085.32
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 12:52:54 +0000 UTC",
+    "temperature_avg": 44.298935,
+    "power_consumption": 4101.3945,
+    "hashrate_chains": [
+      {
+        "0": 81048.664
+      },
+      {
+        "1": 79897.84
+      },
+      {
+        "2": 80249.69
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 13:02:54 +0000 UTC",
+    "temperature_avg": 44.21217,
+    "power_consumption": 4091.7915,
+    "hashrate_chains": [
+      {
+        "0": 79604.64
+      },
+      {
+        "1": 80550.22
+      },
+      {
+        "2": 80410.95
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 13:12:54 +0000 UTC",
+    "temperature_avg": 44.95015,
+    "power_consumption": 4118.631,
+    "hashrate_chains": [
+      {
+        "0": 80235.03
+      },
+      {
+        "1": 81180.61
+      },
+      {
+        "2": 79201.484
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 13:22:54 +0000 UTC",
+    "temperature_avg": 44.54323,
+    "power_consumption": 4113.1953,
+    "hashrate_chains": [
+      {
+        "0": 79604.64
+      },
+      {
+        "1": 80520.9
+      },
+      {
+        "2": 80330.32
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 13:32:54 +0000 UTC",
+    "temperature_avg": 43.914738,
+    "power_consumption": 4093.3806,
+    "hashrate_chains": [
+      {
+        "0": 80117.75
+      },
+      {
+        "1": 80242.36
+      },
+      {
+        "2": 80462.26
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 13:42:54 +0000 UTC",
+    "temperature_avg": 44.43751,
+    "power_consumption": 4116.962,
+    "hashrate_chains": [
+      {
+        "0": 78864.305
+      },
+      {
+        "1": 80418.28
+      },
+      {
+        "2": 79897.84
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 13:52:54 +0000 UTC",
+    "temperature_avg": 44.625095,
+    "power_consumption": 4106.4717,
+    "hashrate_chains": [
+      {
+        "0": 80235.03
+      },
+      {
+        "1": 81532.45
+      },
+      {
+        "2": 80748.13
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 14:02:54 +0000 UTC",
+    "temperature_avg": 44.30716,
+    "power_consumption": 4102.928,
+    "hashrate_chains": [
+      {
+        "0": 81393.18
+      },
+      {
+        "1": 81231.92
+      },
+      {
+        "2": 80748.13
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 14:12:54 +0000 UTC",
+    "temperature_avg": 44.308956,
+    "power_consumption": 4106.467,
+    "hashrate_chains": [
+      {
+        "0": 80095.76
+      },
+      {
+        "1": 79949.16
+      },
+      {
+        "2": 80953.375
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 14:22:54 +0000 UTC",
+    "temperature_avg": 44.23525,
+    "power_consumption": 4098.866,
+    "hashrate_chains": [
+      {
+        "0": 80616.195
+      },
+      {
+        "1": 81481.14
+      },
+      {
+        "2": 81034.01
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 14:32:54 +0000 UTC",
+    "temperature_avg": 44.293407,
+    "power_consumption": 4098.7373,
+    "hashrate_chains": [
+      {
+        "0": 80528.234
+      },
+      {
+        "1": 80264.35
+      },
+      {
+        "2": 80322.99
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 14:42:54 +0000 UTC",
+    "temperature_avg": 44.297726,
+    "power_consumption": 4105.9414,
+    "hashrate_chains": [
+      {
+        "0": 79809.88
+      },
+      {
+        "1": 80117.75
+      },
+      {
+        "2": 79853.87
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 14:52:54 +0000 UTC",
+    "temperature_avg": 44.38094,
+    "power_consumption": 4099.786,
+    "hashrate_chains": [
+      {
+        "0": 81415.17
+      },
+      {
+        "1": 81180.61
+      },
+      {
+        "2": 79758.57
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 15:02:54 +0000 UTC",
+    "temperature_avg": 44.49652,
+    "power_consumption": 4115.816,
+    "hashrate_chains": [
+      {
+        "0": 80616.195
+      },
+      {
+        "1": 80227.695
+      },
+      {
+        "2": 80806.77
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 15:12:54 +0000 UTC",
+    "temperature_avg": 44.109592,
+    "power_consumption": 4101.706,
+    "hashrate_chains": [
+      {
+        "0": 79480.03
+      },
+      {
+        "1": 79003.58
+      },
+      {
+        "2": 81363.86
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 15:22:54 +0000 UTC",
+    "temperature_avg": 44.114765,
+    "power_consumption": 4104.552,
+    "hashrate_chains": [
+      {
+        "0": 79032.9
+      },
+      {
+        "1": 81121.97
+      },
+      {
+        "2": 82096.87
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 15:32:54 +0000 UTC",
+    "temperature_avg": 44.288097,
+    "power_consumption": 4102.9946,
+    "hashrate_chains": [
+      {
+        "0": 80073.766
+      },
+      {
+        "1": 81569.1
+      },
+      {
+        "2": 82126.19
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 15:42:54 +0000 UTC",
+    "temperature_avg": 44.190002,
+    "power_consumption": 4101.474,
+    "hashrate_chains": [
+      {
+        "0": 81576.43
+      },
+      {
+        "1": 80132.41
+      },
+      {
+        "2": 80755.46
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 15:52:54 +0000 UTC",
+    "temperature_avg": 43.993496,
+    "power_consumption": 4093.1846,
+    "hashrate_chains": [
+      {
+        "0": 80066.44
+      },
+      {
+        "1": 80176.39
+      },
+      {
+        "2": 80638.18
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 16:02:54 +0000 UTC",
+    "temperature_avg": 43.89584,
+    "power_consumption": 4093.3198,
+    "hashrate_chains": [
+      {
+        "0": 80682.164
+      },
+      {
+        "1": 81034.01
+      },
+      {
+        "2": 78395.18
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 16:12:54 +0000 UTC",
+    "temperature_avg": 43.847366,
+    "power_consumption": 4095.2388,
+    "hashrate_chains": [
+      {
+        "0": 80425.61
+      },
+      {
+        "1": 81129.3
+      },
+      {
+        "2": 80938.72
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 16:22:54 +0000 UTC",
+    "temperature_avg": 44.08772,
+    "power_consumption": 4093.707,
+    "hashrate_chains": [
+      {
+        "0": 80784.78
+      },
+      {
+        "1": 81275.9
+      },
+      {
+        "2": 80990.02
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 16:32:54 +0000 UTC",
+    "temperature_avg": 43.7367,
+    "power_consumption": 4088.7476,
+    "hashrate_chains": [
+      {
+        "0": 79567.99
+      },
+      {
+        "1": 80403.62
+      },
+      {
+        "2": 79875.85
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 16:42:54 +0000 UTC",
+    "temperature_avg": 43.859722,
+    "power_consumption": 4087.3398,
+    "hashrate_chains": [
+      {
+        "0": 80198.375
+      },
+      {
+        "1": 80315.66
+      },
+      {
+        "2": 80777.45
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 16:52:54 +0000 UTC",
+    "temperature_avg": 43.735424,
+    "power_consumption": 4089.3213,
+    "hashrate_chains": [
+      {
+        "0": 80506.24
+      },
+      {
+        "1": 80718.81
+      },
+      {
+        "2": 80843.42
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 17:02:54 +0000 UTC",
+    "temperature_avg": 43.696198,
+    "power_consumption": 4076.4531,
+    "hashrate_chains": [
+      {
+        "0": 80938.72
+      },
+      {
+        "1": 81832.984
+      },
+      {
+        "2": 80293.67
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  },
+  {
+    "timestamp": "2026-03-14 17:12:54 +0000 UTC",
+    "temperature_avg": 43.19,
+    "power_consumption": 4072.6282,
+    "hashrate_chains": [
+      {
+        "0": 80887.41
+      },
+      {
+        "1": 81092.65
+      },
+      {
+        "2": 80293.67
+      }
+    ],
+    "fan_pwm_percent": 100,
+    "ideal_hashrate": 241853.03
+  }
+]

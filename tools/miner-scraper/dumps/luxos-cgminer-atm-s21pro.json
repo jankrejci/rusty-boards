@@ -1,0 +1,23 @@
+{
+  "ATM": [
+    {
+      "ChipTempWindow": 8.0,
+      "Enabled": false,
+      "MaxProfile": "default",
+      "MinProfile": "",
+      "PostRampMinutes": 5,
+      "StartupMinutes": 5,
+      "TempWindow": 8.0
+    }
+  ],
+  "STATUS": [
+    {
+      "Code": 339,
+      "Description": "LUXminer 2026.3.2.193145-42668da4d",
+      "Msg": "ATM configuration values",
+      "STATUS": "S",
+      "When": 1773510132
+    }
+  ],
+  "id": 1
+}

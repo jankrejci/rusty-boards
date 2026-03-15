@@ -1,0 +1,16 @@
+{
+  "minertype": "Antminer S21 XP",
+  "nettype": "DHCP",
+  "netdevice": "eth0",
+  "macaddr": "02:A7:BF:F6:EA:D0",
+  "hostname": "Antminer",
+  "ipaddress": "10.36.1.51",
+  "netmask": "255.255.255.0",
+  "gateway": "",
+  "dnsservers": "",
+  "system_mode": "GNU/Linux",
+  "system_kernel_version": "Linux 4.9.113 #1 SMP PREEMPT Tue Nov 5 18:08:59 CST 2024",
+  "system_filesystem_version": "Tue Nov 5 16:42:48 CST 2024",
+  "firmware_type": "Release",
+  "serinum": "JYZZFKUBDJEBE00PE"
+}

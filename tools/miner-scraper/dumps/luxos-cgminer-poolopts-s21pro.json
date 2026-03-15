@@ -1,0 +1,22 @@
+{
+  "POOLOPTS": [
+    {
+      "BackoffOnError": true,
+      "HashOnDisconnect": false,
+      "MaxErrors": 5,
+      "SmartSwitch": true,
+      "SmartSwitchSecs": 60,
+      "TimeoutSecs": 5
+    }
+  ],
+  "STATUS": [
+    {
+      "Code": 344,
+      "Description": "LUXminer 2026.3.2.193145-42668da4d",
+      "Msg": "Pool Options",
+      "STATUS": "S",
+      "When": 1773510136
+    }
+  ],
+  "id": 1
+}

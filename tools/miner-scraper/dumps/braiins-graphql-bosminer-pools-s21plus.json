@@ -1,0 +1,1 @@
+{"data":{"bosminer":{"info":{"poolGroups":[{"pools":[{"url":"stratum+tcp://stratum.slushpool.com:3333","user":"braiinstest","status":"ALIVE","active":true,"shares":{"acceptedSolutions":24258,"rejectedSolutions":39}}]}]}}}}

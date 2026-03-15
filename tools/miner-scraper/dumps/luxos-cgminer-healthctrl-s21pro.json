@@ -1,0 +1,18 @@
+{
+  "HEALTH": [
+    {
+      "BadChipHealthThreshold": 0.2,
+      "NumReadings": 120
+    }
+  ],
+  "STATUS": [
+    {
+      "Code": 312,
+      "Description": "LUXminer 2026.3.2.193145-42668da4d",
+      "Msg": "Health config",
+      "STATUS": "S",
+      "When": 1773510123
+    }
+  ],
+  "id": 1
+}

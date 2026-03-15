@@ -1,0 +1,18 @@
+{
+  "HASHBOARDOPTS": [
+    {
+      "NoPicProtectionMode": "shutdown_all_boards",
+      "OvertempAutoRecovery": true
+    }
+  ],
+  "STATUS": [
+    {
+      "Code": 354,
+      "Description": "LUXminer 2026.3.2.193145-42668da4d",
+      "Msg": "Hashboard Options",
+      "STATUS": "S",
+      "When": 1773510128
+    }
+  ],
+  "id": 1
+}

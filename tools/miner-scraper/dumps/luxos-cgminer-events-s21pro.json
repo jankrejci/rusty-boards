@@ -1,0 +1,21 @@
+{
+  "EVENTS": [
+    {
+      "Code": "MINER_TUNED",
+      "CreatedAt": "2026-03-14T17:37:27+00:00",
+      "Description": "Miner has completed tuning and is maintaining current performance.",
+      "DocUrl": "https://docs.luxor.tech/firmware/kb/eventstroubleshooting#miner-tuned",
+      "Target": "MINER"
+    }
+  ],
+  "STATUS": [
+    {
+      "Code": 357,
+      "Description": "LUXminer 2026.3.2.193145-42668da4d",
+      "Msg": "Miner Events",
+      "STATUS": "S",
+      "When": 1773510113
+    }
+  ],
+  "id": 1
+}

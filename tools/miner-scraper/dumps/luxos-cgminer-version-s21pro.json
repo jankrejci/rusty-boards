@@ -1,1 +1,21 @@
-{"STATUS":[{"Code":22,"Description":"LUXminer 2026.3.2.193145-42668da4d","Msg":"LUXminer versions","STATUS":"S","When":1773425028}],"VERSION":[{"API":"3.7","CompileTime":"Mon Mar  2 19:49:36 UTC 2026","LUXminer":"2026.3.2.193145-42668da4d","Miner":"2026.3.2.193145","Type":"Antminer S21 Pro"}],"id":1}
+{
+  "STATUS": [
+    {
+      "Code": 22,
+      "Description": "LUXminer 2026.3.2.193145-42668da4d",
+      "Msg": "LUXminer versions",
+      "STATUS": "S",
+      "When": 1773510052
+    }
+  ],
+  "VERSION": [
+    {
+      "API": "3.7",
+      "CompileTime": "Mon Mar  2 19:49:36 UTC 2026",
+      "LUXminer": "2026.3.2.193145-42668da4d",
+      "Miner": "2026.3.2.193145",
+      "Type": "Antminer S21 Pro"
+    }
+  ],
+  "id": 1
+}

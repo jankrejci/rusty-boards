@@ -1,0 +1,2021 @@
+Mar 14 10:40:34 syslogd started: BusyBox v1.35.0
+Mar 14 10:40:34 kernel: klogd started: BusyBox v1.35.0 (2025-09-30 01:16:45 UTC)
+Mar 14 10:40:34 kernel: [    0.000000@0]d Booting Linux on physical CPU 0x0
+Mar 14 10:40:34 kernel: [    0.000000@0]d Linux version 4.9.113+ (Jiangsu@kaonsu.jenkins.kingdra.com) (gcc version 6.3.1 20170109 (Linaro GCC 6.3-2017.02) ) #5 SMP PREEMPT Mon Mar 17 04:46:03 UTC 2025
+Mar 14 10:40:34 kernel: [    0.000000@0]d Boot CPU: AArch64 Processor [410fd034]
+Mar 14 10:40:34 kernel: [    0.000000@0]d earlycon: aml_uart0 at MMIO 0x00000000ff803000 (options '')
+Mar 14 10:40:34 kernel: [    0.000000@0]d bootconsole [aml_uart0] enabled
+Mar 14 10:40:34 kernel: [    0.000000@0]d 	07400000 - 07500000,     1024 KB, ramoops@0x07400000
+Mar 14 10:40:34 kernel: [    0.000000@0]d fdt_init_reserved_mem, start:0x0000000005000000, end:0x0000000005400000, len:4 MiB
+Mar 14 10:40:34 kernel: [    0.000000@0]d 	05000000 - 05400000,     4096 KB, linux,secmon
+Mar 14 10:40:34 kernel: [    0.000000@0]d fdt_init_reserved_mem, start:0x000000003e000000, end:0x0000000040000000, len:32 MiB
+Mar 14 10:40:34 kernel: [    0.000000@0]d failed to allocate memory for node linux,meson-fb, size:32 MB
+Mar 14 10:40:34 kernel: [    0.000000@0]d cma: Reserved 8 MiB at 0x000000000f800000
+Mar 14 10:40:34 kernel: [    0.000000@0]d On node 0 totalpages: 65536
+Mar 14 10:40:34 kernel: [    0.000000@0]d   DMA zone: 1024 pages used for memmap
+Mar 14 10:40:34 kernel: [    0.000000@0]d   DMA zone: 0 pages reserved
+Mar 14 10:40:34 kernel: [    0.000000@0]d   DMA zone: 65536 pages, LIFO batch:15
+Mar 14 10:40:34 kernel: [    0.000000@0]d psci: probing for conduit method from DT.
+Mar 14 10:40:34 kernel: [    0.000000@0]d psci: PSCIv1.0 detected in firmware.
+Mar 14 10:40:34 kernel: [    0.000000@0]d psci: Using standard PSCI v0.2 function IDs
+Mar 14 10:40:34 kernel: [    0.000000@0]d psci: MIGRATE_INFO_TYPE not supported.
+Mar 14 10:40:34 kernel: [    0.000000@0]d psci: SMC Calling Convention v1.1
+Mar 14 10:40:34 kernel: [    0.000000@0]d percpu: Embedded 25 pages/cpu @ffffffc00f753000 s63768 r8192 d30440 u102400
+Mar 14 10:40:34 kernel: [    0.000000@0]d pcpu-alloc: s63768 r8192 d30440 u102400 alloc=25*4096
+Mar 14 10:40:34 kernel: [    0.000000@0]d pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3 
+Mar 14 10:40:34 kernel: [    0.000000@0]d Detected VIPT I-cache on CPU0
+Mar 14 10:40:34 kernel: [    0.000000@0]d CPU features: enabling workaround for ARM erratum 845719
+Mar 14 10:40:34 kernel: [    0.000000@0]d Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 64512
+Mar 14 10:40:34 kernel: [    0.000000@0]d Kernel command line: init=/init console=ttyS0,115200 no_console_suspend earlycon=aml_uart,0xff803000 ramoops.pstore_en=1 ramoops.record_size=0x8000 ramoops.console_size=0x4000 logo=,loaded,androidboot.selinux=
+Mar 14 10:40:34 kernel: [    0.000000@0]d PID hash table entries: 1024 (order: 1, 8192 bytes)
+Mar 14 10:40:34 kernel: [    0.000000@0]d Dentry cache hash table entries: 32768 (order: 6, 262144 bytes)
+Mar 14 10:40:34 kernel: [    0.000000@0]d Inode-cache hash table entries: 16384 (order: 5, 131072 bytes)
+Mar 14 10:40:34 kernel: [    0.000000@0]d Memory: 213524K/262144K available (7550K kernel code, 676K rwdata, 1984K rodata, 2048K init, 876K bss, 36332K reserved, 12288K cma-reserved)
+Mar 14 10:40:34 kernel: [    0.000000@0]d Virtual kernel memory layout:
+Mar 14 10:40:34 kernel: [    0.000000@0]d     modules : 0xffffff8000000000 - 0xffffff8008000000   (   128 MB)
+Mar 14 10:40:34 kernel: [    0.000000@0]d     vmalloc : 0xffffff8008000000 - 0xffffffbebfff0000   (   250 GB)
+Mar 14 10:40:34 kernel: [    0.000000@0]d       .text : 0xffffff8009080000 - 0xffffff80097e0000   (  7552 KB)
+Mar 14 10:40:34 kernel: [    0.000000@0]d     .rodata : 0xffffff80097e0000 - 0xffffff80099e0000   (  2048 KB)
+Mar 14 10:40:34 kernel: [    0.000000@0]d       .init : 0xffffff80099e0000 - 0xffffff8009be0000   (  2048 KB)
+Mar 14 10:40:34 kernel: [    0.000000@0]d       .data : 0xffffff8009be0000 - 0xffffff8009c89008   (   677 KB)
+Mar 14 10:40:34 kernel: [    0.000000@0]d        .bss : 0xffffff8009c89008 - 0xffffff8009d6438c   (   877 KB)
+Mar 14 10:40:34 kernel: [    0.000000@0]d     fixed   : 0xffffffbefe7fb000 - 0xffffffbefec00000   (  4116 KB)
+Mar 14 10:40:34 kernel: [    0.000000@0]d     PCI I/O : 0xffffffbefee00000 - 0xffffffbeffe00000   (    16 MB)
+Mar 14 10:40:34 kernel: [    0.000000@0]d     vmemmap : 0xffffffbf00000000 - 0xffffffc000000000   (     4 GB maximum)
+Mar 14 10:40:34 kernel: [    0.000000@0]d               0xffffffbf00000000 - 0xffffffbf00400000   (     4 MB actual)
+Mar 14 10:40:34 kernel: [    0.000000@0]d     memory  : 0xffffffc000000000 - 0xffffffc010000000   (   256 MB)
+Mar 14 10:40:34 kernel: [    0.000000@0]d SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+Mar 14 10:40:34 kernel: [    0.000000@0]d Preemptible hierarchical RCU implementation.
+Mar 14 10:40:34 kernel: [    0.000000@0]d 	Build-time adjustment of leaf fanout to 64.
+Mar 14 10:40:34 kernel: [    0.000000@0]d 	RCU restricting CPUs from NR_CPUS=8 to nr_cpu_ids=4.
+Mar 14 10:40:34 kernel: [    0.000000@0]d RCU: Adjusting geometry for rcu_fanout_leaf=64, nr_cpu_ids=4
+Mar 14 10:40:34 kernel: [    0.000000@0]d NR_IRQS:64 nr_irqs:64 0
+Mar 14 10:40:34 kernel: [    0.000000@0]d irq_meson_gpio: 100 to 8 gpio interrupt mux initialized
+Mar 14 10:40:34 kernel: [    0.000000@0]d axg_aoclkc_init: register ao clk ok!
+Mar 14 10:40:34 kernel: [    0.000000@0]d axg_amlogic_init_sdemmc: register amlogic sdemmc clk
+Mar 14 10:40:34 kernel: [    0.000000@0]d axg_amlogic_init_sdemmc: register amlogic sdemmc clk
+Mar 14 10:40:34 kernel: [    0.000000@0]d axg_amlogic_init_media: register meson media clk
+Mar 14 10:40:34 kernel: [    0.000000@0]d axg_amlogic_init_misc: register amlogic axg misc clks
+Mar 14 10:40:34 kernel: [    0.000000@0]d axg_amlogic_init_misc: register amlogic sdemmc clk
+Mar 14 10:40:34 kernel: [    0.000000@0]d axg_clkc_init initialization complete
+Mar 14 10:40:34 kernel: [    0.000000@0]d arm_arch_timer: Architected cp15 timer(s) running at 24.00MHz (phys).
+Mar 14 10:40:34 kernel: [    0.000000@0]d clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x588fe9dc0, max_idle_ns: 440795202592 ns
+Mar 14 10:40:34 kernel: [    0.000003@0]d sched_clock: 56 bits at 24MHz, resolution 41ns, wraps every 4398046511097ns
+Mar 14 10:40:34 kernel: [    0.008654@0]- Console: colour dummy device 80x25
+Mar 14 10:40:34 kernel: [    0.013056@0]- Calibrating delay loop (skipped), value calculated using timer frequency.. 48.00 BogoMIPS (lpj=96000)
+Mar 14 10:40:34 kernel: [    0.023623@0]- pid_max: default: 32768 minimum: 301
+Mar 14 10:40:34 kernel: [    0.028570@0]- thread_stack_cache_init, vmap:ffffffc00ec1cc40, bitmap:ffffffc00ec22000, cache page:ec40
+Mar 14 10:40:34 kernel: [    0.037993@0]- thread_stack_cache_init, allocation vm area:ffffffc00ec1cc80, addr:ffffff8020000000, size:20001000
+Mar 14 10:40:34 kernel: [    0.048302@0]- cpu 0, vmap_stack:[ffffffc00f75c820-ffffffc00f760810]
+Mar 14 10:40:34 kernel: [    0.054688@0]- cpu 0, irq_stack: [ffffffc00f753060-ffffffc00f757050]
+Mar 14 10:40:34 kernel: [    0.061076@0]- cpu 1, vmap_stack:[ffffffc00f775820-ffffffc00f779810]
+Mar 14 10:40:34 kernel: [    0.067463@0]- cpu 1, irq_stack: [ffffffc00f76c060-ffffffc00f770050]
+Mar 14 10:40:34 kernel: [    0.073851@0]- cpu 2, vmap_stack:[ffffffc00f78e820-ffffffc00f792810]
+Mar 14 10:40:34 kernel: [    0.080238@0]- cpu 2, irq_stack: [ffffffc00f785060-ffffffc00f789050]
+Mar 14 10:40:34 kernel: [    0.086625@0]- cpu 3, vmap_stack:[ffffffc00f7a7820-ffffffc00f7ab810]
+Mar 14 10:40:34 kernel: [    0.093013@0]- cpu 3, irq_stack: [ffffffc00f79e060-ffffffc00f7a2050]
+Mar 14 10:40:34 kernel: [    0.099437@0]- Security Framework initialized
+Mar 14 10:40:34 kernel: [    0.103796@0]- Smack:  Initializing.
+Mar 14 10:40:34 kernel: [    0.107359@0]- Smack:  IPv6 port labeling enabled.
+Mar 14 10:40:34 kernel: [    0.112204@0]- Mount-cache hash table entries: 512 (order: 0, 4096 bytes)
+Mar 14 10:40:34 kernel: [    0.119004@0]- Mountpoint-cache hash table entries: 512 (order: 0, 4096 bytes)
+Mar 14 10:40:34 kernel: [    0.127041@0]- sched-energy: CPU device node has no sched-energy-costs
+Mar 14 10:40:34 kernel: [    0.132857@0]- CPU0: update cpu_capacity 1024
+Mar 14 10:40:34 kernel: [    0.137209@0]- ASID allocator initialised with 32768 entries
+Mar 14 10:40:34 kernel: [    0.175295@0]- secmon: can't fine clear_range
+Mar 14 10:40:34 kernel: [    0.175932@0]- Meson chip version = RevC (25:C - 23:0)
+Mar 14 10:40:34 kernel: [    0.207451@1]d Detected VIPT I-cache on CPU1
+Mar 14 10:40:34 kernel: [    0.207505@1]d CPU1: update cpu_capacity 1024
+Mar 14 10:40:34 kernel: [    0.207508@1]d CPU1: Booted secondary processor [410fd034]
+Mar 14 10:40:34 kernel: [    0.235468@2]d Detected VIPT I-cache on CPU2
+Mar 14 10:40:34 kernel: [    0.235500@2]d CPU2: update cpu_capacity 1024
+Mar 14 10:40:34 kernel: [    0.235502@2]d CPU2: Booted secondary processor [410fd034]
+Mar 14 10:40:34 kernel: [    0.263507@3]d Detected VIPT I-cache on CPU3
+Mar 14 10:40:34 kernel: [    0.263537@3]d CPU3: update cpu_capacity 1024
+Mar 14 10:40:34 kernel: [    0.263538@3]d CPU3: Booted secondary processor [410fd034]
+Mar 14 10:40:34 kernel: [    0.263590@0]- Brought up 4 CPUs
+Mar 14 10:40:34 kernel: [    0.303684@0]- SMP: Total of 4 processors activated.
+Mar 14 10:40:34 kernel: [    0.308677@0]- CPU features: detected feature: 32-bit EL0 Support
+Mar 14 10:40:34 kernel: [    0.314802@0]- CPU features: detected feature: Kernel page table isolation (KPTI)
+Mar 14 10:40:34 kernel: [    0.325206@0]- CPU: All CPU(s) started at EL2
+Mar 14 10:40:34 kernel: [    0.326712@0]d alternatives: patching kernel code
+Mar 14 10:40:34 kernel: [    0.331830@1]- addr:ffffff802007be10 is in kernel, size fix 4096->10, data:mode=0755
+Mar 14 10:40:34 kernel: [    0.339379@0]- devtmpfs: initialized
+Mar 14 10:40:34 kernel: [    0.350901@0]- clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+Mar 14 10:40:34 kernel: [    0.355320@0]- futex hash table entries: 1024 (order: 4, 65536 bytes)
+Mar 14 10:40:34 kernel: [    0.361933@0]- pinctrl core: initialized pinctrl subsystem
+Mar 14 10:40:34 kernel: [    0.368132@0]- NET: Registered protocol family 16
+Mar 14 10:40:34 kernel: [    0.392076@0]- cpuidle: using governor menu
+Mar 14 10:40:34 kernel: [    0.392454@0]- vdso: 2 pages (1 code @ ffffff80097e7000, 1 data @ ffffff8009be4000)
+Mar 14 10:40:34 kernel: [    0.398344@0]- hw-breakpoint: found 6 breakpoint and 2 watchpoint registers.
+Mar 14 10:40:34 kernel: [    0.405802@0]- DMA: preallocated 256 KiB pool for atomic allocations
+Mar 14 10:40:34 kernel: [    0.411988@0]- clkmsr: clkmsr: driver init
+Mar 14 10:40:34 kernel: [    0.416262@0]- aml_watch_point_probe, in, wp:2
+Mar 14 10:40:34 kernel: [    0.421608@0]- pstore: using zlib compression
+Mar 14 10:40:34 kernel: [    0.425109@0]- console [pstore-1] enabled
+Mar 14 10:40:34 kernel: [    0.428766@0]- pstore: Registered ramoops as persistent store backend
+Mar 14 10:40:34 kernel: [    0.435239@0]- ramoops: attached 0x100000@0x7400000, ecc: 0/0
+Mar 14 10:40:34 kernel: [    0.442182@0]- meson_mhu: mhu ffffffc00eded810 to scp done 0x1
+Mar 14 10:40:34 kernel: [    0.455221@0]- aml_iomap: amlogic iomap probe done
+Mar 14 10:40:34 kernel: [    0.459395@0]- clkmsr: msr_clk_reg0=ffffff800817a004,msr_clk_reg2=ffffff800817c00c
+Mar 14 10:40:34 kernel: [    0.461997@0]- clkmsr ffd18004.meson_clk_msr: failed to get msr ring reg0
+Mar 14 10:40:34 kernel: [    0.513754@0]- vgaarb: loaded
+Mar 14 10:40:34 kernel: [    0.514234@0]- SCSI subsystem initialized
+Mar 14 10:40:34 kernel: [    0.515460@0]- usbcore: registered new interface driver usbfs
+Mar 14 10:40:34 kernel: [    0.521042@0]- usbcore: registered new interface driver hub
+Mar 14 10:40:34 kernel: [    0.526620@0]- usbcore: registered new device driver usb
+Mar 14 10:40:34 kernel: [    0.532308@0]- pps_core: LinuxPPS API ver. 1 registered
+Mar 14 10:40:34 kernel: [    0.537104@0]- pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+Mar 14 10:40:34 kernel: [    0.546564@0]- PTP clock support registered
+Mar 14 10:40:34 kernel: [    0.550936@0]- secmon: reserve_mem_size:0x300000
+Mar 14 10:40:34 kernel: [    0.555457@0]- secmon secmon: assigned reserved memory node linux,secmon
+Mar 14 10:40:34 kernel: [    0.562389@0]- secmon: get page:ffffffbf00140000, 5000
+Mar 14 10:40:34 kernel: [    0.567260@0]- secmon: share in base: 0xffffffc0050fe000, share out base: 0xffffffc0050ff000
+Mar 14 10:40:34 kernel: [    0.575745@0]- secmon: phy_in_base: 0x50fe000, phy_out_base: 0x50ff000
+Mar 14 10:40:34 kernel: [    0.583443@0]- NetLabel: Initializing
+Mar 14 10:40:34 kernel: [    0.585968@0]- NetLabel:  domain hash size = 128
+Mar 14 10:40:34 kernel: [    0.590635@0]- NetLabel:  protocols = UNLABELED CIPSOv4
+Mar 14 10:40:34 kernel: [    0.595937@0]- NetLabel:  unlabeled traffic allowed by default
+Mar 14 10:40:34 kernel: [    0.602542@0]- clocksource: Switched to clocksource arch_sys_counter
+Mar 14 10:40:34 kernel: [    0.621883@0]- NET: Registered protocol family 2
+Mar 14 10:40:34 kernel: [    0.622717@0]- TCP established hash table entries: 2048 (order: 2, 16384 bytes)
+Mar 14 10:40:34 kernel: [    0.628267@0]- TCP bind hash table entries: 2048 (order: 3, 32768 bytes)
+Mar 14 10:40:34 kernel: [    0.635031@3]- TCP: Hash tables configured (established 2048 bind 2048)
+Mar 14 10:40:34 kernel: [    0.641995@3]- UDP hash table entries: 256 (order: 1, 8192 bytes)
+Mar 14 10:40:34 kernel: [    0.647759@3]- UDP-Lite hash table entries: 256 (order: 1, 8192 bytes)
+Mar 14 10:40:34 kernel: [    0.654594@3]- NET: Registered protocol family 1
+Mar 14 10:40:34 kernel: [    0.659022@3]- PCI: CLS 0 bytes, default 64
+Mar 14 10:40:34 kernel: [    0.661054@3]- Unpacking initramfs...
+Mar 14 10:40:34 kernel: [    1.522393@2]- Freeing initrd memory: 16852K
+Mar 14 10:40:34 kernel: [    1.523131@2]- efusekeynum: 4
+Mar 14 10:40:34 kernel: [    1.524013@2]- efusekeyname:             mac	offset:     0	size:     6
+Mar 14 10:40:34 kernel: [    1.530602@2]- efusekeyname:          mac_bt	offset:     6	size:     6
+Mar 14 10:40:34 kernel: [    1.537160@2]- efusekeyname:        mac_wifi	offset:    12	size:     6
+Mar 14 10:40:34 kernel: [    1.543707@2]- efusekeyname:            usid	offset:    18	size:    16
+Mar 14 10:40:34 kernel: [    1.550659@3]- efuse efuse: probe OK!
+Mar 14 10:40:34 kernel: [    1.554603@3]- unifykey: no efuse-version set, use default value: -1
+Mar 14 10:40:34 kernel: [    1.560812@1]- unifykey: aml_unifykeys_init done!
+Mar 14 10:40:34 kernel: [    1.565800@1]- hw perfevents: clusterb_enabled = 0
+Mar 14 10:40:34 kernel: [    1.569874@1]- hw perfevents: cpumasks 0xf, 0x0
+Mar 14 10:40:34 kernel: [    1.574445@1]- hw perfevents: cluster A irq = 7
+Mar 14 10:40:34 kernel: [    1.579056@1]- hw perfevents: enabled with armv8_pmuv3 PMU driver, 7 counters available
+Mar 14 10:40:34 kernel: [    1.589619@1]- workingset: timestamp_bits=62 max_order=16 bucket_order=0
+Mar 14 10:40:34 kernel: [    1.605965@1]- squashfs: version 4.0 (2009/01/31) Phillip Lougher
+Mar 14 10:40:34 kernel: [    1.607658@1]- fuse init (API version 7.26)
+Mar 14 10:40:34 kernel: [    1.615607@1]- NET: Registered protocol family 38
+Mar 14 10:40:34 kernel: [    1.615656@1]- Key type asymmetric registered
+Mar 14 10:40:34 kernel: [    1.619757@1]- Asymmetric key parser 'x509' registered
+Mar 14 10:40:34 kernel: [    1.625208@1]- Block layer SCSI generic (bsg) driver version 0.4 loaded (major 247)
+Mar 14 10:40:34 kernel: [    1.632729@1]- io scheduler noop registered (default)
+Mar 14 10:40:34 kernel: [    1.637683@1]- io scheduler deadline registered
+Mar 14 10:40:34 kernel: [    1.642669@1]- io scheduler cfq registered
+Mar 14 10:40:34 kernel: [    1.658088@1]- Unable to detect cache hierarchy for CPU 0
+Mar 14 10:40:34 kernel: [    1.658259@1]d random: fast init done
+Mar 14 10:40:34 kernel: [    1.661822@1]d random: crng init done
+Mar 14 10:40:34 kernel: [    1.686634@3]- loop: module loaded
+Mar 14 10:40:34 kernel: [    1.691664@3]- zram: Added device: zram0
+Mar 14 10:40:34 kernel: [    1.691938@3]- mtdoops: mtd device (mtddev=name/number) must be supplied
+Mar 14 10:40:34 kernel: [    1.697626@3]- libphy: Fixed MDIO Bus: probed
+Mar 14 10:40:34 kernel: [    1.701395@3]- tun: Universal TUN/TAP device driver, 1.6
+Mar 14 10:40:34 kernel: [    1.706430@3]- tun: (C) 1999-2004 Max Krasnyansky <maxk@qualcomm.com>
+Mar 14 10:40:34 kernel: [    1.714460@3]-  ee eth reset:Addr = ffffff80081db008
+Mar 14 10:40:34 kernel: [    1.722188@3]- meson6-dwmac ff3f0000.ethernet: no reset control found
+Mar 14 10:40:34 kernel: [    1.724356@3]- stmmac - user ID: 0x11, Synopsys ID: 0x37
+Mar 14 10:40:34 kernel: [    1.729676@3]-  Ring mode enabled
+Mar 14 10:40:34 kernel: [    1.733001@3]-  DMA HW capability register supported
+Mar 14 10:40:34 kernel: [    1.737812@3]-  Normal descriptors
+Mar 14 10:40:34 kernel: [    1.741227@3]-  RX Checksum Offload Engine supported
+Mar 14 10:40:34 kernel: [    1.746213@3]- 	COE Type 2
+Mar 14 10:40:34 kernel: [    1.748925@3]-  TX Checksum insertion supported
+Mar 14 10:40:34 kernel: [    1.753475@3]-  Wake-Up On Lan supported
+Mar 14 10:40:34 kernel: [    1.757475@3]-  Enable RX Mitigation via HW Watchdog Timer
+Mar 14 10:40:34 kernel: [    1.769821@3]- libphy: stmmac: probed
+Mar 14 10:40:34 kernel: [    1.769863@3]- eth%d: PHY ID 0007c0f1 at 0 IRQ POLL (stmmac-0:00) active
+Mar 14 10:40:34 kernel: [    1.775873@3]- PPP generic driver version 2.4.2
+Mar 14 10:40:34 kernel: [    1.779479@3]- PPP BSD Compression module registered
+Mar 14 10:40:34 kernel: [    1.784136@3]- PPP Deflate Compression module registered
+Mar 14 10:40:34 kernel: [    1.789484@3]- PPP MPPE Compression module registered
+Mar 14 10:40:34 kernel: [    1.794541@3]- NET: Registered protocol family 24
+Mar 14 10:40:34 kernel: [    1.799405@3]- usbcore: registered new interface driver asix
+Mar 14 10:40:34 kernel: [    1.805045@3]- usbcore: registered new interface driver ax88179_178a
+Mar 14 10:40:34 kernel: [    1.811426@3]- usbcore: registered new interface driver cdc_ether
+Mar 14 10:40:34 kernel: [    1.817527@3]- usbcore: registered new interface driver net1080
+Mar 14 10:40:34 kernel: [    1.823482@3]- usbcore: registered new interface driver cdc_subset
+Mar 14 10:40:34 kernel: [    1.829688@3]- usbcore: registered new interface driver zaurus
+Mar 14 10:40:34 kernel: [    1.835583@3]- usbcore: registered new interface driver cdc_ncm
+Mar 14 10:40:34 kernel: [    1.842095@3]- ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+Mar 14 10:40:34 kernel: [    1.848286@3]- ehci-pci: EHCI PCI platform driver
+Mar 14 10:40:34 kernel: [    1.853085@3]- ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+Mar 14 10:40:34 kernel: [    1.859500@3]- ohci-pci: OHCI PCI platform driver
+Mar 14 10:40:34 kernel: [    1.864798@3]- usbcore: registered new interface driver cdc_acm
+Mar 14 10:40:34 kernel: [    1.870159@3]- cdc_acm: USB Abstract Control Model driver for USB modems and ISDN adapters
+Mar 14 10:40:34 kernel: [    1.878567@3]- usbcore: registered new interface driver usb-storage
+Mar 14 10:40:34 kernel: [    1.884907@3]- usbcore: registered new interface driver usbserial
+Mar 14 10:40:34 kernel: [    1.891516@1]- mousedev: PS/2 mouse device common for all mice
+Mar 14 10:40:34 kernel: [    1.897109@1]- usbcore: registered new interface driver xpad
+Mar 14 10:40:34 kernel: [    1.902687@3]- i2c /dev entries driver
+Mar 14 10:40:34 kernel: [    1.907116@2]- device-mapper: ioctl: 4.35.0-ioctl (2016-06-23) initialised: dm-devel@redhat.com
+Mar 14 10:40:34 kernel: [    1.915898@2]- cpu cpu0: bL_cpufreq_init: CPU 0 initialized
+Mar 14 10:40:34 kernel: [    1.920685@2]- arm_big_little: bL_cpufreq_register: Registered platform driver: scpi
+Mar 14 10:40:34 kernel: [    1.929755@1]- usbcore: registered new interface driver usbhid
+Mar 14 10:40:34 kernel: [    1.934235@1]- usbhid: USB HID core driver
+Mar 14 10:40:34 kernel: [    1.938621@2]- ashmem: initialized
+Mar 14 10:40:34 kernel: [    1.942258@2]- logger: created 512K log 'log_main'
+Mar 14 10:40:34 kernel: [    1.946771@0]- logger: created 1K log 'log_events'
+Mar 14 10:40:34 kernel: [    1.951597@2]- logger: created 1K log 'log_radio'
+Mar 14 10:40:34 kernel: [    1.956295@2]- logger: created 16K log 'log_system'
+Mar 14 10:40:34 kernel: [    1.960987@2]- exFAT: Version 1.3.0
+Mar 14 10:40:34 kernel: [    1.965870@1]- ff803000.serial: clock gate not found
+Mar 14 10:40:34 kernel: [    1.969562@1]- meson_uart ff803000.serial: ==uart0 reg addr = ffffff800830d000
+Mar 14 10:40:34 kernel: [    1.976777@1]- ff803000.serial: ttyS0 at MMIO 0xff803000 (irq = 13, base_baud = 1500000) is a meson_uart
+Mar 14 10:40:34 kernel: [    1.991840@1]- meson_uart ff803000.serial: ttyS0 use xtal(24M) 24000000 change 0 to 115200
+Mar 14 10:40:34 kernel: [    1.994598@1]- console [ttyS0] enabled
+Mar 14 10:40:34 kernel: [    2.002011@1]- bootconsole [aml_uart0] disabled
+Mar 14 10:40:34 kernel: [    2.011575@0]- ff804000.serial: clock gate not found
+Mar 14 10:40:34 kernel: [    2.016049@0]- meson_uart ff804000.serial: ==uart3 reg addr = ffffff80083a7000
+Mar 14 10:40:34 kernel: [    2.023224@0]- ff804000.serial: ttyS3 at MMIO 0xff804000 (irq = 14, base_baud = 1500000) is a meson_uart
+Mar 14 10:40:34 kernel: [    2.033390@1]- meson_uart ffd24000.serial: ==uart1 reg addr = ffffff80083a9000
+Mar 14 10:40:34 kernel: [    2.039891@1]- ffd24000.serial: ttyS1 at MMIO 0xffd24000 (irq = 25, base_baud = 1500000) is a meson_uart
+Mar 14 10:40:34 kernel: [    2.049934@2]- meson_uart ffd23000.serial: ==uart2 reg addr = ffffff80083ab000
+Mar 14 10:40:34 kernel: [    2.056543@2]- ffd23000.serial: ttyS2 at MMIO 0xffd23000 (irq = 26, base_baud = 1500000) is a meson_uart
+Mar 14 10:40:34 kernel: [    2.067056@0]- amlogic-new-usb2 ffe09000.usb2phy: USB2 phy probe:phy_mem:0xffe09000, iomap phy_base:0xffffff80083ce000
+Mar 14 10:40:34 kernel: [    2.076818@0]- amlogic-new-usb3 ffe09080.usb3phy: This phy has no usb port
+Mar 14 10:40:34 kernel: [    2.083525@0]- amlogic-new-usb3 ffe09080.usb3phy: USB3 phy probe:phy_mem:0xffe09080, iomap phy_base:0xffffff80083d2080
+Mar 14 10:40:34 kernel: [    2.097027@0]- i2c i2c-1: of_i2c: modalias failure on /soc/aobus@ff800000/i2c@5000/mcu6350@40
+Mar 14 10:40:34 kernel: [    2.102576@0]- i2c i2c-1: Failed to create I2C device for /soc/aobus@ff800000/i2c@5000/mcu6350@40
+Mar 14 10:40:34 kernel: [    2.113486@0]- aml_dma ff63e000.aml_dma: Aml dma
+Mar 14 10:40:34 kernel: [    2.117539@0]- aml_aes_dma ff63e000.aml_dma:aml_aes: Aml AES_dma
+Mar 14 10:40:34 kernel: [    2.122929@0]- aml_sha_dma ff63e000.aml_dma:aml_sha: Aml SHA1/SHA224/SHA256 dma
+Mar 14 10:40:34 kernel: [    2.129690@0]- meson-remote: remote_probe
+Mar 14 10:40:34 kernel: [    2.134463@0]- input: aml_keypad as /devices/platform/ff808040.rc/input/input0
+Mar 14 10:40:34 kernel: [    2.141801@0]- amlogic mtd driver init
+Mar 14 10:40:34 kernel: [    2.145089@0]- mtd_nand_probe:128,parse dts start
+Mar 14 10:40:34 kernel: [    2.148952@0]- bl mode descrete
+Mar 14 10:40:34 kernel: [    2.151951@0]- fip_copies 4
+Mar 14 10:40:34 kernel: [    2.154716@0]- fip_size 0x200000
+Mar 14 10:40:34 kernel: [    2.157911@0]- nand_clk_ctrl 0xffe07000
+Mar 14 10:40:34 kernel: [    2.161766@0]- mtd_nand_probe:234,parse dts end
+Mar 14 10:40:34 kernel: [    2.166283@0]- nand register base ffffff80083de800, nand clock register ffffff80083e0000
+Mar 14 10:40:34 kernel: [    2.174937@0]- gclock=90000245 P_NAND_CFG=e5
+Mar 14 10:40:34 kernel: [    2.178702@0]- NAND device id: 98 da 90 15 76 16
+Mar 14 10:40:34 kernel: [    2.183158@0]- NAND device: Manufacturer ID: 
+Mar 14 10:40:34 kernel: [    2.187304@0]-  0x98, Chip ID: 0x98 (Toshiba A revision NAND 2Gib TC58NVG1S3HBAI4 )
+Mar 14 10:40:34 kernel: [    2.194962@0]- gclock=90000245 P_NAND_CFG=e5
+Mar 14 10:40:34 kernel: [    2.199181@0]- oob_fill_cnt =32 oob_size =64, bch_bytes =14
+Mar 14 10:40:34 kernel: [    2.204723@0]- ecc mode:6 ecc_page_num=2 eep_need_oobsize=16
+Mar 14 10:40:34 kernel: [    2.210357@0]- plane_num=1 writesize=0x800 ecc.size=0x200 bch_mode=1
+Mar 14 10:40:34 kernel: [    2.216686@0]- mtd->oobavail: 0x8
+Mar 14 10:40:34 kernel: [    2.220329@0]- aml_nand_init 2046: plat-name:bootloader
+Mar 14 10:40:34 kernel: [    2.225190@0]- Creating 1 MTD partitions on "bootloader":
+Mar 14 10:40:34 kernel: [    2.230557@0]- 0x000000000000-0x000000200000 : "bootloader"
+Mar 14 10:40:34 kernel: [    2.237551@1]- bootloader initialized ok
+Mar 14 10:40:34 kernel: [    2.240037@1]- gclock=90000245 P_NAND_CFG=e5
+Mar 14 10:40:34 kernel: [    2.244405@1]- NAND device id: 98 da 90 15 76 16
+Mar 14 10:40:34 kernel: [    2.248841@1]- NAND device: Manufacturer ID: 
+Mar 14 10:40:34 kernel: [    2.252998@1]-  0x98, Chip ID: 0x98 (Toshiba A revision NAND 2Gib TC58NVG1S3HBAI4 )
+Mar 14 10:40:34 kernel: [    2.260645@1]- gclock=90000245 P_NAND_CFG=e5
+Mar 14 10:40:34 kernel: [    2.264878@1]- oob_fill_cnt =32 oob_size =64, bch_bytes =14
+Mar 14 10:40:34 kernel: [    2.270416@1]- ecc mode:6 ecc_page_num=2 eep_need_oobsize=16
+Mar 14 10:40:34 kernel: [    2.276060@1]- plane_num=1 writesize=0x800 ecc.size=0x200 bch_mode=1
+Mar 14 10:40:34 kernel: [    2.282386@1]- mtd->oobavail: 0x8
+Mar 14 10:40:34 kernel: [    2.285917@1]- aml_nand_init 2046: plat-name:nandnormal
+Mar 14 10:40:34 kernel: [    2.290920@1]- bbt_start=20
+Mar 14 10:40:34 kernel: [    2.293630@1]- env_start=24
+Mar 14 10:40:34 kernel: [    2.296416@1]- key_start=32
+Mar 14 10:40:34 kernel: [    2.299185@1]- dtb_start=40
+Mar 14 10:40:34 kernel: [    2.301949@1]- ddr_start=44
+Mar 14 10:40:34 kernel: [    2.304737@1]- nbbt: info size=0x800 max_scan_blk=24, start_blk=20
+Mar 14 10:40:34 kernel: [    2.311187@1]- get_free_node 43: bitmap=0
+Mar 14 10:40:34 kernel: [    2.314886@1]- get_free_node 55: bitmap=1
+Mar 14 10:40:34 kernel: [    2.319011@1]- get_free_node 43: bitmap=1
+Mar 14 10:40:34 kernel: [    2.322858@1]- get_free_node 55: bitmap=3
+Mar 14 10:40:34 kernel: [    2.326981@1]- get_free_node 43: bitmap=3
+Mar 14 10:40:34 kernel: [    2.330831@1]- get_free_node 55: bitmap=7
+Mar 14 10:40:34 kernel: [    2.334810@1]- nbbt : phy_blk_addr=20, ec=0, phy_page_addr=0, timestamp=1
+Mar 14 10:40:34 kernel: [    2.341567@1]- nbbt free list:
+Mar 14 10:40:34 kernel: [    2.344609@1]- blockN=21, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.348935@1]- blockN=22, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.353267@1]- blockN=23, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.357618@1]- aml_nand_scan_rsv_info 1141: page_num=1
+Mar 14 10:40:34 kernel: [    2.362994@1]- nbbt valid addr: 280000
+Mar 14 10:40:34 kernel: [    2.366444@1]- aml_nand_bbt_check 1306 bbt is valid, reading.
+Mar 14 10:40:34 kernel: [    2.372184@1]- aml_nand_read_rsv_info:423,read nbbt info at 280000
+Mar 14 10:40:34 kernel: [    2.378457@1]- nenv: info size=0x10000 max_scan_blk=32, start_blk=24
+Mar 14 10:40:34 kernel: [    2.384927@1]- get_free_node 43: bitmap=7
+Mar 14 10:40:34 kernel: [    2.388638@1]- get_free_node 55: bitmap=f
+Mar 14 10:40:34 kernel: [    2.392763@1]- get_free_node 43: bitmap=f
+Mar 14 10:40:34 kernel: [    2.396611@1]- get_free_node 55: bitmap=1f
+Mar 14 10:40:34 kernel: [    2.400823@1]- get_free_node 43: bitmap=1f
+Mar 14 10:40:34 kernel: [    2.404758@1]- get_free_node 55: bitmap=3f
+Mar 14 10:40:34 kernel: [    2.408970@1]- get_free_node 43: bitmap=3f
+Mar 14 10:40:34 kernel: [    2.412903@1]- get_free_node 55: bitmap=7f
+Mar 14 10:40:34 kernel: [    2.417117@1]- get_free_node 43: bitmap=7f
+Mar 14 10:40:34 kernel: [    2.421051@1]- get_free_node 55: bitmap=ff
+Mar 14 10:40:34 kernel: [    2.425263@1]- get_free_node 43: bitmap=ff
+Mar 14 10:40:34 kernel: [    2.429198@1]- get_free_node 55: bitmap=1ff
+Mar 14 10:40:34 kernel: [    2.433497@1]- get_free_node 43: bitmap=1ff
+Mar 14 10:40:34 kernel: [    2.437518@1]- get_free_node 55: bitmap=3ff
+Mar 14 10:40:34 kernel: [    2.441668@1]- nenv : phy_blk_addr=25, ec=22, phy_page_addr=0, timestamp=46
+Mar 14 10:40:34 kernel: [    2.448600@1]- nenv free list:
+Mar 14 10:40:34 kernel: [    2.451634@1]- blockN=24, ec=22, dirty_flag=1
+Mar 14 10:40:34 kernel: [    2.455967@1]- blockN=26, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.460300@1]- blockN=27, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.464634@1]- blockN=28, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.468965@1]- blockN=29, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.473301@1]- blockN=30, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.477634@1]- blockN=31, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.481983@1]- aml_nand_scan_rsv_info 1141: page_num=32
+Mar 14 10:40:34 kernel: [    2.496006@1]- nenv valid addr: 330000
+Mar 14 10:40:34 kernel: [    2.496032@1]- nkey: info size=0x8000 max_scan_blk=40, start_blk=32
+Mar 14 10:40:34 kernel: [    2.500516@1]- get_free_node 43: bitmap=3ff
+Mar 14 10:40:34 kernel: [    2.504537@1]- get_free_node 55: bitmap=7ff
+Mar 14 10:40:34 kernel: [    2.508836@1]- get_free_node 43: bitmap=7ff
+Mar 14 10:40:34 kernel: [    2.512857@1]- get_free_node 55: bitmap=fff
+Mar 14 10:40:34 kernel: [    2.517156@1]- get_free_node 43: bitmap=fff
+Mar 14 10:40:34 kernel: [    2.521177@1]- get_free_node 55: bitmap=1fff
+Mar 14 10:40:34 kernel: [    2.525561@1]- get_free_node 43: bitmap=1fff
+Mar 14 10:40:34 kernel: [    2.529671@1]- get_free_node 55: bitmap=3fff
+Mar 14 10:40:34 kernel: [    2.534056@1]- get_free_node 43: bitmap=3fff
+Mar 14 10:40:34 kernel: [    2.538164@1]- get_free_node 55: bitmap=7fff
+Mar 14 10:40:34 kernel: [    2.542558@1]- get_free_node 43: bitmap=7fff
+Mar 14 10:40:34 kernel: [    2.546657@1]- get_free_node 55: bitmap=ffff
+Mar 14 10:40:34 kernel: [    2.551040@1]- get_free_node 43: bitmap=ffff
+Mar 14 10:40:34 kernel: [    2.555150@1]- get_free_node 55: bitmap=1ffff
+Mar 14 10:40:34 kernel: [    2.559622@1]- get_free_node 43: bitmap=1ffff
+Mar 14 10:40:34 kernel: [    2.563817@1]- get_free_node 55: bitmap=3ffff
+Mar 14 10:40:34 kernel: [    2.568142@1]- nkey : phy_blk_addr=-1, ec=0, phy_page_addr=0, timestamp=0
+Mar 14 10:40:34 kernel: [    2.574899@1]- nkey free list:
+Mar 14 10:40:34 kernel: [    2.577923@1]- blockN=32, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.582265@1]- blockN=33, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.586600@1]- blockN=34, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.590933@1]- blockN=35, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.595266@1]- blockN=36, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.599606@1]- blockN=37, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.603934@1]- blockN=38, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.608265@1]- blockN=39, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.612616@1]- aml_nand_scan_rsv_info 1141: page_num=16
+Mar 14 10:40:34 kernel: [    2.617801@1]- nkey valid addr: fffffffffffe0000
+Mar 14 10:40:34 kernel: [    2.622407@1]- aml_nand_key_check 1251 NO key exist
+Mar 14 10:40:34 kernel: [    2.627248@1]- ndtb: info size=0x20000 max_scan_blk=44, start_blk=40
+Mar 14 10:40:34 kernel: [    2.633862@1]- get_free_node 43: bitmap=3ffff
+Mar 14 10:40:34 kernel: [    2.637916@1]- get_free_node 55: bitmap=7ffff
+Mar 14 10:40:34 kernel: [    2.642390@1]- get_free_node 43: bitmap=7ffff
+Mar 14 10:40:34 kernel: [    2.646584@1]- get_free_node 55: bitmap=fffff
+Mar 14 10:40:34 kernel: [    2.651055@1]- get_free_node 43: bitmap=fffff
+Mar 14 10:40:34 kernel: [    2.655250@1]- get_free_node 55: bitmap=1fffff
+Mar 14 10:40:34 kernel: [    2.659662@1]- ndtb : phy_blk_addr=40, ec=0, phy_page_addr=0, timestamp=1
+Mar 14 10:40:34 kernel: [    2.666417@1]- ndtb free list:
+Mar 14 10:40:34 kernel: [    2.669454@1]- blockN=41, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.673787@1]- blockN=42, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.678120@1]- blockN=43, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.682469@1]- aml_nand_scan_rsv_info 1141: page_num=64
+Mar 14 10:40:34 kernel: [    2.696505@1]- ndtb valid addr: 500000
+Mar 14 10:40:34 kernel: [    2.696531@1]- nddr: info size=0x20000 max_scan_blk=46, start_blk=44
+Mar 14 10:40:34 kernel: [    2.701097@1]- get_free_node 43: bitmap=1fffff
+Mar 14 10:40:34 kernel: [    2.705379@1]- get_free_node 55: bitmap=3fffff
+Mar 14 10:40:34 kernel: [    2.709937@1]- get_free_node 43: bitmap=3fffff
+Mar 14 10:40:34 kernel: [    2.714219@1]- get_free_node 55: bitmap=7fffff
+Mar 14 10:40:34 kernel: [    2.718628@1]- nddr : phy_blk_addr=-1, ec=0, phy_page_addr=0, timestamp=0
+Mar 14 10:40:34 kernel: [    2.725387@1]- nddr free list:
+Mar 14 10:40:34 kernel: [    2.728421@1]- blockN=44, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.732755@1]- blockN=45, ec=-1, dirty_flag=0
+Mar 14 10:40:34 kernel: [    2.737104@1]- aml_nand_scan_rsv_info 1141: page_num=64
+Mar 14 10:40:34 kernel: [    2.742289@1]- nddr valid addr: fffffffffffe0000
+Mar 14 10:40:34 kernel: [    2.746892@1]- aml_nand_ddr_check 1281 NO ddr exist
+Mar 14 10:40:34 kernel: [    2.753232@1]-  NAND bbt detect factory Bad block at c000000
+Mar 14 10:40:34 kernel: [    2.757383@1]- aml_nand_init:408 factory bad addr=600
+Mar 14 10:40:34 kernel: [    2.762396@1]-  NAND bbt detect factory Bad block at c020000
+Mar 14 10:40:34 kernel: [    2.768041@1]- aml_nand_init:408 factory bad addr=601
+Mar 14 10:40:34 kernel: [    2.773611@1]- Creating 6 MTD partitions on "nandnormal":
+Mar 14 10:40:34 kernel: [    2.778434@1]- 0x000000800000-0x000001000000 : "tpl"
+Mar 14 10:40:34 kernel: [    2.785006@2]- 0x000001000000-0x000001200000 : "misc"
+Mar 14 10:40:34 kernel: [    2.790021@3]- 0x000001200000-0x000002200000 : "recovery"
+Mar 14 10:40:34 kernel: [    2.795324@2]- 0x000002200000-0x000004200000 : "boot"
+Mar 14 10:40:34 kernel: [    2.800371@2]- 0x000004200000-0x000004700000 : "config"
+Mar 14 10:40:34 kernel: [    2.805342@2]- 0x000004700000-0x000010000000 : "nvdata"
+Mar 14 10:40:34 kernel: [    2.810370@2]-  NAND bbt detect factory Bad block at c000000
+Mar 14 10:40:34 kernel: [    2.814842@2]-  NAND bbt detect factory Bad block at c020000
+Mar 14 10:40:34 kernel: [    2.822312@2]- nandnormal initialized ok
+Mar 14 10:40:34 kernel: [    2.824476@2]- aml_ubootenv_init: register env chardev
+Mar 14 10:40:34 kernel: [    2.829753@2]- aml_ubootenv_init: register env chardev OK
+Mar 14 10:40:34 kernel: [    2.834992@2]- amlnf_dtb_init: register dtb cdev
+Mar 14 10:40:34 kernel: [    2.839739@2]- amlnf_dtb_init: register dtd cdev OK
+Mar 14 10:40:34 kernel: [    2.845091@2]- aml_vrtc rtc: rtc core: registered aml_vrtc as rtc0
+Mar 14 10:40:34 kernel: [    2.850781@2]- input: aml_vkeypad as /devices/platform/rtc/input/input1
+Mar 14 10:40:34 kernel: [    2.857600@2]- amlkaraoke init success!
+Mar 14 10:40:34 kernel: [    2.861301@2]- meson_wdt ffd0f0d0.watchdog: start watchdog
+Mar 14 10:40:34 kernel: [    2.866332@2]- meson_wdt ffd0f0d0.watchdog: create hrtimer for watch dog
+Mar 14 10:40:34 kernel: [    2.873465@2]- meson_wdt ffd0f0d0.watchdog: AML Watchdog Timer probed done
+Mar 14 10:40:34 kernel: [    2.880478@2]- dmc_monitor_probe
+Mar 14 10:40:34 kernel: [    2.883348@2]- page_trace_module_init, create sysfs failed
+Mar 14 10:40:34 kernel: [    2.889079@2]- defendkey defendkey: Reserved memory is not enough!
+Mar 14 10:40:34 kernel: [    2.894685@2]- defendkey: probe of defendkey failed with error -22
+Mar 14 10:40:34 kernel: [    2.901627@2]- GACT probability NOT on
+Mar 14 10:40:34 kernel: [    2.904568@2]- Mirror/redirect action on
+Mar 14 10:40:34 kernel: [    2.908448@2]- u32 classifier
+Mar 14 10:40:34 kernel: [    2.911377@2]-     Actions configured
+Mar 14 10:40:34 kernel: [    2.915026@2]- Netfilter messages via NETLINK v0.30.
+Mar 14 10:40:34 kernel: [    2.920255@2]- nf_conntrack version 0.5.0 (2048 buckets, 8192 max)
+Mar 14 10:40:34 kernel: [    2.926499@2]- ctnetlink v0.93: registering with nfnetlink.
+Mar 14 10:40:34 kernel: [    2.932395@2]- xt_time: kernel timezone is -0000
+Mar 14 10:40:34 kernel: [    2.936589@2]- wireguard: WireGuard 1.0.20220627 loaded. See www.wireguard.com for information.
+Mar 14 10:40:34 kernel: [    2.944933@2]- wireguard: Copyright (C) 2015-2019 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
+Mar 14 10:40:34 kernel: [    2.954876@2]- ipip: IPv4 and MPLS over IPv4 tunneling driver
+Mar 14 10:40:34 kernel: [    2.961441@2]- ip_tables: (C) 2000-2006 Netfilter Core Team
+Mar 14 10:40:34 kernel: [    2.966313@2]- arp_tables: arp_tables: (C) 2002 David S. Miller
+Mar 14 10:40:34 kernel: [    2.971982@2]- Initializing XFRM netlink socket
+Mar 14 10:40:34 kernel: [    2.976989@2]- NET: Registered protocol family 10
+Mar 14 10:40:34 kernel: [    2.982736@2]- mip6: Mobile IPv6
+Mar 14 10:40:34 kernel: [    2.984283@2]- ip6_tables: (C) 2000-2006 Netfilter Core Team
+Mar 14 10:40:34 kernel: [    2.990340@2]- sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+Mar 14 10:40:34 kernel: [    2.997701@2]- NET: Registered protocol family 17
+Mar 14 10:40:34 kernel: [    3.000796@2]- NET: Registered protocol family 15
+Mar 14 10:40:34 kernel: [    3.005464@2]- bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+Mar 14 10:40:34 kernel: [    3.018621@2]- l2tp_core: L2TP core driver, V2.0
+Mar 14 10:40:34 kernel: [    3.023195@2]- l2tp_ppp: PPPoL2TP kernel driver, V2.0
+Mar 14 10:40:34 kernel: [    3.028205@2]- l2tp_ip: L2TP IP encapsulation support (L2TPv3)
+Mar 14 10:40:34 kernel: [    3.034040@2]- l2tp_netlink: L2TP netlink interface
+Mar 14 10:40:34 kernel: [    3.038935@2]- l2tp_eth: L2TP ethernet pseudowire support (L2TPv3)
+Mar 14 10:40:34 kernel: [    3.045066@2]- l2tp_debugfs: L2TP debugfs support
+Mar 14 10:40:34 kernel: [    3.049697@2]- l2tp_ip6: L2TP IP encapsulation support for IPv6 (L2TPv3)
+Mar 14 10:40:34 kernel: [    3.056414@2]- NET: Registered protocol family 35
+Mar 14 10:40:34 kernel: [    3.061333@2]- Key type dns_resolver registered
+Mar 14 10:40:34 kernel: [    3.066103@2]- Registered swp emulation handler
+Mar 14 10:40:34 kernel: [    3.070080@2]- Registered cp15_barrier emulation handler
+Mar 14 10:40:34 kernel: [    3.075368@2]- Registered setend emulation handler
+Mar 14 10:40:34 kernel: [    3.081160@2]- registered taskstats version 1
+Mar 14 10:40:34 kernel: [    3.091075@0]- dwc3 ff500000.dwc3: Configuration mismatch. dr_mode forced to host
+Mar 14 10:40:34 kernel: [    3.097342@0]- xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+Mar 14 10:40:34 kernel: [    3.098724@0]- xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 1
+Mar 14 10:40:34 kernel: [    3.106983@0]- xhci-hcd xhci-hcd.0.auto: hcc params 0x0220f664 hci version 0x100 quirks 0x02010010
+Mar 14 10:40:34 kernel: [    3.115562@0]- xhci-hcd xhci-hcd.0.auto: irq 22, io mem 0xff500000
+Mar 14 10:40:34 kernel: [    3.122773@2]- hub 1-0:1.0: USB hub found
+Mar 14 10:40:34 kernel: [    3.125654@2]- hub 1-0:1.0: 1 port detected
+Mar 14 10:40:34 kernel: [    3.130212@2]- xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+Mar 14 10:40:34 kernel: [    3.135524@2]- xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 2
+Mar 14 10:40:34 kernel: [    3.143456@2]- usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+Mar 14 10:40:34 kernel: [    3.152650@1]- hub 2-0:1.0: USB hub found
+Mar 14 10:40:34 kernel: [    3.155749@1]- hub 2-0:1.0: config failed, hub doesn't have any ports! (err -19)
+Mar 14 10:40:34 kernel: [    3.163158@1]- usb usb2: Unsupported the hub
+Mar 14 10:40:34 kernel: [    3.167762@1]- aml_vrtc rtc: setting system clock to 2026-03-14 10:40:34 UTC (1773484834)
+Mar 14 10:40:34 kernel: [    3.176220@1]- dwc_otg ff400000.dwc2_a: dwc_otg_driver_probe(ffffffc00ef4a800)
+Mar 14 10:40:34 kernel: [    3.176270@1]- dwc_otg: usb0: type: 2 speed: 0, config: 0, dma: 0, id: 0, phy: ffe09000, ctrl: 0
+Mar 14 10:40:34 kernel: [    3.184215@1]- dwc_otg ff400000.dwc2_a: base=0xffffff8008580000
+Mar 14 10:40:34 kernel: [    3.184222@1]- dwc_otg ff400000.dwc2_a: dwc_otg_device=0xffffffc00d928600
+Mar 14 10:40:34 kernel: [    3.284566@2]- dwc_otg: Core Release: 3.10a
+Mar 14 10:40:34 kernel: [    3.284609@2]- dwc_otg: Setting default values for core params
+Mar 14 10:40:34 kernel: [    3.288968@2]- dwc_otg: curmode: 0, host_only: 0
+Mar 14 10:40:34 kernel: [    3.293555@2]- dwc_otg ff400000.dwc2_a: DMA config: BURST_DEFAULT
+Mar 14 10:40:34 kernel: [    3.305913@2]- dwc_otg: Using Buffer DMA mode
+Mar 14 10:40:34 kernel: [    3.305943@2]- dwc_otg: OTG VER PARAM: 1, OTG VER FLAG: 1
+Mar 14 10:40:34 kernel: [    3.310017@2]- dwc_otg: Working on port type = SLAVE
+Mar 14 10:40:34 kernel: [    3.314958@2]- dwc_otg: Dedicated Tx FIFOs mode
+Mar 14 10:40:34 kernel: [    3.321449@0]- thermal thermal_zone0: binding zone soc_thermal with cdev thermal-cpufreq-0 failed:-22
+Mar 14 10:40:34 kernel: [    3.328844@0]- cpucore_cooling_register, max_cpu_core_num:4
+Mar 14 10:40:34 kernel: [    3.341103@0]- gxbb_pm: enter meson_pm_probe!
+Mar 14 10:40:34 kernel: [    3.341148@0]- no vddio3v3_en pin
+Mar 14 10:40:34 kernel: [    3.342999@0]- pm-meson aml_pm: Can't get switch_clk81
+Mar 14 10:40:34 kernel: [    3.348121@0]- gxbb_pm: meson_pm_probe done
+Mar 14 10:40:34 kernel: [    3.352852@0]- meson_uart ff803000.serial: ttyS0 use xtal(24M) 24000000 change 115200 to 115200
+Mar 14 10:40:34 kernel: [    3.357149@0]- Freeing unused kernel memory: 2048K
+Mar 14 10:40:34 kernel: [    3.375167@0]- meson_uart ff803000.serial: ttyS0 use xtal(24M) 24000000 change 115200 to 115200
+Mar 14 10:40:34 kernel: [    3.558952@3]- ubi0: attaching mtd5
+Mar 14 10:40:34 kernel: [    3.570511@3]- ubi0: scanning is finished
+Mar 14 10:40:34 kernel: [    3.575077@3]- ubi0: attached mtd5 (name "config", size 5 MiB)
+Mar 14 10:40:34 kernel: [    3.575284@3]- ubi0: PEB size: 131072 bytes (128 KiB), LEB size: 126976 bytes
+Mar 14 10:40:34 kernel: [    3.582464@3]- ubi0: min./max. I/O unit sizes: 2048/2048, sub-page size 2048
+Mar 14 10:40:34 kernel: [    3.589436@3]- ubi0: VID header offset: 2048 (aligned 2048), data offset: 4096
+Mar 14 10:40:34 kernel: [    3.596626@3]- ubi0: good PEBs: 40, bad PEBs: 0, corrupted PEBs: 0
+Mar 14 10:40:34 kernel: [    3.602771@3]- ubi0: user volume: 1, internal volumes: 1, max. volumes count: 128
+Mar 14 10:40:34 kernel: [    3.610232@3]- ubi0: max/mean erase counter: 29/17, WL threshold: 4096, image sequence number: 3212187554
+Mar 14 10:40:34 kernel: [    3.619757@3]- ubi0: available PEBs: 0, total reserved PEBs: 40, PEBs reserved for bad PEB handling: 4
+Mar 14 10:40:34 kernel: [    3.629057@1]- ubi0: background thread "ubi_bgt0d" started, PID 1145
+Mar 14 10:40:34 kernel: [    3.642271@0]- UBIFS (ubi0:0): background thread "ubifs_bgt0_0" started, PID 1149
+Mar 14 10:40:34 kernel: [    3.660264@3]- UBIFS (ubi0:0): recovery needed
+Mar 14 10:40:35 kernel: [    3.719500@1]- UBIFS (ubi0:0): recovery completed
+Mar 14 10:40:35 kernel: [    3.719644@1]- UBIFS (ubi0:0): UBIFS: mounted UBI device 0, volume 0, name "config_data"
+Mar 14 10:40:35 kernel: [    3.726662@1]- UBIFS (ubi0:0): LEB size: 126976 bytes (124 KiB), min./max. I/O unit sizes: 2048 bytes/2048 bytes
+Mar 14 10:40:35 kernel: [    3.736798@1]- UBIFS (ubi0:0): FS size: 2793472 bytes (2 MiB, 22 LEBs), journal size 1015809 bytes (0 MiB, 6 LEBs)
+Mar 14 10:40:35 kernel: [    3.747118@1]- UBIFS (ubi0:0): reserved for root: 131942 bytes (128 KiB)
+Mar 14 10:40:35 kernel: [    3.753784@1]- UBIFS (ubi0:0): media format: w4/r0 (latest is w4/r0), UUID B2F9B334-6047-40AE-AEB8-09148699EEC9, small LPT model
+Mar 14 10:40:35 kernel: [    3.779954@1]- ubi2: attaching mtd6
+Mar 14 10:40:35 kernel: [    4.052496@1]-  NAND bbt detect factory Bad block at c000000
+Mar 14 10:40:35 kernel: [    4.052548@1]-  NAND bbt detect factory Bad block at c020000
+Mar 14 10:40:35 kernel: [    4.201672@1]- ubi2: scanning is finished
+Mar 14 10:40:35 kernel: [    4.208192@1]- ubi2: attached mtd6 (name "nvdata", size 185 MiB)
+Mar 14 10:40:35 kernel: [    4.208577@1]- ubi2: PEB size: 131072 bytes (128 KiB), LEB size: 126976 bytes
+Mar 14 10:40:35 kernel: [    4.215718@1]- ubi2: min./max. I/O unit sizes: 2048/2048, sub-page size 2048
+Mar 14 10:40:35 kernel: [    4.222717@1]- ubi2: VID header offset: 2048 (aligned 2048), data offset: 4096
+Mar 14 10:40:35 kernel: [    4.229908@1]- ubi2: good PEBs: 1478, bad PEBs: 2, corrupted PEBs: 0
+Mar 14 10:40:35 kernel: [    4.236240@1]- ubi2: user volume: 1, internal volumes: 1, max. volumes count: 128
+Mar 14 10:40:35 kernel: [    4.243689@1]- ubi2: max/mean erase counter: 1/0, WL threshold: 4096, image sequence number: 323065093
+Mar 14 10:40:35 kernel: [    4.252955@1]- ubi2: available PEBs: 0, total reserved PEBs: 1478, PEBs reserved for bad PEB handling: 2
+Mar 14 10:40:35 kernel: [    4.262423@0]- ubi2: background thread "ubi_bgt2d" started, PID 1157
+Mar 14 10:40:35 kernel: [    4.275952@3]- UBIFS (ubi2:0): background thread "ubifs_bgt2_0" started, PID 1161
+Mar 14 10:40:35 kernel: [    4.293853@1]- UBIFS (ubi2:0): recovery needed
+Mar 14 10:40:35 kernel: [    4.352935@1]- UBIFS (ubi2:0): recovery completed
+Mar 14 10:40:35 kernel: [    4.353101@1]- UBIFS (ubi2:0): UBIFS: mounted UBI device 2, volume 0, name "nvdada_log"
+Mar 14 10:40:35 kernel: [    4.360017@1]- UBIFS (ubi2:0): LEB size: 126976 bytes (124 KiB), min./max. I/O unit sizes: 2048 bytes/2048 bytes
+Mar 14 10:40:35 kernel: [    4.370161@1]- UBIFS (ubi2:0): FS size: 185384960 bytes (176 MiB, 1460 LEBs), journal size 9269248 bytes (8 MiB, 73 LEBs)
+Mar 14 10:40:35 kernel: [    4.381069@1]- UBIFS (ubi2:0): reserved for root: 4952683 bytes (4836 KiB)
+Mar 14 10:40:35 kernel: [    4.387909@1]- UBIFS (ubi2:0): media format: w4/r0 (latest is w4/r0), UUID FA25BD0B-2E51-46EB-B985-03F190D2A388, small LPT model
+Mar 14 10:40:36 kernel: [    5.558622@2]- eth0: device MAC address 02:9b:53:20:a5:a2
+Mar 14 10:40:36 kernel: [    5.571035@1]- meson6-dwmac ff3f0000.ethernet eth0: fail to init PTP.
+Mar 14 10:40:36 kernel: [    5.572223@1]- IPv6: ADDRCONF(NETDEV_UP): eth0: link is not ready
+Mar 14 10:40:36 ntpd[1202]: ntpd 4.2.8p15@1.3728-o Tue Sep 30 01:18:58 UTC 2025 (1): Starting
+Mar 14 10:40:36 ntpd[1202]: Command line: /usr/sbin/ntpd -g -p /var/run/ntpd.pid
+Mar 14 10:40:36 ntpd[1202]: ----------------------------------------------------
+Mar 14 10:40:36 ntpd[1202]: ntp-4 is maintained by Network Time Foundation,
+Mar 14 10:40:36 ntpd[1202]: Inc. (NTF), a non-profit 501(c)(3) public-benefit
+Mar 14 10:40:36 ntpd[1202]: corporation.  Support and training for ntp-4 are
+Mar 14 10:40:36 ntpd[1202]: available at https://www.nwtime.org/support
+Mar 14 10:40:36 ntpd[1202]: ----------------------------------------------------
+Mar 14 10:40:36 ntpd[1207]: proto: precision = 2.667 usec (-18)
+Mar 14 10:40:36 ntpd[1207]: basedate set to 2025-09-18
+Mar 14 10:40:36 ntpd[1207]: gps base set to 2025-09-21 (week 2385)
+Mar 14 10:40:36 ntpd[1207]: Listen and drop on 0 v6wildcard [::]:123
+Mar 14 10:40:36 ntpd[1207]: Listen and drop on 1 v4wildcard 0.0.0.0:123
+Mar 14 10:40:36 ntpd[1207]: Listen normally on 2 lo 127.0.0.1:123
+Mar 14 10:40:36 ntpd[1207]: Listen normally on 3 lo [::1]:123
+Mar 14 10:40:36 ntpd[1207]: Listening on routing socket on fd #20 for interface updates
+Mar 14 10:40:36 ntpd[1207]: kernel reports TIME_ERROR: 0x41: Clock Unsynchronized
+Mar 14 10:40:36 ntpd[1207]: kernel reports TIME_ERROR: 0x41: Clock Unsynchronized
+Mar 14 10:40:36 dropbear[1219]: Running in background
+Mar 14 10:40:37 kernel: [    6.602826@1]d meson6-dwmac ff3f0000.ethernet eth0: Link is Up - 100Mbps/Full - flow control off
+Mar 14 10:40:37 kernel: [    6.606008@1]- IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+Mar 14 10:40:37 ntpd[1207]: bind(23) AF_INET6 fe80::9b:53ff:fe20:a5a2%2#123 flags 0x11 failed: Cannot assign requested address
+Mar 14 10:40:37 ntpd[1207]: unable to create socket on eth0 (4) for fe80::9b:53ff:fe20:a5a2%2#123
+Mar 14 10:40:37 ntpd[1207]: failed to init interface for address fe80::9b:53ff:fe20:a5a2%2
+Mar 14 10:40:40 ntpd[1207]: Listen normally on 5 eth0 10.36.1.103:123
+Mar 14 10:40:40 ntpd[1207]: Listen normally on 6 eth0 [fe80::9b:53ff:fe20:a5a2%2]:123
+Mar 14 10:40:42 miner: info [Integrity]: Load tls ca...
+Mar 14 10:40:42 miner: info [Telemetry]: IP Address of host gateway.maratech.io is [0.0.0.0]
+Mar 14 10:40:42 miner: info [System]: Kaonsu core initializing...
+Mar 14 10:40:42 miner: info [System]: Go runtime: unknown
+Mar 14 10:40:42 miner: info [System]: Kaonsu version rel 3.15_968 (kaonsu.jenkins.kingdra.com) (go1.24.6 linux/amd64) 5992a175d2b92e9d1a571b618a2939f7771f2ce6 (main), Tue 30 Sep 2025 01:11:53 AM UTC
+Mar 14 10:40:42 miner: info [System]: [KV] Load speicial features configs from /usr/bin/features.conf
+Mar 14 10:40:42 miner: info [System]: [KV] Set config: FEATURES_KHEAVY_HASH=true
+Mar 14 10:40:42 miner: info [System]: [KV] Set config: FEATURES_SCRYPT_HASH=true
+Mar 14 10:40:42 miner: info [System]: Control board type: A113D , SN:ca9303d7f581df58f7856e62f8c8b7f84863e0f0301e9dfae8fa3638f9f3660e
+Mar 14 10:40:42 miner: info [KeyChain]: Code:0xce80 Loaded 0/0 userspace CA certificates
+Mar 14 10:40:43 dropbear[1285]: Child connection from 10.20.30.94:38150
+Mar 14 10:40:43 dropbear[1285]: Login attempt for nonexistent user
+Mar 14 10:40:43 dropbear[1285]: Exit before auth from <10.20.30.94:38150>: Exited normally
+Mar 14 10:40:43 dropbear[1286]: Child connection from 10.20.30.94:38156
+Mar 14 10:40:43 miner: info [System]: No upgrade available.
+Mar 14 10:40:43 miner: info [System]: Eth0: Link up.
+Mar 14 10:40:43 miner: info [CgMinerApi]: CgMinerApi Listen on 0.0.0.0:4028
+Mar 14 10:40:43 miner: info [CgMinerApi]: Complex http api server listening on 127.0.0.1:4029
+Mar 14 10:40:43 dropbear[1286]: Login attempt for nonexistent user
+Mar 14 10:40:43 miner: info [Telemetry]: Time sync success, cost 0 seconds
+Mar 14 10:40:44 dropbear[1286]: Exit before auth from <10.20.30.94:38156>: Exited normally
+Mar 14 10:40:44 miner: info [Miner]: Hashboard[0] Probe finish, model=IHB68601
+Mar 14 10:40:44 miner: info [Miner]: Hashboard[2] Probe finish, model=IHB68601
+Mar 14 10:40:44 miner: info [Miner]: Hashboard[1] Probe finish, model=IHB68601
+Mar 14 10:40:44 miner: info [Miner]: Dump eeprom info.
+Mar 14 10:40:44 miner: Slot[0] EEPROM Data:
+Mar 14 10:40:44 miner: 	SN: JYZZYS4BDJFAC03R0
+Mar 14 10:40:44 miner: 	AsicDieReversion: ED
+Mar 14 10:40:44 miner: 	AsicMarking: S1VX24BD1G
+Mar 14 10:40:44 miner: 	AsicBin: 4
+Mar 14 10:40:44 miner: 	AsicFTVersion: F1V05B2C1
+Mar 14 10:40:44 miner: 	PCBVersion: 0x0110
+Mar 14 10:40:44 miner: 	BOMVersion: 0x0000
+Mar 14 10:40:44 miner: 	AsicSensorType: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr0: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr1: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr2: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr3: 0
+Mar 14 10:40:44 miner: 	PicSensorType: 0
+Mar 14 10:40:44 miner: 	PicSensorAddr: 0
+Mar 14 10:40:44 miner: 	AsicTech: PM
+Mar 14 10:40:44 miner: 	BoardType: IHB68601
+Mar 14 10:40:44 miner: 	FactoryProductionNumber: JYZZ20240601007-Y1
+Mar 14 10:40:44 miner: 	Voltage: 14.400000
+Mar 14 10:40:44 miner: 	Frequency: 405
+Mar 14 10:40:44 miner: 	NonceReturnRate: 99.790001
+Mar 14 10:40:44 miner: 	FactoryTestTempIn: 34
+Mar 14 10:40:44 miner: 	FactoryTestTempOut: 50
+Mar 14 10:40:44 miner: 	FactoryTestVersion: 0
+Mar 14 10:40:44 miner: 	FactoryTestStandard: 1
+Mar 14 10:40:44 miner: info [Miner]: Dump eeprom info.
+Mar 14 10:40:44 miner: Slot[2] EEPROM Data:
+Mar 14 10:40:44 miner: 	SN: JYZZYS4BDJFAC039B
+Mar 14 10:40:44 miner: 	AsicDieReversion: ED
+Mar 14 10:40:44 miner: 	AsicMarking: S1VX24BB21
+Mar 14 10:40:44 miner: 	AsicBin: 4
+Mar 14 10:40:44 miner: 	AsicFTVersion: F1V05B2C1
+Mar 14 10:40:44 miner: 	PCBVersion: 0x0110
+Mar 14 10:40:44 miner: 	BOMVersion: 0x0000
+Mar 14 10:40:44 miner: 	AsicSensorType: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr0: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr1: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr2: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr3: 0
+Mar 14 10:40:44 miner: 	PicSensorType: 0
+Mar 14 10:40:44 miner: 	PicSensorAddr: 0
+Mar 14 10:40:44 miner: 	AsicTech: PM
+Mar 14 10:40:44 miner: 	BoardType: IHB68601
+Mar 14 10:40:44 miner: 	FactoryProductionNumber: JYZZ20240601007-Y1
+Mar 14 10:40:44 miner: 	Voltage: 14.400000
+Mar 14 10:40:44 miner: 	Frequency: 405
+Mar 14 10:40:44 miner: 	NonceReturnRate: 99.690002
+Mar 14 10:40:44 miner: 	FactoryTestTempIn: 31
+Mar 14 10:40:44 miner: 	FactoryTestTempOut: 47
+Mar 14 10:40:44 miner: 	FactoryTestVersion: 0
+Mar 14 10:40:44 miner: 	FactoryTestStandard: 1
+Mar 14 10:40:44 miner: info [Miner]: Dump eeprom info.
+Mar 14 10:40:44 miner: Slot[1] EEPROM Data:
+Mar 14 10:40:44 miner: 	SN: JYZZYS4BDJFAC02WY
+Mar 14 10:40:44 miner: 	AsicDieReversion: ED
+Mar 14 10:40:44 miner: 	AsicMarking: S1VX24BD1G
+Mar 14 10:40:44 miner: 	AsicBin: 4
+Mar 14 10:40:44 miner: 	AsicFTVersion: F1V05B2C1
+Mar 14 10:40:44 miner: 	PCBVersion: 0x0110
+Mar 14 10:40:44 miner: 	BOMVersion: 0x0000
+Mar 14 10:40:44 miner: 	AsicSensorType: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr0: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr1: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr2: 0
+Mar 14 10:40:44 miner: 	AsicSensorAddr3: 0
+Mar 14 10:40:44 miner: 	PicSensorType: 0
+Mar 14 10:40:44 miner: 	PicSensorAddr: 0
+Mar 14 10:40:44 miner: 	AsicTech: PM
+Mar 14 10:40:44 miner: 	BoardType: IHB68601
+Mar 14 10:40:44 miner: 	FactoryProductionNumber: JYZZ20240601007-Y1
+Mar 14 10:40:44 miner: 	Voltage: 14.400000
+Mar 14 10:40:44 miner: 	Frequency: 405
+Mar 14 10:40:44 miner: 	NonceReturnRate: 99.839996
+Mar 14 10:40:44 miner: 	FactoryTestTempIn: 34
+Mar 14 10:40:44 miner: 	FactoryTestTempOut: 50
+Mar 14 10:40:44 miner: 	FactoryTestVersion: 0
+Mar 14 10:40:44 miner: 	FactoryTestStandard: 1
+Mar 14 10:40:44 miner: info [Miner]: [EarlyProbePrint] Hashboard Type: IHB68601, Miner is: Antminer S21Imm.
+Mar 14 10:40:50 miner: warning [PowerSupply]: Power supply run cmd error: header error
+Mar 14 10:40:55 miner: warning [PowerSupply]: Power supply run cmd error: header error
+Mar 14 10:41:00 miner: warning [PowerSupply]: Power supply run cmd error: header error
+Mar 14 10:41:00 miner: info [PowerSupply]: APW v1 protocol probe failed, try APW v2 protocol.
+Mar 14 10:41:09 miner: info [Miner]: 
+Mar 14 10:41:09 miner: PowerProfile:
+Mar 14 10:41:09 miner:     Vendor: Bitmain Technologies
+Mar 14 10:41:09 miner:     Model: APW11A1216-1 Ver.A (0x6a)
+Mar 14 10:41:09 miner:     MinVoltage: 12.40
+Mar 14 10:41:09 miner:     MaxVoltage: 16.00
+Mar 14 10:41:11 miner: info [PowerSupply]: Get output voltage sample success. voltage=0.07
+Mar 14 10:41:11 miner: info [Miner]: Fan check passed = true.
+Mar 14 10:41:11 miner: info [Main]: Use workmode from config file
+Mar 14 10:41:11 miner: info [Miner]: Kaonsu miner init
+Mar 14 10:41:11 miner: info [PowerSupply]: Set voltage to 16.00.
+Mar 14 10:41:13 miner: info [PowerSupply]: Turn on.
+Mar 14 10:41:13 miner: info [Miner]: Chain[1] SatelliteController: No satellite controller.
+Mar 14 10:41:13 miner: info [Miner]: Chain[2] SatelliteController: No satellite controller.
+Mar 14 10:41:13 miner: info [Miner]: Chain[1] Sensor 72 on bus init ok
+Mar 14 10:41:13 miner: info [Miner]: Chain[0] SatelliteController: No satellite controller.
+Mar 14 10:41:13 miner: info [Miner]: Chain[1] Sensor 76 on bus init ok
+Mar 14 10:41:13 miner: info [Miner]: Chain[1] SatelliteController: Temperature Monitoring Thread start
+Mar 14 10:41:13 miner: info [Miner]: Chain[2] Sensor 72 on bus init ok
+Mar 14 10:41:13 miner: info [Miner]: Chain[0] Sensor 72 on bus init ok
+Mar 14 10:41:13 miner: info [Miner]: Chain[2] Sensor 76 on bus init ok
+Mar 14 10:41:13 miner: info [Miner]: Chain[0] Sensor 76 on bus init ok
+Mar 14 10:41:13 miner: info [Miner]: Chain[2] SatelliteController: Temperature Monitoring Thread start
+Mar 14 10:41:13 miner: info [Miner]: Chain[1] Sensor:[right][top] 0.00 -> 39.88
+Mar 14 10:41:13 miner: info [Miner]: Chain[0] SatelliteController: Temperature Monitoring Thread start
+Mar 14 10:41:13 miner: info [Miner]: Chain[0] Sensor:[right][top] 0.00 -> 39.75
+Mar 14 10:41:13 miner: info [Miner]: Chain[2] Sensor:[right][top] 0.00 -> 39.62
+Mar 14 10:41:13 miner: info [Miner]: Chain[1] Sensor:[left][top] 0.00 -> 44.25
+Mar 14 10:41:13 miner: info [Miner]: Chain[2] Sensor:[left][top] 0.00 -> 44.12
+Mar 14 10:41:13 miner: info [Miner]: Chain[0] Sensor:[left][top] 0.00 -> 44.38
+Mar 14 10:41:13 miner: info [Miner]: Chain[0] Init success
+Mar 14 10:41:13 miner: info [Miner]: Chain[0] Reset.
+Mar 14 10:41:13 miner: info [Miner]: AsicInterface[0] Asic interface start to receive packages from ASIC 1368.
+Mar 14 10:41:13 kernel: [   41.967664@2]- meson_uart ffd23000.serial: ttyS2 use xtal(24M) 24000000 change 0 to 9600
+Mar 14 10:41:13 kernel: [   41.970283@2]- meson_uart ffd23000.serial: ttyS2 use xtal(24M) 24000000 change 9600 to 115200
+Mar 14 10:41:13 kernel: [   41.970434@3]- meson_uart ff804000.serial: ttyS3 use xtal(24M) 24000000 change 0 to 9600
+Mar 14 10:41:13 kernel: [   41.970676@3]- meson_uart ff804000.serial: ttyS3 use xtal(24M) 24000000 change 9600 to 115200
+Mar 14 10:41:13 kernel: [   41.975317@0]- meson_uart ffd24000.serial: ttyS1 use xtal(24M) 24000000 change 0 to 9600
+Mar 14 10:41:13 kernel: [   41.975506@0]- meson_uart ffd24000.serial: ttyS1 use xtal(24M) 24000000 change 9600 to 115200
+Mar 14 10:41:13 miner: info [Miner]: AsicInterface[2] Asic interface start to receive packages from ASIC 1368.
+Mar 14 10:41:13 miner: info [Miner]: Chain[2] Init success
+Mar 14 10:41:13 miner: info [Miner]: Chain[2] Reset.
+Mar 14 10:41:13 miner: info [Miner]: AsicInterface[1] Asic interface start to receive packages from ASIC 1368.
+Mar 14 10:41:13 miner: info [Miner]: Chain[1] Init success
+Mar 14 10:41:13 miner: info [Miner]: Chain[1] Reset.
+Mar 14 10:41:14 miner: info [Miner]: Chain[0] AsicNum: 156
+Mar 14 10:41:14 miner: info [Miner]: Chain[2] AsicNum: 156
+Mar 14 10:41:14 miner: info [Miner]: Chain[1] AsicNum: 156
+Mar 14 10:41:14 miner: info [Miner]: All Hashboards init done.
+Mar 14 10:41:14 miner: info [Miner]: Slot[2] Config frequency to 50.00MHz
+Mar 14 10:41:14 miner: info [Miner]: Chain[2] Reset.
+Mar 14 10:41:14 miner: info [Miner]: Slot[0] Config frequency to 50.00MHz
+Mar 14 10:41:14 miner: info [Miner]: Chain[0] Reset.
+Mar 14 10:41:14 miner: info [Miner]: Slot[1] Config frequency to 50.00MHz
+Mar 14 10:41:14 miner: info [Miner]: Chain[1] Reset.
+Mar 14 10:41:14 miner: info [Miner]: Chain[1] Sensor:[right][top] 27.91 -> 39.88
+Mar 14 10:41:14 miner: info [Miner]: Chain[1] Sensor:[left][top] 30.98 -> 44.25
+Mar 14 10:41:14 miner: info [Miner]: Chain[2] Sensor:[right][top] 27.74 -> 39.62
+Mar 14 10:41:14 miner: info [Miner]: Chain[0] Sensor:[right][top] 27.82 -> 39.75
+Mar 14 10:41:14 miner: info [Miner]: Prepare: Wait hashboard cooling down to 35.00, Current temperature: 40.27
+Mar 14 10:41:14 miner: info [Miner]: Env=OilImmersionCooling, Use simpified preheat.
+Mar 14 10:41:14 miner: info [Miner]: Chain[2] Sensor:[left][top] 30.89 -> 44.00
+Mar 14 10:41:14 miner: info [Miner]: Chain[0] Sensor:[left][top] 31.06 -> 44.38
+Mar 14 10:41:24 miner: info [Miner]: Prepare: Bring up temperature: 44.011482
+Mar 14 10:41:24 miner: info [Miner]: Chain[2] Reset.
+Mar 14 10:41:24 miner: info [Miner]: Chain[0] Reset.
+Mar 14 10:41:24 miner: info [Miner]: Chain[1] Reset.
+Mar 14 10:41:25 miner: info [Miner]: Chain[2] AsicNum: 156
+Mar 14 10:41:25 miner: info [Miner]: Chain[0] AsicNum: 156
+Mar 14 10:41:25 miner: info [Miner]: Chain[1] AsicNum: 156
+Mar 14 10:41:25 miner: info [Miner]: Slot[2] Start ASIC core calibration.
+Mar 14 10:41:25 miner: info [Miner]: Slot[0] Start ASIC core calibration.
+Mar 14 10:41:25 miner: info [Miner]: Slot[1] Start ASIC core calibration.
+Mar 14 10:41:27 miner: info [Miner]: Slot[2] (Strategy:0, Count:0) ASIC core calibration by pattern.
+Mar 14 10:41:27 miner: info [Miner]: Slot[1] (Strategy:0, Count:0) ASIC core calibration by pattern.
+Mar 14 10:41:27 miner: info [Miner]: Slot[0] (Strategy:0, Count:0) ASIC core calibration by pattern.
+Mar 14 10:41:28 miner: info [Miner]: Chain[2] Test Frequency: 200MHz, timeout: 108
+Mar 14 10:41:28 miner: info [Miner]: Chain[1] Test Frequency: 200MHz, timeout: 108
+Mar 14 10:41:28 miner: info [Miner]: Chain[0] Test Frequency: 200MHz, timeout: 108
+Mar 14 10:41:28 miner: info [Miner]: Chain[2] Frequency: 200MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:41:28 miner: Slot[2] Avg rate: 100.0%
+Mar 14 10:41:28 miner: info [Miner]: Chain[1] Frequency: 200MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:41:28 miner: Slot[1] Avg rate: 100.0%
+Mar 14 10:41:28 miner: info [Miner]: Slot[1] (Strategy:0, Count:0) ASIC core calibration succeed, cost 4s
+Mar 14 10:41:28 miner: info [Miner]: Slot[2] (Strategy:0, Count:0) ASIC core calibration succeed, cost 4s
+Mar 14 10:41:28 miner: info [Miner]: Chain[0] Frequency: 200MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:41:29 miner: Slot[0] Avg rate: 100.0%
+Mar 14 10:41:29 miner: info [Miner]: Slot[0] (Strategy:0, Count:0) ASIC core calibration succeed, cost 4s
+Mar 14 10:41:29 miner: info [Miner]: Prepare: OpenCore Finish. Enable Temp Control.
+Mar 14 10:41:29 miner: info [PowerSupply]: Set voltage to 15.90.
+Mar 14 10:41:31 miner: info [Miner]: Slot[2] Config frequency to 206.25MHz
+Mar 14 10:41:31 miner: info [Miner]: Slot[0] Config frequency to 206.25MHz
+Mar 14 10:41:31 miner: info [Miner]: Slot[1] Config frequency to 206.25MHz
+Mar 14 10:41:31 miner: info [PowerSupply]: Set voltage to 15.80.
+Mar 14 10:41:35 miner: info [Miner]: Slot[2] Config frequency to 212.50MHz
+Mar 14 10:41:35 miner: info [Miner]: Slot[1] Config frequency to 212.50MHz
+Mar 14 10:41:35 miner: info [Miner]: Slot[0] Config frequency to 212.50MHz
+Mar 14 10:41:35 miner: info [PowerSupply]: Set voltage to 15.70.
+Mar 14 10:41:39 miner: info [Miner]: Slot[2] Config frequency to 218.75MHz
+Mar 14 10:41:39 miner: info [Miner]: Slot[0] Config frequency to 218.75MHz
+Mar 14 10:41:39 miner: info [Miner]: Slot[1] Config frequency to 218.75MHz
+Mar 14 10:41:39 miner: info [PowerSupply]: Set voltage to 15.60.
+Mar 14 10:41:43 miner: info [Miner]: Slot[2] Config frequency to 225.00MHz
+Mar 14 10:41:43 miner: info [Miner]: Slot[0] Config frequency to 225.00MHz
+Mar 14 10:41:43 miner: info [Miner]: Slot[1] Config frequency to 225.00MHz
+Mar 14 10:41:43 miner: info [PowerSupply]: Set voltage to 15.50.
+Mar 14 10:41:46 miner: info [Miner]: Slot[0] Config frequency to 231.25MHz
+Mar 14 10:41:46 miner: info [Miner]: Slot[2] Config frequency to 231.25MHz
+Mar 14 10:41:46 miner: info [Miner]: Slot[1] Config frequency to 231.25MHz
+Mar 14 10:41:47 miner: info [PowerSupply]: Set voltage to 15.40.
+Mar 14 10:41:50 miner: info [Miner]: Slot[2] Config frequency to 237.50MHz
+Mar 14 10:41:50 miner: info [Miner]: Slot[0] Config frequency to 237.50MHz
+Mar 14 10:41:50 miner: info [Miner]: Slot[1] Config frequency to 237.50MHz
+Mar 14 10:41:51 miner: info [PowerSupply]: Set voltage to 15.30.
+Mar 14 10:41:54 miner: info [Miner]: Slot[2] Config frequency to 243.75MHz
+Mar 14 10:41:54 miner: info [Miner]: Slot[0] Config frequency to 243.75MHz
+Mar 14 10:41:54 miner: info [Miner]: Slot[1] Config frequency to 243.75MHz
+Mar 14 10:41:55 miner: info [PowerSupply]: Set voltage to 15.20.
+Mar 14 10:41:58 miner: info [Miner]: Slot[1] Config frequency to 250.00MHz
+Mar 14 10:41:58 miner: info [Miner]: Slot[0] Config frequency to 250.00MHz
+Mar 14 10:41:58 miner: info [Miner]: Slot[2] Config frequency to 250.00MHz
+Mar 14 10:41:59 miner: info [PowerSupply]: Set voltage to 15.10.
+Mar 14 10:42:02 miner: info [Miner]: Slot[2] Config frequency to 256.25MHz
+Mar 14 10:42:02 miner: info [Miner]: Slot[0] Config frequency to 256.25MHz
+Mar 14 10:42:02 miner: info [Miner]: Slot[1] Config frequency to 256.25MHz
+Mar 14 10:42:03 miner: info [PowerSupply]: Set voltage to 15.00.
+Mar 14 10:42:06 miner: info [Miner]: Slot[2] Config frequency to 262.50MHz
+Mar 14 10:42:06 miner: info [Miner]: Slot[1] Config frequency to 262.50MHz
+Mar 14 10:42:06 miner: info [Miner]: Slot[0] Config frequency to 262.50MHz
+Mar 14 10:42:07 miner: info [PowerSupply]: Set voltage to 14.90.
+Mar 14 10:42:10 miner: info [Miner]: Slot[0] Config frequency to 268.75MHz
+Mar 14 10:42:10 miner: info [Miner]: Slot[1] Config frequency to 268.75MHz
+Mar 14 10:42:10 miner: info [Miner]: Slot[2] Config frequency to 268.75MHz
+Mar 14 10:42:11 miner: info [PowerSupply]: Set voltage to 14.80.
+Mar 14 10:42:14 miner: info [Miner]: Slot[2] Config frequency to 275.00MHz
+Mar 14 10:42:14 miner: info [Miner]: Slot[0] Config frequency to 275.00MHz
+Mar 14 10:42:14 miner: info [Miner]: Slot[1] Config frequency to 275.00MHz
+Mar 14 10:42:15 miner: info [PowerSupply]: Set voltage to 14.70.
+Mar 14 10:42:18 miner: info [Miner]: Slot[0] Config frequency to 281.25MHz
+Mar 14 10:42:18 miner: info [Miner]: Slot[2] Config frequency to 281.25MHz
+Mar 14 10:42:18 miner: info [Miner]: Slot[1] Config frequency to 281.25MHz
+Mar 14 10:42:19 miner: info [PowerSupply]: Set voltage to 14.60.
+Mar 14 10:42:22 miner: info [Miner]: Slot[2] Config frequency to 287.50MHz
+Mar 14 10:42:22 miner: info [Miner]: Slot[0] Config frequency to 287.50MHz
+Mar 14 10:42:22 miner: info [Miner]: Slot[1] Config frequency to 287.50MHz
+Mar 14 10:42:23 miner: info [PowerSupply]: Set voltage to 14.50.
+Mar 14 10:42:26 miner: info [Miner]: Slot[2] Config frequency to 293.75MHz
+Mar 14 10:42:26 miner: info [Miner]: Slot[0] Config frequency to 293.75MHz
+Mar 14 10:42:26 miner: info [Miner]: Slot[1] Config frequency to 293.75MHz
+Mar 14 10:42:27 miner: info [PowerSupply]: Set voltage to 14.40.
+Mar 14 10:42:30 miner: info [Miner]: Slot[0] Config frequency to 300.00MHz
+Mar 14 10:42:30 miner: info [Miner]: Slot[2] Config frequency to 300.00MHz
+Mar 14 10:42:30 miner: info [Miner]: Slot[1] Config frequency to 300.00MHz
+Mar 14 10:42:31 miner: info [Miner]: Prepare: Preheat Start. Target Temp: 40.000000
+Mar 14 10:42:31 miner: info [Miner]: GoWork: Set baudrate to 1000000
+Mar 14 10:42:31 kernel: [  119.867229@3]- meson_uart ffd24000.serial: ttyS1 use xtal(24M) 24000000 change 115200 to 115200
+Mar 14 10:42:31 kernel: [  119.867290@1]- meson_uart ffd23000.serial: ttyS2 use xtal(24M) 24000000 change 115200 to 115200
+Mar 14 10:42:31 kernel: [  119.867403@1]- meson_uart ffd23000.serial: ttyS2 use xtal(24M) 24000000 change 115200 to 1000000
+Mar 14 10:42:31 kernel: [  119.887216@1]- meson_uart ff804000.serial: ttyS3 use xtal(24M) 24000000 change 115200 to 115200
+Mar 14 10:42:31 kernel: [  119.887333@1]- meson_uart ff804000.serial: ttyS3 use xtal(24M) 24000000 change 115200 to 1000000
+Mar 14 10:42:31 kernel: [  119.905301@3]- meson_uart ffd24000.serial: ttyS1 use xtal(24M) 24000000 change 115200 to 1000000
+Mar 14 10:42:32 miner: info [Miner]: Chain[1] Avg frequency: 300.00MHz, Theory hashrate: 59716.80GH/s, Last asic quality rate:100.00, Real hashrate will be 59716.80GH/s.
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: info [Miner]: Chain[2] Avg frequency: 300.00MHz, Theory hashrate: 59716.80GH/s, Last asic quality rate:100.00, Real hashrate will be 59716.80GH/s.
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: info [Miner]: Chain[0] Avg frequency: 300.00MHz, Theory hashrate: 59716.80GH/s, Last asic quality rate:100.00, Real hashrate will be 59716.80GH/s.
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:32 miner: |   300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |  300.0 |
+Mar 14 10:42:33 miner: info [Miner]: Chain[2] Set HCN to 0x136b.
+Mar 14 10:42:33 miner: info [Miner]: Chain[0] Set HCN to 0x136b.
+Mar 14 10:42:33 miner: info [Miner]: Chain[2] CalibrationFrequency: 300.00MHz --> 300.00MHz
+Mar 14 10:42:33 miner: info [Miner]: Chain[0] CalibrationFrequency: 300.00MHz --> 300.00MHz
+Mar 14 10:42:33 miner: info [Miner]: Chain[1] Set HCN to 0x136b.
+Mar 14 10:42:33 miner: info [Miner]: Chain[1] CalibrationFrequency: 300.00MHz --> 300.00MHz
+Mar 14 10:42:33 miner: warning [Miner]: Prepare: not in EnvironmentSelectorAirCooling/TwoPhase mode, skip preheat.
+Mar 14 10:42:34 miner: info [Miner]: Prepare: Preheat Finish, temp = 45.950233-45.985069.
+Mar 14 10:42:34 miner: info [Miner]: Prepare: Preheat Finish.
+Mar 14 10:42:34 miner: info [Miner]: Prepare Finished, bring up temperature: 44.011482
+Mar 14 10:42:34 miner: info [Miner]: Prepare Hashboards: Cost 1m19.868217538s.
+Mar 14 10:42:34 miner: info [Miner]: WorkMode -> [Stock Frequency Mode]
+Mar 14 10:42:34 miner: info [Miner]: ModeStock: Scan baseline
+Mar 14 10:42:34 miner: info [Miner]: Chain[0] Test Frequency: 300MHz, timeout: 108
+Mar 14 10:42:34 miner: info [Miner]: Chain[1] Test Frequency: 300MHz, timeout: 108
+Mar 14 10:42:34 miner: info [Miner]: Chain[2] Test Frequency: 300MHz, timeout: 108
+Mar 14 10:42:35 miner: info [Miner]: Chain[0] Frequency: 300MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:35 miner: info [Miner]: Chain[2] Frequency: 300MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:35 miner: info [Miner]: Chain[1] Frequency: 300MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:35 miner: info [Miner]: ModeStock: Tune voltage
+Mar 14 10:42:35 miner: info [Miner]: Slot[2] Config frequency to 310.00MHz
+Mar 14 10:42:35 miner: info [Miner]: Slot[1] Config frequency to 310.00MHz
+Mar 14 10:42:35 miner: info [Miner]: Slot[0] Config frequency to 310.00MHz
+Mar 14 10:42:36 miner: info [Miner]: Chain[1] Test Frequency: 310MHz, timeout: 108
+Mar 14 10:42:36 miner: info [Miner]: Chain[2] Test Frequency: 310MHz, timeout: 108
+Mar 14 10:42:36 miner: info [Miner]: Chain[0] Test Frequency: 310MHz, timeout: 108
+Mar 14 10:42:37 miner: info [Miner]: Chain[2] Frequency: 310MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:37 miner: info [Miner]: Chain[0] Frequency: 310MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:37 miner: info [Miner]: Chain[1] Frequency: 310MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:37 miner: info [Miner]: Slot[2] Config frequency to 320.00MHz
+Mar 14 10:42:37 miner: info [Miner]: Slot[1] Config frequency to 320.00MHz
+Mar 14 10:42:37 miner: info [Miner]: Slot[0] Config frequency to 320.00MHz
+Mar 14 10:42:37 miner: info [Miner]: Chain[0] Test Frequency: 320MHz, timeout: 108
+Mar 14 10:42:37 miner: info [Miner]: Chain[1] Test Frequency: 320MHz, timeout: 108
+Mar 14 10:42:37 miner: info [Miner]: Chain[2] Test Frequency: 320MHz, timeout: 108
+Mar 14 10:42:38 miner: info [Miner]: Chain[1] Frequency: 320MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:38 miner: info [Miner]: Chain[0] Frequency: 320MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:38 miner: info [Miner]: Chain[2] Frequency: 320MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:38 miner: info [Miner]: Slot[2] Config frequency to 330.00MHz
+Mar 14 10:42:38 miner: info [Miner]: Slot[0] Config frequency to 330.00MHz
+Mar 14 10:42:38 miner: info [Miner]: Slot[1] Config frequency to 330.00MHz
+Mar 14 10:42:39 miner: info [Miner]: Chain[0] Test Frequency: 330MHz, timeout: 108
+Mar 14 10:42:39 miner: info [Miner]: Chain[2] Test Frequency: 330MHz, timeout: 108
+Mar 14 10:42:39 miner: info [Miner]: Chain[1] Test Frequency: 330MHz, timeout: 108
+Mar 14 10:42:40 miner: info [Miner]: Chain[0] Frequency: 330MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:40 miner: info [Miner]: Chain[2] Frequency: 330MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:40 miner: info [Miner]: Chain[1] Frequency: 330MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:40 miner: info [Miner]: Slot[2] Config frequency to 340.00MHz
+Mar 14 10:42:40 miner: info [Miner]: Slot[0] Config frequency to 340.00MHz
+Mar 14 10:42:40 miner: info [Miner]: Slot[1] Config frequency to 340.00MHz
+Mar 14 10:42:41 miner: info [Miner]: Chain[0] Test Frequency: 340MHz, timeout: 108
+Mar 14 10:42:41 miner: info [Miner]: Chain[1] Test Frequency: 340MHz, timeout: 108
+Mar 14 10:42:41 miner: info [Miner]: Chain[2] Test Frequency: 340MHz, timeout: 108
+Mar 14 10:42:42 miner: info [Miner]: Chain[0] Frequency: 340MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:42 miner: info [Miner]: Chain[2] Frequency: 340MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:42 miner: info [Miner]: Chain[1] Frequency: 340MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:42 miner: info [Miner]: Slot[2] Config frequency to 350.00MHz
+Mar 14 10:42:42 miner: info [Miner]: Slot[1] Config frequency to 350.00MHz
+Mar 14 10:42:42 miner: info [Miner]: Slot[0] Config frequency to 350.00MHz
+Mar 14 10:42:43 miner: info [Miner]: Chain[2] Test Frequency: 350MHz, timeout: 108
+Mar 14 10:42:43 miner: info [Miner]: Chain[0] Test Frequency: 350MHz, timeout: 108
+Mar 14 10:42:43 miner: info [Miner]: Chain[1] Test Frequency: 350MHz, timeout: 108
+Mar 14 10:42:44 miner: info [Miner]: Chain[2] Frequency: 350MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:44 miner: info [Miner]: Chain[0] Frequency: 350MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:44 miner: info [Miner]: Chain[1] Frequency: 350MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:44 miner: info [Miner]: Slot[0] Config frequency to 360.00MHz
+Mar 14 10:42:44 miner: info [Miner]: Slot[2] Config frequency to 360.00MHz
+Mar 14 10:42:44 miner: info [Miner]: Slot[1] Config frequency to 360.00MHz
+Mar 14 10:42:45 miner: info [Miner]: Chain[2] Test Frequency: 360MHz, timeout: 108
+Mar 14 10:42:45 miner: info [Miner]: Chain[0] Test Frequency: 360MHz, timeout: 108
+Mar 14 10:42:45 miner: info [Miner]: Chain[1] Test Frequency: 360MHz, timeout: 108
+Mar 14 10:42:45 miner: info [Miner]: Chain[2] Frequency: 360MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:45 miner: info [Miner]: Chain[0] Frequency: 360MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:45 miner: info [Miner]: Chain[1] Frequency: 360MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:45 miner: info [Miner]: Slot[1] Config frequency to 370.00MHz
+Mar 14 10:42:45 miner: info [Miner]: Slot[0] Config frequency to 370.00MHz
+Mar 14 10:42:45 miner: info [Miner]: Slot[2] Config frequency to 370.00MHz
+Mar 14 10:42:46 miner: info [Miner]: Chain[2] Test Frequency: 370MHz, timeout: 108
+Mar 14 10:42:46 miner: info [Miner]: Chain[0] Test Frequency: 370MHz, timeout: 108
+Mar 14 10:42:46 miner: info [Miner]: Chain[1] Test Frequency: 370MHz, timeout: 108
+Mar 14 10:42:47 miner: info [Miner]: Chain[1] Frequency: 370MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:47 miner: info [Miner]: Chain[0] Frequency: 370MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:47 miner: info [Miner]: Chain[2] Frequency: 370MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:47 miner: info [Miner]: Slot[0] Config frequency to 380.00MHz
+Mar 14 10:42:47 miner: info [Miner]: Slot[2] Config frequency to 380.00MHz
+Mar 14 10:42:47 miner: info [Miner]: Slot[1] Config frequency to 380.00MHz
+Mar 14 10:42:48 miner: info [Miner]: Chain[2] Test Frequency: 380MHz, timeout: 108
+Mar 14 10:42:48 miner: info [Miner]: Chain[0] Test Frequency: 380MHz, timeout: 108
+Mar 14 10:42:48 miner: info [Miner]: Chain[1] Test Frequency: 380MHz, timeout: 108
+Mar 14 10:42:49 miner: info [Miner]: Chain[0] Frequency: 380MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:49 miner: info [Miner]: Chain[2] Frequency: 380MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:49 miner: info [Miner]: Chain[1] Frequency: 380MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:49 miner: info [Miner]: Slot[2] Config frequency to 390.00MHz
+Mar 14 10:42:49 miner: info [Miner]: Slot[0] Config frequency to 390.00MHz
+Mar 14 10:42:49 miner: info [Miner]: Slot[1] Config frequency to 390.00MHz
+Mar 14 10:42:50 miner: info [Miner]: Chain[2] Test Frequency: 390MHz, timeout: 108
+Mar 14 10:42:50 miner: info [Miner]: Chain[0] Test Frequency: 390MHz, timeout: 108
+Mar 14 10:42:50 miner: info [Miner]: Chain[1] Test Frequency: 390MHz, timeout: 108
+Mar 14 10:42:51 miner: info [Miner]: Chain[2] Frequency: 390MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:51 miner: info [Miner]: Chain[1] Frequency: 390MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:51 miner: info [Miner]: Chain[0] Frequency: 390MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:51 miner: info [Miner]: Slot[2] Config frequency to 400.00MHz
+Mar 14 10:42:51 miner: info [Miner]: Slot[1] Config frequency to 400.00MHz
+Mar 14 10:42:51 miner: info [Miner]: Slot[0] Config frequency to 400.00MHz
+Mar 14 10:42:52 miner: info [Miner]: Chain[0] Test Frequency: 400MHz, timeout: 108
+Mar 14 10:42:52 miner: info [Miner]: Chain[1] Test Frequency: 400MHz, timeout: 108
+Mar 14 10:42:52 miner: info [Miner]: Chain[2] Test Frequency: 400MHz, timeout: 108
+Mar 14 10:42:53 miner: info [Miner]: Chain[1] Frequency: 400MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:53 miner: info [Miner]: Chain[2] Frequency: 400MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:53 miner: info [Miner]: Chain[0] Frequency: 400MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:53 miner: info [Miner]: Slot[2] Config frequency to 405.00MHz
+Mar 14 10:42:53 miner: info [Miner]: Slot[1] Config frequency to 405.00MHz
+Mar 14 10:42:53 miner: info [Miner]: Slot[0] Config frequency to 405.00MHz
+Mar 14 10:42:53 miner: info [Miner]: Chain[0] Test Frequency: 405MHz, timeout: 108
+Mar 14 10:42:53 miner: info [Miner]: Chain[2] Test Frequency: 405MHz, timeout: 108
+Mar 14 10:42:53 miner: info [Miner]: Chain[1] Test Frequency: 405MHz, timeout: 108
+Mar 14 10:42:54 miner: info [Miner]: Chain[0] Frequency: 405MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:54 miner: info [Miner]: Chain[2] Frequency: 405MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:54 miner: info [Miner]: Chain[1] Frequency: 405MHz, Rate: 100.00, Var: 0.00
+Mar 14 10:42:54 miner: info [Miner]: GoWork: Start switch to mining mode.
+Mar 14 10:42:55 miner: info [Miner]: Chain[2] Avg frequency: 405.00MHz, Theory hashrate: 80617.68GH/s, Last asic quality rate:100.00, Real hashrate will be 80617.68GH/s.
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: info [Miner]: Chain[0] Avg frequency: 405.00MHz, Theory hashrate: 80617.68GH/s, Last asic quality rate:100.00, Real hashrate will be 80617.68GH/s.
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: info [Miner]: Chain[1] Avg frequency: 405.00MHz, Theory hashrate: 80617.68GH/s, Last asic quality rate:100.00, Real hashrate will be 80617.68GH/s.
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: |   405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |  405.0 |
+Mar 14 10:42:55 miner: info [Miner]: Chain[0] Set HCN to 0xd93.
+Mar 14 10:42:55 miner: info [Miner]: Chain[0] CalibrationFrequency: 405.00MHz --> 405.00MHz
+Mar 14 10:42:55 miner: info [Miner]: Chain[1] Set HCN to 0xd93.
+Mar 14 10:42:55 miner: info [Miner]: Chain[2] Set HCN to 0xd93.
+Mar 14 10:42:55 miner: info [Miner]: Chain[1] CalibrationFrequency: 405.00MHz --> 405.00MHz
+Mar 14 10:42:55 miner: info [Miner]: Chain[2] CalibrationFrequency: 405.00MHz --> 405.00MHz
+Mar 14 10:42:55 miner: info [Miner]: GoWork: Voltage: 14.40, Ideal hashrate: 241853.03GH/s, Real hashrate: 241853.03GH/s, Rate: 100.00
+Mar 14 10:42:55 miner: info [Miner]: Total cost 1m41.028500464s.
+Mar 14 10:42:55 miner: info [Miner]: Miner: Theory Ghs: 241853.03
+Mar 14 10:42:55 miner: info [Main]: Workmode from config file initialized
+Mar 14 10:42:55 miner: info [Event]: [Miner] Kaonsu started(Stock).
+Mar 14 10:42:55 miner: info [Telemetry]: Telemetry subsystem started.
+Mar 14 10:42:55 miner: info [Telemetry]: Connected to license server 'foxtrot.lic-ex.prod-usa.maratech.io'
+Mar 14 10:44:25 dropbear[1713]: Child connection from 10.20.105.4:58698
+Mar 14 10:44:25 dropbear[1714]: Child connection from 10.20.105.4:58718
+Mar 14 10:44:25 dropbear[1713]: Exit before auth from <10.20.105.4:58698>: (user 'root', 0 fails): Exited normally
+Mar 14 10:44:25 dropbear[1714]: Exit before auth from <10.20.105.4:58718>: (user 'root', 0 fails): Exited normally
+Mar 14 10:45:03 dropbear[1785]: Child connection from 10.20.61.52:49632
+Mar 14 10:45:03 dropbear[1785]: Login attempt for nonexistent user
+Mar 14 10:45:03 dropbear[1785]: Exit before auth from <10.20.61.52:49632>: Exited normally
+Mar 14 10:45:43 dropbear[1868]: Child connection from 10.20.30.94:35842
+Mar 14 10:45:43 dropbear[1868]: Login attempt for nonexistent user
+Mar 14 10:45:43 dropbear[1868]: Exit before auth from <10.20.30.94:35842>: Exited normally
+Mar 14 10:45:43 dropbear[1869]: Child connection from 10.20.30.94:35858
+Mar 14 10:45:43 dropbear[1869]: Login attempt for nonexistent user
+Mar 14 10:45:43 dropbear[1869]: Exit before auth from <10.20.30.94:35858>: Exited normally
+Mar 14 10:45:55 miner: info [Miner]: start to EnableVoltageCompensate @ 14.40
+Mar 14 10:46:30 ntpd[1207]: kernel reports TIME_ERROR: 0x41: Clock Unsynchronized
+Mar 14 10:46:31 ntpd[1207]: frequency error 1766 PPM exceeds tolerance 500 PPM
+Mar 14 10:50:03 dropbear[2342]: Child connection from 10.20.61.52:42936
+Mar 14 10:50:04 dropbear[2342]: Login attempt for nonexistent user
+Mar 14 10:50:04 dropbear[2342]: Exit before auth from <10.20.61.52:42936>: Exited normally
+Mar 14 10:50:43 dropbear[2424]: Child connection from 10.20.30.94:39362
+Mar 14 10:50:43 dropbear[2424]: Login attempt for nonexistent user
+Mar 14 10:50:44 dropbear[2424]: Exit before auth from <10.20.30.94:39362>: Exited normally
+Mar 14 10:50:44 dropbear[2425]: Child connection from 10.20.30.94:39364
+Mar 14 10:50:44 dropbear[2425]: Login attempt for nonexistent user
+Mar 14 10:50:44 dropbear[2425]: Exit before auth from <10.20.30.94:39364>: Exited normally
+Mar 14 10:55:04 dropbear[2899]: Child connection from 10.20.61.52:35432
+Mar 14 10:55:04 dropbear[2899]: Login attempt for nonexistent user
+Mar 14 10:55:04 dropbear[2899]: Exit before auth from <10.20.61.52:35432>: Exited normally
+Mar 14 10:55:43 dropbear[2982]: Child connection from 10.20.30.94:41300
+Mar 14 10:55:44 dropbear[2982]: Login attempt for nonexistent user
+Mar 14 10:55:44 dropbear[2982]: Exit before auth from <10.20.30.94:41300>: Exited normally
+Mar 14 10:55:44 dropbear[2983]: Child connection from 10.20.30.94:41310
+Mar 14 10:55:44 dropbear[2983]: Login attempt for nonexistent user
+Mar 14 10:55:44 dropbear[2983]: Exit before auth from <10.20.30.94:41310>: Exited normally
+Mar 14 10:55:53 dropbear[2999]: Child connection from 10.20.105.11:58919
+Mar 14 10:55:54 dropbear[3000]: Child connection from 10.20.105.11:58939
+Mar 14 10:55:54 dropbear[2999]: Exit before auth from <10.20.105.11:58919>: (user 'root', 0 fails): Exited normally
+Mar 14 10:55:54 dropbear[3000]: Exit before auth from <10.20.105.11:58939>: (user 'root', 0 fails): Exited normally
+Mar 14 11:00:04 dropbear[3460]: Child connection from 10.20.61.52:38516
+Mar 14 11:00:04 dropbear[3460]: Login attempt for nonexistent user
+Mar 14 11:00:04 dropbear[3460]: Exit before auth from <10.20.61.52:38516>: Exited normally
+Mar 14 11:00:44 dropbear[3543]: Child connection from 10.20.30.94:49382
+Mar 14 11:00:44 dropbear[3543]: Login attempt for nonexistent user
+Mar 14 11:00:44 dropbear[3543]: Exit before auth from <10.20.30.94:49382>: Exited normally
+Mar 14 11:00:44 dropbear[3544]: Child connection from 10.20.30.94:49384
+Mar 14 11:00:44 dropbear[3544]: Login attempt for nonexistent user
+Mar 14 11:00:45 dropbear[3544]: Exit before auth from <10.20.30.94:49384>: Exited normally
+Mar 14 11:05:04 dropbear[4018]: Child connection from 10.20.61.52:38314
+Mar 14 11:05:04 dropbear[4018]: Login attempt for nonexistent user
+Mar 14 11:05:04 dropbear[4018]: Exit before auth from <10.20.61.52:38314>: Exited normally
+Mar 14 11:05:44 dropbear[4098]: Child connection from 10.20.30.94:44792
+Mar 14 11:05:44 dropbear[4098]: Login attempt for nonexistent user
+Mar 14 11:05:44 dropbear[4098]: Exit before auth from <10.20.30.94:44792>: Exited normally
+Mar 14 11:05:44 dropbear[4099]: Child connection from 10.20.30.94:44794
+Mar 14 11:05:44 dropbear[4099]: Login attempt for nonexistent user
+Mar 14 11:05:45 dropbear[4099]: Exit before auth from <10.20.30.94:44794>: Exited normally
+Mar 14 11:07:16 dropbear[4273]: Child connection from 10.20.105.11:59221
+Mar 14 11:07:16 dropbear[4273]: Exit before auth from <10.20.105.11:59221>: (user 'root', 0 fails): Exited normally
+Mar 14 11:07:16 dropbear[4274]: Child connection from 10.20.105.11:59241
+Mar 14 11:07:17 dropbear[4274]: Exit before auth from <10.20.105.11:59241>: (user 'root', 0 fails): Exited normally
+Mar 14 11:08:04 dropbear[4359]: Child connection from 10.20.61.52:38630
+Mar 14 11:08:05 dropbear[4359]: Exit before auth from <10.20.61.52:38630>: (user 'root', 1 fails): Exited normally
+Mar 14 11:08:05 dropbear[4360]: Child connection from 10.20.61.52:38644
+Mar 14 11:08:05 dropbear[4360]: Login attempt for nonexistent user
+Mar 14 11:08:05 dropbear[4360]: Exit before auth from <10.20.61.52:38644>: Exited normally
+Mar 14 11:10:04 dropbear[4587]: Child connection from 10.20.61.52:36720
+Mar 14 11:10:04 dropbear[4587]: Login attempt for nonexistent user
+Mar 14 11:10:04 dropbear[4587]: Exit before auth from <10.20.61.52:36720>: Exited normally
+Mar 14 11:10:44 dropbear[4670]: Child connection from 10.20.30.94:46364
+Mar 14 11:10:44 dropbear[4670]: Login attempt for nonexistent user
+Mar 14 11:10:44 dropbear[4670]: Exit before auth from <10.20.30.94:46364>: Exited normally
+Mar 14 11:10:44 dropbear[4671]: Child connection from 10.20.30.94:46366
+Mar 14 11:10:44 dropbear[4671]: Login attempt for nonexistent user
+Mar 14 11:10:45 dropbear[4671]: Exit before auth from <10.20.30.94:46366>: Exited normally
+Mar 14 11:15:04 dropbear[5145]: Child connection from 10.20.61.52:48246
+Mar 14 11:15:04 dropbear[5145]: Login attempt for nonexistent user
+Mar 14 11:15:04 dropbear[5145]: Exit before auth from <10.20.61.52:48246>: Exited normally
+Mar 14 11:15:43 dropbear[5222]: Child connection from 10.20.105.8:59448
+Mar 14 11:15:43 dropbear[5230]: Child connection from 10.20.30.94:39366
+Mar 14 11:15:43 dropbear[5222]: Exit before auth from <10.20.105.8:59448>: (user 'root', 0 fails): Exited normally
+Mar 14 11:15:43 dropbear[5231]: Child connection from 10.20.105.8:59469
+Mar 14 11:15:44 dropbear[5230]: Login attempt for nonexistent user
+Mar 14 11:15:44 dropbear[5231]: Exit before auth from <10.20.105.8:59469>: (user 'root', 0 fails): Exited normally
+Mar 14 11:15:44 dropbear[5230]: Exit before auth from <10.20.30.94:39366>: Exited normally
+Mar 14 11:15:44 dropbear[5232]: Child connection from 10.20.30.94:39376
+Mar 14 11:15:44 dropbear[5232]: Login attempt for nonexistent user
+Mar 14 11:15:44 dropbear[5232]: Exit before auth from <10.20.30.94:39376>: Exited normally
+Mar 14 11:20:04 dropbear[5710]: Child connection from 10.20.61.52:46482
+Mar 14 11:20:04 dropbear[5710]: Login attempt for nonexistent user
+Mar 14 11:20:04 dropbear[5710]: Exit before auth from <10.20.61.52:46482>: Exited normally
+Mar 14 11:20:43 dropbear[5786]: Child connection from 10.20.105.8:59569
+Mar 14 11:20:43 dropbear[5786]: Exit before auth from <10.20.105.8:59569>: (user 'root', 0 fails): Exited normally
+Mar 14 11:20:43 dropbear[5791]: Child connection from 10.20.105.8:59588
+Mar 14 11:20:44 dropbear[5792]: Child connection from 10.20.30.94:47760
+Mar 14 11:20:44 dropbear[5792]: Login attempt for nonexistent user
+Mar 14 11:20:44 dropbear[5791]: Exit before auth from <10.20.105.8:59588>: (user 'root', 0 fails): Exited normally
+Mar 14 11:20:44 dropbear[5792]: Exit before auth from <10.20.30.94:47760>: Exited normally
+Mar 14 11:20:44 dropbear[5796]: Child connection from 10.20.30.94:47762
+Mar 14 11:20:44 dropbear[5796]: Login attempt for nonexistent user
+Mar 14 11:20:45 dropbear[5796]: Exit before auth from <10.20.30.94:47762>: Exited normally
+Mar 14 11:22:04 dropbear[5945]: Child connection from 10.20.61.52:55444
+Mar 14 11:22:04 dropbear[5945]: Login attempt for nonexistent user
+Mar 14 11:22:04 dropbear[5945]: Exit before auth from <10.20.61.52:55444>: Exited normally
+Mar 14 11:22:14 dropbear[5974]: Child connection from 10.20.30.94:41880
+Mar 14 11:22:14 dropbear[5974]: Login attempt for nonexistent user
+Mar 14 11:22:14 dropbear[5974]: Exit before auth from <10.20.30.94:41880>: Exited normally
+Mar 14 11:22:14 dropbear[5975]: Child connection from 10.20.30.94:41896
+Mar 14 11:22:14 dropbear[5975]: Login attempt for nonexistent user
+Mar 14 11:22:14 dropbear[5975]: Exit before auth from <10.20.30.94:41896>: Exited normally
+Mar 14 11:25:04 dropbear[6278]: Child connection from 10.20.61.52:55138
+Mar 14 11:25:04 dropbear[6278]: Login attempt for nonexistent user
+Mar 14 11:25:04 dropbear[6278]: Exit before auth from <10.20.61.52:55138>: Exited normally
+Mar 14 11:25:43 dropbear[6358]: Child connection from 10.20.105.8:59654
+Mar 14 11:25:43 dropbear[6363]: Child connection from 10.20.30.94:34492
+Mar 14 11:25:43 dropbear[6358]: Exit before auth from <10.20.105.8:59654>: (user 'root', 0 fails): Exited normally
+Mar 14 11:25:43 dropbear[6364]: Child connection from 10.20.105.8:59675
+Mar 14 11:25:44 dropbear[6363]: Login attempt for nonexistent user
+Mar 14 11:25:44 dropbear[6364]: Exit before auth from <10.20.105.8:59675>: (user 'root', 0 fails): Exited normally
+Mar 14 11:25:44 dropbear[6363]: Exit before auth from <10.20.30.94:34492>: Exited normally
+Mar 14 11:25:44 dropbear[6365]: Child connection from 10.20.30.94:34502
+Mar 14 11:25:44 dropbear[6365]: Login attempt for nonexistent user
+Mar 14 11:25:44 dropbear[6365]: Exit before auth from <10.20.30.94:34502>: Exited normally
+Mar 14 11:30:04 dropbear[6839]: Child connection from 10.20.61.52:60342
+Mar 14 11:30:04 dropbear[6839]: Login attempt for nonexistent user
+Mar 14 11:30:04 dropbear[6839]: Exit before auth from <10.20.61.52:60342>: Exited normally
+Mar 14 11:30:43 dropbear[6918]: Child connection from 10.20.105.8:59804
+Mar 14 11:30:44 dropbear[6923]: Child connection from 10.20.30.94:34538
+Mar 14 11:30:44 dropbear[6923]: Login attempt for nonexistent user
+Mar 14 11:30:44 dropbear[6918]: Exit before auth from <10.20.105.8:59804>: (user 'root', 0 fails): Exited normally
+Mar 14 11:30:44 dropbear[6924]: Child connection from 10.20.105.8:59824
+Mar 14 11:30:44 dropbear[6923]: Exit before auth from <10.20.30.94:34538>: Exited normally
+Mar 14 11:30:44 dropbear[6925]: Child connection from 10.20.30.94:34554
+Mar 14 11:30:44 dropbear[6925]: Login attempt for nonexistent user
+Mar 14 11:30:44 dropbear[6925]: Exit before auth from <10.20.30.94:34554>: Exited normally
+Mar 14 11:30:45 dropbear[6924]: Exit before auth from <10.20.105.8:59824>: (user 'root', 0 fails): Exited normally
+Mar 14 11:33:13 dropbear[7199]: Child connection from 10.20.105.8:59868
+Mar 14 11:33:14 dropbear[7199]: Exit before auth from <10.20.105.8:59868>: (user 'root', 0 fails): Exited normally
+Mar 14 11:33:14 dropbear[7203]: Child connection from 10.20.105.8:59887
+Mar 14 11:33:14 dropbear[7203]: Exit before auth from <10.20.105.8:59887>: (user 'root', 0 fails): Exited normally
+Mar 14 11:35:04 dropbear[7402]: Child connection from 10.20.61.52:34382
+Mar 14 11:35:04 dropbear[7402]: Login attempt for nonexistent user
+Mar 14 11:35:04 dropbear[7402]: Exit before auth from <10.20.61.52:34382>: Exited normally
+Mar 14 11:35:43 dropbear[7482]: Child connection from 10.20.30.94:46490
+Mar 14 11:35:43 dropbear[7482]: Login attempt for nonexistent user
+Mar 14 11:35:44 dropbear[7482]: Exit before auth from <10.20.30.94:46490>: Exited normally
+Mar 14 11:35:44 dropbear[7486]: Child connection from 10.20.30.94:46492
+Mar 14 11:35:44 dropbear[7486]: Login attempt for nonexistent user
+Mar 14 11:35:44 dropbear[7486]: Exit before auth from <10.20.30.94:46492>: Exited normally
+Mar 14 11:36:15 dropbear[7549]: Child connection from 10.20.105.8:60062
+Mar 14 11:36:15 dropbear[7549]: Exit before auth from <10.20.105.8:60062>: (user 'root', 0 fails): Exited normally
+Mar 14 11:36:15 dropbear[7550]: Child connection from 10.20.105.8:60084
+Mar 14 11:36:15 dropbear[7550]: Exit before auth from <10.20.105.8:60084>: (user 'root', 0 fails): Exited normally
+Mar 14 11:40:04 dropbear[7958]: Child connection from 10.20.61.52:40410
+Mar 14 11:40:04 dropbear[7958]: Login attempt for nonexistent user
+Mar 14 11:40:04 dropbear[7958]: Exit before auth from <10.20.61.52:40410>: Exited normally
+Mar 14 11:40:43 dropbear[8041]: Child connection from 10.20.30.94:51372
+Mar 14 11:40:44 dropbear[8041]: Login attempt for nonexistent user
+Mar 14 11:40:44 dropbear[8041]: Exit before auth from <10.20.30.94:51372>: Exited normally
+Mar 14 11:40:44 dropbear[8042]: Child connection from 10.20.30.94:51374
+Mar 14 11:40:44 dropbear[8042]: Login attempt for nonexistent user
+Mar 14 11:40:44 dropbear[8042]: Exit before auth from <10.20.30.94:51374>: Exited normally
+Mar 14 11:41:15 dropbear[8107]: Child connection from 10.20.105.8:60227
+Mar 14 11:41:15 dropbear[8107]: Exit before auth from <10.20.105.8:60227>: (user 'root', 0 fails): Exited normally
+Mar 14 11:41:15 dropbear[8108]: Child connection from 10.20.105.8:60248
+Mar 14 11:41:15 dropbear[8108]: Exit before auth from <10.20.105.8:60248>: (user 'root', 0 fails): Exited normally
+Mar 14 11:45:04 dropbear[8519]: Child connection from 10.20.61.52:58130
+Mar 14 11:45:04 dropbear[8519]: Login attempt for nonexistent user
+Mar 14 11:45:04 dropbear[8519]: Exit before auth from <10.20.61.52:58130>: Exited normally
+Mar 14 11:45:43 dropbear[8602]: Child connection from 10.20.30.94:58832
+Mar 14 11:45:44 dropbear[8602]: Login attempt for nonexistent user
+Mar 14 11:45:44 dropbear[8602]: Exit before auth from <10.20.30.94:58832>: Exited normally
+Mar 14 11:45:44 dropbear[8603]: Child connection from 10.20.30.94:58842
+Mar 14 11:45:44 dropbear[8603]: Login attempt for nonexistent user
+Mar 14 11:45:44 dropbear[8603]: Exit before auth from <10.20.30.94:58842>: Exited normally
+Mar 14 11:46:15 dropbear[8666]: Child connection from 10.20.105.8:60323
+Mar 14 11:46:15 dropbear[8666]: Exit before auth from <10.20.105.8:60323>: (user 'root', 0 fails): Exited normally
+Mar 14 11:46:15 dropbear[8667]: Child connection from 10.20.105.8:60345
+Mar 14 11:46:15 dropbear[8667]: Exit before auth from <10.20.105.8:60345>: (user 'root', 0 fails): Exited normally
+Mar 14 11:50:04 dropbear[9080]: Child connection from 10.20.61.52:54608
+Mar 14 11:50:04 dropbear[9080]: Login attempt for nonexistent user
+Mar 14 11:50:04 dropbear[9080]: Exit before auth from <10.20.61.52:54608>: Exited normally
+Mar 14 11:50:43 dropbear[9160]: Child connection from 10.20.30.94:46798
+Mar 14 11:50:44 dropbear[9160]: Login attempt for nonexistent user
+Mar 14 11:50:44 dropbear[9160]: Exit before auth from <10.20.30.94:46798>: Exited normally
+Mar 14 11:50:44 dropbear[9164]: Child connection from 10.20.30.94:46802
+Mar 14 11:50:44 dropbear[9164]: Login attempt for nonexistent user
+Mar 14 11:50:44 dropbear[9164]: Exit before auth from <10.20.30.94:46802>: Exited normally
+Mar 14 11:51:15 dropbear[9227]: Child connection from 10.20.105.8:60436
+Mar 14 11:51:15 dropbear[9227]: Exit before auth from <10.20.105.8:60436>: (user 'root', 0 fails): Exited normally
+Mar 14 11:51:15 dropbear[9228]: Child connection from 10.20.105.8:60456
+Mar 14 11:51:15 dropbear[9228]: Exit before auth from <10.20.105.8:60456>: (user 'root', 0 fails): Exited normally
+Mar 14 11:55:04 dropbear[9638]: Child connection from 10.20.61.52:48994
+Mar 14 11:55:04 dropbear[9638]: Login attempt for nonexistent user
+Mar 14 11:55:04 dropbear[9638]: Exit before auth from <10.20.61.52:48994>: Exited normally
+Mar 14 11:55:43 dropbear[9721]: Child connection from 10.20.30.94:51398
+Mar 14 11:55:44 dropbear[9721]: Login attempt for nonexistent user
+Mar 14 11:55:44 dropbear[9721]: Exit before auth from <10.20.30.94:51398>: Exited normally
+Mar 14 11:55:44 dropbear[9722]: Child connection from 10.20.30.94:51404
+Mar 14 11:55:44 dropbear[9722]: Login attempt for nonexistent user
+Mar 14 11:55:44 dropbear[9722]: Exit before auth from <10.20.30.94:51404>: Exited normally
+Mar 14 11:56:15 dropbear[9785]: Child connection from 10.20.105.8:60539
+Mar 14 11:56:15 dropbear[9785]: Exit before auth from <10.20.105.8:60539>: (user 'root', 0 fails): Exited normally
+Mar 14 11:56:15 dropbear[9789]: Child connection from 10.20.105.8:60560
+Mar 14 11:56:16 dropbear[9789]: Exit before auth from <10.20.105.8:60560>: (user 'root', 0 fails): Exited normally
+Mar 14 12:00:04 dropbear[10198]: Child connection from 10.20.61.52:43464
+Mar 14 12:00:04 dropbear[10198]: Login attempt for nonexistent user
+Mar 14 12:00:04 dropbear[10198]: Exit before auth from <10.20.61.52:43464>: Exited normally
+Mar 14 12:00:43 dropbear[10281]: Child connection from 10.20.30.94:37446
+Mar 14 12:00:43 dropbear[10281]: Login attempt for nonexistent user
+Mar 14 12:00:44 dropbear[10281]: Exit before auth from <10.20.30.94:37446>: Exited normally
+Mar 14 12:00:44 dropbear[10282]: Child connection from 10.20.30.94:37458
+Mar 14 12:00:44 dropbear[10282]: Login attempt for nonexistent user
+Mar 14 12:00:44 dropbear[10282]: Exit before auth from <10.20.30.94:37458>: Exited normally
+Mar 14 12:01:15 dropbear[10345]: Child connection from 10.20.105.8:60641
+Mar 14 12:01:15 dropbear[10345]: Exit before auth from <10.20.105.8:60641>: (user 'root', 0 fails): Exited normally
+Mar 14 12:01:15 dropbear[10346]: Child connection from 10.20.105.8:60661
+Mar 14 12:01:15 dropbear[10346]: Exit before auth from <10.20.105.8:60661>: (user 'root', 0 fails): Exited normally
+Mar 14 12:05:04 dropbear[10759]: Child connection from 10.20.61.52:58810
+Mar 14 12:05:04 dropbear[10759]: Login attempt for nonexistent user
+Mar 14 12:05:04 dropbear[10759]: Exit before auth from <10.20.61.52:58810>: Exited normally
+Mar 14 12:05:44 dropbear[10839]: Child connection from 10.20.30.94:42648
+Mar 14 12:05:44 dropbear[10839]: Login attempt for nonexistent user
+Mar 14 12:05:44 dropbear[10839]: Exit before auth from <10.20.30.94:42648>: Exited normally
+Mar 14 12:05:44 dropbear[10843]: Child connection from 10.20.30.94:42662
+Mar 14 12:05:44 dropbear[10843]: Login attempt for nonexistent user
+Mar 14 12:05:45 dropbear[10843]: Exit before auth from <10.20.30.94:42662>: Exited normally
+Mar 14 12:07:03 dropbear[10987]: Child connection from 10.20.105.8:60828
+Mar 14 12:07:04 dropbear[10987]: Exit before auth from <10.20.105.8:60828>: (user 'root', 0 fails): Exited normally
+Mar 14 12:07:04 dropbear[10988]: Child connection from 10.20.105.8:60848
+Mar 14 12:07:04 dropbear[10988]: Exit before auth from <10.20.105.8:60848>: (user 'root', 0 fails): Exited normally
+Mar 14 12:07:16 dropbear[11020]: Child connection from 10.20.30.94:53520
+Mar 14 12:07:17 dropbear[11020]: Exit before auth from <10.20.30.94:53520>: (user 'root', 1 fails): Exited normally
+Mar 14 12:07:17 dropbear[11021]: Child connection from 10.20.30.94:53534
+Mar 14 12:07:17 dropbear[11021]: Login attempt for nonexistent user
+Mar 14 12:07:17 dropbear[11021]: Exit before auth from <10.20.30.94:53534>: Exited normally
+Mar 14 12:07:28 dropbear[11048]: Child connection from 10.20.30.45:56739
+Mar 14 12:07:29 dropbear[11048]: Exit before auth from <10.20.30.45:56739>: (user 'root', 1 fails): Exited normally
+Mar 14 12:07:29 dropbear[11049]: Child connection from 10.20.30.45:56766
+Mar 14 12:07:29 dropbear[11049]: Login attempt for nonexistent user
+Mar 14 12:07:29 dropbear[11049]: Exit before auth from <10.20.30.45:56766>: Exited normally
+Mar 14 12:08:04 dropbear[11119]: Child connection from 10.20.61.52:36692
+Mar 14 12:08:04 dropbear[11119]: Exit before auth from <10.20.61.52:36692>: (user 'root', 1 fails): Exited normally
+Mar 14 12:08:04 dropbear[11123]: Child connection from 10.20.61.52:36702
+Mar 14 12:08:05 dropbear[11123]: Login attempt for nonexistent user
+Mar 14 12:08:05 dropbear[11123]: Exit before auth from <10.20.61.52:36702>: Exited normally
+Mar 14 12:10:04 dropbear[11346]: Child connection from 10.20.61.52:52992
+Mar 14 12:10:04 dropbear[11346]: Login attempt for nonexistent user
+Mar 14 12:10:04 dropbear[11346]: Exit before auth from <10.20.61.52:52992>: Exited normally
+Mar 14 12:10:43 dropbear[11430]: Child connection from 10.20.30.94:35666
+Mar 14 12:10:43 dropbear[11430]: Login attempt for nonexistent user
+Mar 14 12:10:44 dropbear[11430]: Exit before auth from <10.20.30.94:35666>: Exited normally
+Mar 14 12:10:44 dropbear[11431]: Child connection from 10.20.30.94:35678
+Mar 14 12:10:44 dropbear[11431]: Login attempt for nonexistent user
+Mar 14 12:10:44 dropbear[11431]: Exit before auth from <10.20.30.94:35678>: Exited normally
+Mar 14 12:12:03 dropbear[11575]: Child connection from 10.20.105.8:60940
+Mar 14 12:12:04 dropbear[11575]: Exit before auth from <10.20.105.8:60940>: (user 'root', 0 fails): Exited normally
+Mar 14 12:12:04 dropbear[11579]: Child connection from 10.20.105.8:60959
+Mar 14 12:12:05 dropbear[11579]: Exit before auth from <10.20.105.8:60959>: (user 'root', 0 fails): Exited normally
+Mar 14 12:15:04 dropbear[11906]: Child connection from 10.20.61.52:48608
+Mar 14 12:15:04 dropbear[11906]: Login attempt for nonexistent user
+Mar 14 12:15:04 dropbear[11906]: Exit before auth from <10.20.61.52:48608>: Exited normally
+Mar 14 12:15:43 dropbear[11989]: Child connection from 10.20.30.94:42218
+Mar 14 12:15:44 dropbear[11989]: Login attempt for nonexistent user
+Mar 14 12:15:44 dropbear[11990]: Child connection from 10.20.30.94:42228
+Mar 14 12:15:44 dropbear[11989]: Exit before auth from <10.20.30.94:42218>: Exited normally
+Mar 14 12:15:44 dropbear[11990]: Login attempt for nonexistent user
+Mar 14 12:15:44 dropbear[11990]: Exit before auth from <10.20.30.94:42228>: Exited normally
+Mar 14 12:17:04 dropbear[12135]: Child connection from 10.20.105.8:61046
+Mar 14 12:17:05 dropbear[12135]: Exit before auth from <10.20.105.8:61046>: (user 'root', 0 fails): Exited normally
+Mar 14 12:17:05 dropbear[12139]: Child connection from 10.20.105.8:61065
+Mar 14 12:17:06 dropbear[12139]: Exit before auth from <10.20.105.8:61065>: (user 'root', 0 fails): Exited normally
+Mar 14 12:20:03 dropbear[12471]: Child connection from 10.20.61.52:53606
+Mar 14 12:20:04 dropbear[12471]: Login attempt for nonexistent user
+Mar 14 12:20:04 dropbear[12471]: Exit before auth from <10.20.61.52:53606>: Exited normally
+Mar 14 12:20:43 dropbear[12551]: Child connection from 10.20.30.94:38440
+Mar 14 12:20:43 dropbear[12551]: Login attempt for nonexistent user
+Mar 14 12:20:44 dropbear[12551]: Exit before auth from <10.20.30.94:38440>: Exited normally
+Mar 14 12:20:44 dropbear[12552]: Child connection from 10.20.30.94:38450
+Mar 14 12:20:44 dropbear[12552]: Login attempt for nonexistent user
+Mar 14 12:20:44 dropbear[12552]: Exit before auth from <10.20.30.94:38450>: Exited normally
+Mar 14 12:22:03 dropbear[12699]: Child connection from 10.20.105.8:61143
+Mar 14 12:22:04 dropbear[12699]: Exit before auth from <10.20.105.8:61143>: (user 'root', 0 fails): Exited normally
+Mar 14 12:22:04 dropbear[12700]: Child connection from 10.20.105.8:61165
+Mar 14 12:22:04 dropbear[12700]: Exit before auth from <10.20.105.8:61165>: (user 'root', 0 fails): Exited normally
+Mar 14 12:22:34 dropbear[12759]: Child connection from 10.20.61.52:37006
+Mar 14 12:22:34 dropbear[12759]: Login attempt for nonexistent user
+Mar 14 12:22:34 dropbear[12759]: Exit before auth from <10.20.61.52:37006>: Exited normally
+Mar 14 12:22:44 dropbear[12786]: Child connection from 10.20.30.94:49594
+Mar 14 12:22:44 dropbear[12786]: Login attempt for nonexistent user
+Mar 14 12:22:44 dropbear[12786]: Exit before auth from <10.20.30.94:49594>: Exited normally
+Mar 14 12:22:44 dropbear[12790]: Child connection from 10.20.30.94:49606
+Mar 14 12:22:44 dropbear[12790]: Login attempt for nonexistent user
+Mar 14 12:22:44 dropbear[12790]: Exit before auth from <10.20.30.94:49606>: Exited normally
+Mar 14 12:25:03 dropbear[13040]: Child connection from 10.20.61.52:58746
+Mar 14 12:25:04 dropbear[13040]: Login attempt for nonexistent user
+Mar 14 12:25:04 dropbear[13040]: Exit before auth from <10.20.61.52:58746>: Exited normally
+Mar 14 12:25:43 dropbear[13123]: Child connection from 10.20.30.94:59354
+Mar 14 12:25:43 dropbear[13123]: Login attempt for nonexistent user
+Mar 14 12:25:44 dropbear[13123]: Exit before auth from <10.20.30.94:59354>: Exited normally
+Mar 14 12:25:44 dropbear[13124]: Child connection from 10.20.30.94:59360
+Mar 14 12:25:44 dropbear[13124]: Login attempt for nonexistent user
+Mar 14 12:25:44 dropbear[13124]: Exit before auth from <10.20.30.94:59360>: Exited normally
+Mar 14 12:27:03 dropbear[13268]: Child connection from 10.20.105.8:61273
+Mar 14 12:27:04 dropbear[13268]: Exit before auth from <10.20.105.8:61273>: (user 'root', 0 fails): Exited normally
+Mar 14 12:27:04 dropbear[13272]: Child connection from 10.20.105.8:61290
+Mar 14 12:27:04 dropbear[13272]: Exit before auth from <10.20.105.8:61290>: (user 'root', 0 fails): Exited normally
+Mar 14 12:30:04 dropbear[13600]: Child connection from 10.20.61.52:35874
+Mar 14 12:30:04 dropbear[13600]: Login attempt for nonexistent user
+Mar 14 12:30:04 dropbear[13600]: Exit before auth from <10.20.61.52:35874>: Exited normally
+Mar 14 12:30:43 dropbear[13674]: Child connection from 10.20.30.94:34260
+Mar 14 12:30:43 dropbear[13674]: Login attempt for nonexistent user
+Mar 14 12:30:44 dropbear[13674]: Exit before auth from <10.20.30.94:34260>: Exited normally
+Mar 14 12:30:44 dropbear[13684]: Child connection from 10.20.30.94:34266
+Mar 14 12:30:44 dropbear[13684]: Login attempt for nonexistent user
+Mar 14 12:30:44 dropbear[13684]: Exit before auth from <10.20.30.94:34266>: Exited normally
+Mar 14 12:32:03 dropbear[13828]: Child connection from 10.20.105.8:61353
+Mar 14 12:32:04 dropbear[13828]: Exit before auth from <10.20.105.8:61353>: (user 'root', 0 fails): Exited normally
+Mar 14 12:32:04 dropbear[13829]: Child connection from 10.20.105.8:61373
+Mar 14 12:32:04 dropbear[13829]: Exit before auth from <10.20.105.8:61373>: (user 'root', 0 fails): Exited normally
+Mar 14 12:35:04 dropbear[14159]: Child connection from 10.20.61.52:49716
+Mar 14 12:35:04 dropbear[14161]: Child connection from 10.20.105.8:61456
+Mar 14 12:35:04 dropbear[14159]: Login attempt for nonexistent user
+Mar 14 12:35:04 dropbear[14159]: Exit before auth from <10.20.61.52:49716>: Exited normally
+Mar 14 12:35:04 dropbear[14161]: Exit before auth from <10.20.105.8:61456>: (user 'root', 0 fails): Exited normally
+Mar 14 12:35:04 dropbear[14162]: Child connection from 10.20.105.8:61475
+Mar 14 12:35:05 dropbear[14162]: Exit before auth from <10.20.105.8:61475>: (user 'root', 0 fails): Exited normally
+Mar 14 12:35:43 dropbear[14233]: Child connection from 10.20.30.94:35344
+Mar 14 12:35:44 dropbear[14233]: Login attempt for nonexistent user
+Mar 14 12:35:44 dropbear[14233]: Exit before auth from <10.20.30.94:35344>: Exited normally
+Mar 14 12:35:44 dropbear[14234]: Child connection from 10.20.30.94:35352
+Mar 14 12:35:44 dropbear[14234]: Login attempt for nonexistent user
+Mar 14 12:35:44 dropbear[14234]: Exit before auth from <10.20.30.94:35352>: Exited normally
+Mar 14 12:37:04 dropbear[14391]: Child connection from 10.20.105.8:61546
+Mar 14 12:37:04 dropbear[14391]: Exit before auth from <10.20.105.8:61546>: (user 'root', 0 fails): Exited normally
+Mar 14 12:37:04 dropbear[14392]: Child connection from 10.20.105.8:61566
+Mar 14 12:37:05 dropbear[14392]: Exit before auth from <10.20.105.8:61566>: (user 'root', 0 fails): Exited normally
+Mar 14 12:40:04 dropbear[14719]: Child connection from 10.20.61.52:40284
+Mar 14 12:40:04 dropbear[14719]: Login attempt for nonexistent user
+Mar 14 12:40:04 dropbear[14719]: Exit before auth from <10.20.61.52:40284>: Exited normally
+Mar 14 12:40:43 dropbear[14793]: Child connection from 10.20.30.94:44206
+Mar 14 12:40:44 dropbear[14793]: Login attempt for nonexistent user
+Mar 14 12:40:44 dropbear[14793]: Exit before auth from <10.20.30.94:44206>: Exited normally
+Mar 14 12:40:44 dropbear[14803]: Child connection from 10.20.30.94:44212
+Mar 14 12:40:44 dropbear[14803]: Login attempt for nonexistent user
+Mar 14 12:40:44 dropbear[14803]: Exit before auth from <10.20.30.94:44212>: Exited normally
+Mar 14 12:42:03 dropbear[14948]: Child connection from 10.20.105.8:61645
+Mar 14 12:42:04 dropbear[14948]: Exit before auth from <10.20.105.8:61645>: (user 'root', 0 fails): Exited normally
+Mar 14 12:42:04 dropbear[14949]: Child connection from 10.20.105.8:61666
+Mar 14 12:42:04 dropbear[14949]: Exit before auth from <10.20.105.8:61666>: (user 'root', 0 fails): Exited normally
+Mar 14 12:45:04 dropbear[15280]: Child connection from 10.20.61.52:40882
+Mar 14 12:45:04 dropbear[15280]: Login attempt for nonexistent user
+Mar 14 12:45:04 dropbear[15280]: Exit before auth from <10.20.61.52:40882>: Exited normally
+Mar 14 12:45:43 dropbear[15351]: Child connection from 10.20.30.94:53082
+Mar 14 12:45:44 dropbear[15351]: Login attempt for nonexistent user
+Mar 14 12:45:44 dropbear[15351]: Exit before auth from <10.20.30.94:53082>: Exited normally
+Mar 14 12:45:44 dropbear[15355]: Child connection from 10.20.30.94:53096
+Mar 14 12:45:44 dropbear[15355]: Login attempt for nonexistent user
+Mar 14 12:45:44 dropbear[15355]: Exit before auth from <10.20.30.94:53096>: Exited normally
+Mar 14 12:47:03 dropbear[15508]: Child connection from 10.20.105.8:61740
+Mar 14 12:47:04 dropbear[15508]: Exit before auth from <10.20.105.8:61740>: (user 'root', 0 fails): Exited normally
+Mar 14 12:47:04 dropbear[15509]: Child connection from 10.20.105.8:61758
+Mar 14 12:47:04 dropbear[15509]: Exit before auth from <10.20.105.8:61758>: (user 'root', 0 fails): Exited normally
+Mar 14 12:50:03 dropbear[15837]: Child connection from 10.20.61.52:46106
+Mar 14 12:50:04 dropbear[15837]: Login attempt for nonexistent user
+Mar 14 12:50:04 dropbear[15837]: Exit before auth from <10.20.61.52:46106>: Exited normally
+Mar 14 12:50:43 dropbear[15912]: Child connection from 10.20.30.94:53538
+Mar 14 12:50:43 dropbear[15912]: Login attempt for nonexistent user
+Mar 14 12:50:44 dropbear[15912]: Exit before auth from <10.20.30.94:53538>: Exited normally
+Mar 14 12:50:44 dropbear[15913]: Child connection from 10.20.30.94:53544
+Mar 14 12:50:44 dropbear[15913]: Login attempt for nonexistent user
+Mar 14 12:50:44 dropbear[15913]: Exit before auth from <10.20.30.94:53544>: Exited normally
+Mar 14 12:52:03 dropbear[16069]: Child connection from 10.20.105.8:61829
+Mar 14 12:52:04 dropbear[16069]: Exit before auth from <10.20.105.8:61829>: (user 'root', 0 fails): Exited normally
+Mar 14 12:52:04 dropbear[16070]: Child connection from 10.20.105.8:61848
+Mar 14 12:52:04 dropbear[16070]: Exit before auth from <10.20.105.8:61848>: (user 'root', 0 fails): Exited normally
+Mar 14 12:55:03 dropbear[16398]: Child connection from 10.20.61.52:49586
+Mar 14 12:55:04 dropbear[16398]: Login attempt for nonexistent user
+Mar 14 12:55:04 dropbear[16398]: Exit before auth from <10.20.61.52:49586>: Exited normally
+Mar 14 12:55:43 dropbear[16472]: Child connection from 10.20.30.94:58736
+Mar 14 12:55:43 dropbear[16472]: Login attempt for nonexistent user
+Mar 14 12:55:44 dropbear[16472]: Exit before auth from <10.20.30.94:58736>: Exited normally
+Mar 14 12:55:44 dropbear[16473]: Child connection from 10.20.30.94:58742
+Mar 14 12:55:44 dropbear[16473]: Login attempt for nonexistent user
+Mar 14 12:55:44 dropbear[16473]: Exit before auth from <10.20.30.94:58742>: Exited normally
+Mar 14 12:57:03 dropbear[16627]: Child connection from 10.20.105.8:61899
+Mar 14 12:57:04 dropbear[16627]: Exit before auth from <10.20.105.8:61899>: (user 'root', 0 fails): Exited normally
+Mar 14 12:57:04 dropbear[16628]: Child connection from 10.20.105.8:61918
+Mar 14 12:57:04 dropbear[16628]: Exit before auth from <10.20.105.8:61918>: (user 'root', 0 fails): Exited normally
+Mar 14 13:00:03 dropbear[16959]: Child connection from 10.20.61.52:39080
+Mar 14 13:00:04 dropbear[16959]: Login attempt for nonexistent user
+Mar 14 13:00:04 dropbear[16959]: Exit before auth from <10.20.61.52:39080>: Exited normally
+Mar 14 13:00:43 dropbear[17030]: Child connection from 10.20.30.94:40636
+Mar 14 13:00:43 dropbear[17030]: Login attempt for nonexistent user
+Mar 14 13:00:44 dropbear[17030]: Exit before auth from <10.20.30.94:40636>: Exited normally
+Mar 14 13:00:44 dropbear[17034]: Child connection from 10.20.30.94:40648
+Mar 14 13:00:44 dropbear[17034]: Login attempt for nonexistent user
+Mar 14 13:00:44 dropbear[17034]: Exit before auth from <10.20.30.94:40648>: Exited normally
+Mar 14 13:02:03 dropbear[17187]: Child connection from 10.20.105.8:61991
+Mar 14 13:02:04 dropbear[17188]: Child connection from 10.20.105.8:62011
+Mar 14 13:02:04 dropbear[17187]: Exit before auth from <10.20.105.8:61991>: (user 'root', 0 fails): Exited normally
+Mar 14 13:02:04 dropbear[17188]: Exit before auth from <10.20.105.8:62011>: (user 'root', 0 fails): Exited normally
+Mar 14 13:05:03 dropbear[17515]: Child connection from 10.20.61.52:50478
+Mar 14 13:05:04 dropbear[17515]: Login attempt for nonexistent user
+Mar 14 13:05:04 dropbear[17515]: Exit before auth from <10.20.61.52:50478>: Exited normally
+Mar 14 13:05:43 dropbear[17590]: Child connection from 10.20.30.94:47388
+Mar 14 13:05:44 dropbear[17590]: Login attempt for nonexistent user
+Mar 14 13:05:44 dropbear[17590]: Exit before auth from <10.20.30.94:47388>: Exited normally
+Mar 14 13:05:44 dropbear[17591]: Child connection from 10.20.30.94:47402
+Mar 14 13:05:44 dropbear[17591]: Login attempt for nonexistent user
+Mar 14 13:05:44 dropbear[17591]: Exit before auth from <10.20.30.94:47402>: Exited normally
+Mar 14 13:07:03 dropbear[17744]: Child connection from 10.20.105.8:62078
+Mar 14 13:07:04 dropbear[17744]: Exit before auth from <10.20.105.8:62078>: (user 'root', 0 fails): Exited normally
+Mar 14 13:07:04 dropbear[17748]: Child connection from 10.20.105.8:62097
+Mar 14 13:07:04 dropbear[17748]: Exit before auth from <10.20.105.8:62097>: (user 'root', 0 fails): Exited normally
+Mar 14 13:07:59 miner: warning [Telemetry]: ping timeout
+Mar 14 13:08:04 dropbear[17859]: Child connection from 10.20.61.52:55078
+Mar 14 13:08:05 dropbear[17859]: Exit before auth from <10.20.61.52:55078>: (user 'root', 1 fails): Exited normally
+Mar 14 13:08:05 dropbear[17863]: Child connection from 10.20.61.52:55088
+Mar 14 13:08:05 dropbear[17863]: Login attempt for nonexistent user
+Mar 14 13:08:05 dropbear[17863]: Exit before auth from <10.20.61.52:55088>: Exited normally
+Mar 14 13:10:03 dropbear[18086]: Child connection from 10.20.61.52:57082
+Mar 14 13:10:04 dropbear[18086]: Login attempt for nonexistent user
+Mar 14 13:10:04 dropbear[18086]: Exit before auth from <10.20.61.52:57082>: Exited normally
+Mar 14 13:10:43 dropbear[18160]: Child connection from 10.20.30.94:46018
+Mar 14 13:10:43 dropbear[18160]: Login attempt for nonexistent user
+Mar 14 13:10:44 dropbear[18160]: Exit before auth from <10.20.30.94:46018>: Exited normally
+Mar 14 13:10:44 dropbear[18161]: Child connection from 10.20.30.94:46024
+Mar 14 13:10:44 dropbear[18161]: Login attempt for nonexistent user
+Mar 14 13:10:44 dropbear[18161]: Exit before auth from <10.20.30.94:46024>: Exited normally
+Mar 14 13:11:20 miner: info [Telemetry]: Connected to license server 'echo.lic-ex.prod-usa.maratech.io'
+Mar 14 13:12:03 dropbear[18320]: Child connection from 10.20.105.8:62149
+Mar 14 13:12:04 dropbear[18320]: Exit before auth from <10.20.105.8:62149>: (user 'root', 0 fails): Exited normally
+Mar 14 13:12:04 dropbear[18321]: Child connection from 10.20.105.8:62169
+Mar 14 13:12:04 dropbear[18321]: Exit before auth from <10.20.105.8:62169>: (user 'root', 0 fails): Exited normally
+Mar 14 13:15:03 dropbear[18652]: Child connection from 10.20.61.52:51000
+Mar 14 13:15:04 dropbear[18652]: Login attempt for nonexistent user
+Mar 14 13:15:04 dropbear[18652]: Exit before auth from <10.20.61.52:51000>: Exited normally
+Mar 14 13:15:43 dropbear[18723]: Child connection from 10.20.30.94:47944
+Mar 14 13:15:43 dropbear[18723]: Login attempt for nonexistent user
+Mar 14 13:15:44 dropbear[18723]: Exit before auth from <10.20.30.94:47944>: Exited normally
+Mar 14 13:15:44 dropbear[18727]: Child connection from 10.20.30.94:47954
+Mar 14 13:15:44 dropbear[18727]: Login attempt for nonexistent user
+Mar 14 13:15:44 dropbear[18727]: Exit before auth from <10.20.30.94:47954>: Exited normally
+Mar 14 13:17:04 dropbear[18881]: Child connection from 10.20.105.8:62226
+Mar 14 13:17:04 dropbear[18881]: Exit before auth from <10.20.105.8:62226>: (user 'root', 0 fails): Exited normally
+Mar 14 13:17:04 dropbear[18882]: Child connection from 10.20.105.8:62246
+Mar 14 13:17:04 dropbear[18882]: Exit before auth from <10.20.105.8:62246>: (user 'root', 0 fails): Exited normally
+Mar 14 13:20:03 dropbear[19213]: Child connection from 10.20.61.52:38254
+Mar 14 13:20:04 dropbear[19213]: Login attempt for nonexistent user
+Mar 14 13:20:04 dropbear[19213]: Exit before auth from <10.20.61.52:38254>: Exited normally
+Mar 14 13:20:43 dropbear[19288]: Child connection from 10.20.30.94:32950
+Mar 14 13:20:43 dropbear[19288]: Login attempt for nonexistent user
+Mar 14 13:20:44 dropbear[19288]: Exit before auth from <10.20.30.94:32950>: Exited normally
+Mar 14 13:20:44 dropbear[19289]: Child connection from 10.20.30.94:32958
+Mar 14 13:20:44 dropbear[19289]: Login attempt for nonexistent user
+Mar 14 13:20:44 dropbear[19289]: Exit before auth from <10.20.30.94:32958>: Exited normally
+Mar 14 13:22:03 dropbear[19442]: Child connection from 10.20.105.8:62305
+Mar 14 13:22:04 dropbear[19442]: Exit before auth from <10.20.105.8:62305>: (user 'root', 0 fails): Exited normally
+Mar 14 13:22:04 dropbear[19443]: Child connection from 10.20.105.8:62325
+Mar 14 13:22:04 dropbear[19443]: Exit before auth from <10.20.105.8:62325>: (user 'root', 0 fails): Exited normally
+Mar 14 13:23:04 dropbear[19556]: Child connection from 10.20.61.52:49160
+Mar 14 13:23:04 dropbear[19556]: Login attempt for nonexistent user
+Mar 14 13:23:04 dropbear[19556]: Exit before auth from <10.20.61.52:49160>: Exited normally
+Mar 14 13:23:13 dropbear[19577]: Child connection from 10.20.30.94:56202
+Mar 14 13:23:14 dropbear[19577]: Login attempt for nonexistent user
+Mar 14 13:23:14 dropbear[19577]: Exit before auth from <10.20.30.94:56202>: Exited normally
+Mar 14 13:23:14 dropbear[19578]: Child connection from 10.20.30.94:56216
+Mar 14 13:23:14 dropbear[19578]: Login attempt for nonexistent user
+Mar 14 13:23:14 dropbear[19578]: Exit before auth from <10.20.30.94:56216>: Exited normally
+Mar 14 13:25:03 dropbear[19785]: Child connection from 10.20.61.52:43818
+Mar 14 13:25:04 dropbear[19785]: Login attempt for nonexistent user
+Mar 14 13:25:04 dropbear[19785]: Exit before auth from <10.20.61.52:43818>: Exited normally
+Mar 14 13:25:43 dropbear[19859]: Child connection from 10.20.30.94:33808
+Mar 14 13:25:43 dropbear[19859]: Login attempt for nonexistent user
+Mar 14 13:25:44 dropbear[19859]: Exit before auth from <10.20.30.94:33808>: Exited normally
+Mar 14 13:25:44 dropbear[19860]: Child connection from 10.20.30.94:33822
+Mar 14 13:25:44 dropbear[19860]: Login attempt for nonexistent user
+Mar 14 13:25:44 dropbear[19860]: Exit before auth from <10.20.30.94:33822>: Exited normally
+Mar 14 13:30:03 dropbear[20344]: Child connection from 10.20.61.52:54698
+Mar 14 13:30:04 dropbear[20344]: Login attempt for nonexistent user
+Mar 14 13:30:04 dropbear[20344]: Exit before auth from <10.20.61.52:54698>: Exited normally
+Mar 14 13:30:43 dropbear[20415]: Child connection from 10.20.30.94:54106
+Mar 14 13:30:43 dropbear[20415]: Login attempt for nonexistent user
+Mar 14 13:30:44 dropbear[20415]: Exit before auth from <10.20.30.94:54106>: Exited normally
+Mar 14 13:30:44 dropbear[20416]: Child connection from 10.20.30.94:54112
+Mar 14 13:30:44 dropbear[20416]: Login attempt for nonexistent user
+Mar 14 13:30:44 dropbear[20416]: Exit before auth from <10.20.30.94:54112>: Exited normally
+Mar 14 13:35:03 dropbear[20898]: Child connection from 10.20.61.52:44384
+Mar 14 13:35:04 dropbear[20898]: Login attempt for nonexistent user
+Mar 14 13:35:04 dropbear[20898]: Exit before auth from <10.20.61.52:44384>: Exited normally
+Mar 14 13:35:43 dropbear[20972]: Child connection from 10.20.30.94:42256
+Mar 14 13:35:43 dropbear[20972]: Login attempt for nonexistent user
+Mar 14 13:35:44 dropbear[20972]: Exit before auth from <10.20.30.94:42256>: Exited normally
+Mar 14 13:35:44 dropbear[20974]: Child connection from 10.20.30.94:42272
+Mar 14 13:35:44 dropbear[20974]: Login attempt for nonexistent user
+Mar 14 13:35:44 dropbear[20974]: Exit before auth from <10.20.30.94:42272>: Exited normally
+Mar 14 13:40:03 dropbear[21457]: Child connection from 10.20.61.52:43284
+Mar 14 13:40:04 dropbear[21457]: Login attempt for nonexistent user
+Mar 14 13:40:04 dropbear[21457]: Exit before auth from <10.20.61.52:43284>: Exited normally
+Mar 14 13:40:43 dropbear[21528]: Child connection from 10.20.30.94:48388
+Mar 14 13:40:43 dropbear[21528]: Login attempt for nonexistent user
+Mar 14 13:40:44 dropbear[21528]: Exit before auth from <10.20.30.94:48388>: Exited normally
+Mar 14 13:40:44 dropbear[21532]: Child connection from 10.20.30.94:48398
+Mar 14 13:40:44 dropbear[21532]: Login attempt for nonexistent user
+Mar 14 13:40:44 dropbear[21532]: Exit before auth from <10.20.30.94:48398>: Exited normally
+Mar 14 13:42:53 miner: info [Telemetry]: Connected to license server 'delta.lic-ex.prod-usa.maratech.io'
+Mar 14 13:45:03 dropbear[22017]: Child connection from 10.20.61.52:57908
+Mar 14 13:45:04 dropbear[22017]: Login attempt for nonexistent user
+Mar 14 13:45:04 dropbear[22017]: Exit before auth from <10.20.61.52:57908>: Exited normally
+Mar 14 13:45:43 dropbear[22091]: Child connection from 10.20.30.94:49356
+Mar 14 13:45:43 dropbear[22091]: Login attempt for nonexistent user
+Mar 14 13:45:44 dropbear[22091]: Exit before auth from <10.20.30.94:49356>: Exited normally
+Mar 14 13:45:44 dropbear[22092]: Child connection from 10.20.30.94:49360
+Mar 14 13:45:44 dropbear[22092]: Login attempt for nonexistent user
+Mar 14 13:45:44 dropbear[22092]: Exit before auth from <10.20.30.94:49360>: Exited normally
+Mar 14 13:50:03 dropbear[22575]: Child connection from 10.20.61.52:35380
+Mar 14 13:50:04 dropbear[22575]: Login attempt for nonexistent user
+Mar 14 13:50:04 dropbear[22575]: Exit before auth from <10.20.61.52:35380>: Exited normally
+Mar 14 13:50:43 dropbear[22649]: Child connection from 10.20.30.94:56674
+Mar 14 13:50:43 dropbear[22649]: Login attempt for nonexistent user
+Mar 14 13:50:44 dropbear[22649]: Exit before auth from <10.20.30.94:56674>: Exited normally
+Mar 14 13:50:44 dropbear[22650]: Child connection from 10.20.30.94:56690
+Mar 14 13:50:44 dropbear[22650]: Login attempt for nonexistent user
+Mar 14 13:50:44 dropbear[22650]: Exit before auth from <10.20.30.94:56690>: Exited normally
+Mar 14 13:55:04 dropbear[23134]: Child connection from 10.20.61.52:45462
+Mar 14 13:55:04 dropbear[23134]: Login attempt for nonexistent user
+Mar 14 13:55:04 dropbear[23134]: Exit before auth from <10.20.61.52:45462>: Exited normally
+Mar 14 13:55:43 dropbear[23205]: Child connection from 10.20.30.94:52276
+Mar 14 13:55:43 dropbear[23205]: Login attempt for nonexistent user
+Mar 14 13:55:44 dropbear[23205]: Exit before auth from <10.20.30.94:52276>: Exited normally
+Mar 14 13:55:44 dropbear[23209]: Child connection from 10.20.30.94:52290
+Mar 14 13:55:44 dropbear[23209]: Login attempt for nonexistent user
+Mar 14 13:55:44 dropbear[23209]: Exit before auth from <10.20.30.94:52290>: Exited normally
+Mar 14 14:00:03 dropbear[23689]: Child connection from 10.20.61.52:58610
+Mar 14 14:00:04 dropbear[23689]: Login attempt for nonexistent user
+Mar 14 14:00:04 dropbear[23689]: Exit before auth from <10.20.61.52:58610>: Exited normally
+Mar 14 14:00:43 dropbear[23763]: Child connection from 10.20.30.94:54206
+Mar 14 14:00:43 dropbear[23763]: Login attempt for nonexistent user
+Mar 14 14:00:44 dropbear[23763]: Exit before auth from <10.20.30.94:54206>: Exited normally
+Mar 14 14:00:44 dropbear[23764]: Child connection from 10.20.30.94:54220
+Mar 14 14:00:44 dropbear[23764]: Login attempt for nonexistent user
+Mar 14 14:00:44 dropbear[23764]: Exit before auth from <10.20.30.94:54220>: Exited normally
+Mar 14 14:05:03 dropbear[24246]: Child connection from 10.20.61.52:53420
+Mar 14 14:05:04 dropbear[24246]: Login attempt for nonexistent user
+Mar 14 14:05:04 dropbear[24246]: Exit before auth from <10.20.61.52:53420>: Exited normally
+Mar 14 14:05:43 dropbear[24320]: Child connection from 10.20.30.94:43876
+Mar 14 14:05:43 dropbear[24320]: Login attempt for nonexistent user
+Mar 14 14:05:44 dropbear[24320]: Exit before auth from <10.20.30.94:43876>: Exited normally
+Mar 14 14:05:44 dropbear[24321]: Child connection from 10.20.30.94:43884
+Mar 14 14:05:44 dropbear[24321]: Login attempt for nonexistent user
+Mar 14 14:05:44 dropbear[24321]: Exit before auth from <10.20.30.94:43884>: Exited normally
+Mar 14 14:07:17 dropbear[24509]: Child connection from 10.20.30.94:43552
+Mar 14 14:07:17 dropbear[24509]: Exit before auth from <10.20.30.94:43552>: (user 'root', 1 fails): Exited normally
+Mar 14 14:07:17 dropbear[24510]: Child connection from 10.20.30.94:43554
+Mar 14 14:07:17 dropbear[24510]: Login attempt for nonexistent user
+Mar 14 14:07:18 dropbear[24510]: Exit before auth from <10.20.30.94:43554>: Exited normally
+Mar 14 14:08:04 dropbear[24597]: Child connection from 10.20.61.52:42120
+Mar 14 14:08:05 dropbear[24597]: Exit before auth from <10.20.61.52:42120>: (user 'root', 1 fails): Exited normally
+Mar 14 14:08:05 dropbear[24598]: Child connection from 10.20.61.52:42128
+Mar 14 14:08:05 dropbear[24598]: Login attempt for nonexistent user
+Mar 14 14:08:05 dropbear[24598]: Exit before auth from <10.20.61.52:42128>: Exited normally
+Mar 14 14:10:03 dropbear[24824]: Child connection from 10.20.61.52:35320
+Mar 14 14:10:04 dropbear[24824]: Login attempt for nonexistent user
+Mar 14 14:10:04 dropbear[24824]: Exit before auth from <10.20.61.52:35320>: Exited normally
+Mar 14 14:10:43 dropbear[24895]: Child connection from 10.20.30.94:59112
+Mar 14 14:10:43 dropbear[24895]: Login attempt for nonexistent user
+Mar 14 14:10:44 dropbear[24895]: Exit before auth from <10.20.30.94:59112>: Exited normally
+Mar 14 14:10:44 dropbear[24899]: Child connection from 10.20.30.94:59124
+Mar 14 14:10:44 dropbear[24899]: Login attempt for nonexistent user
+Mar 14 14:10:44 dropbear[24899]: Exit before auth from <10.20.30.94:59124>: Exited normally
+Mar 14 14:12:23 dropbear[25089]: Child connection from 10.20.105.13:62688
+Mar 14 14:12:23 dropbear[25089]: Exit before auth from <10.20.105.13:62688>: (user 'root', 0 fails): Exited normally
+Mar 14 14:12:23 dropbear[25090]: Child connection from 10.20.105.13:62711
+Mar 14 14:12:23 dropbear[25090]: Exit before auth from <10.20.105.13:62711>: (user 'root', 0 fails): Exited normally
+Mar 14 14:15:03 dropbear[25382]: Child connection from 10.20.61.52:33774
+Mar 14 14:15:04 dropbear[25382]: Login attempt for nonexistent user
+Mar 14 14:15:04 dropbear[25382]: Exit before auth from <10.20.61.52:33774>: Exited normally
+Mar 14 14:15:43 dropbear[25456]: Child connection from 10.20.30.94:59392
+Mar 14 14:15:43 dropbear[25456]: Login attempt for nonexistent user
+Mar 14 14:15:44 dropbear[25456]: Exit before auth from <10.20.30.94:59392>: Exited normally
+Mar 14 14:15:44 dropbear[25457]: Child connection from 10.20.30.94:59404
+Mar 14 14:15:44 dropbear[25457]: Login attempt for nonexistent user
+Mar 14 14:15:44 dropbear[25457]: Exit before auth from <10.20.30.94:59404>: Exited normally
+Mar 14 14:15:53 dropbear[25482]: Child connection from 10.20.105.13:62759
+Mar 14 14:15:53 dropbear[25482]: Exit before auth from <10.20.105.13:62759>: (user 'root', 0 fails): Exited normally
+Mar 14 14:15:53 dropbear[25483]: Child connection from 10.20.105.13:62778
+Mar 14 14:15:54 dropbear[25483]: Exit before auth from <10.20.105.13:62778>: (user 'root', 0 fails): Exited normally
+Mar 14 14:17:53 dropbear[25705]: Child connection from 10.20.105.13:62820
+Mar 14 14:17:53 dropbear[25705]: Exit before auth from <10.20.105.13:62820>: (user 'root', 0 fails): Exited normally
+Mar 14 14:17:53 dropbear[25707]: Child connection from 10.20.105.13:62840
+Mar 14 14:17:54 dropbear[25707]: Exit before auth from <10.20.105.13:62840>: (user 'root', 0 fails): Exited normally
+Mar 14 14:20:03 dropbear[25948]: Child connection from 10.20.61.52:40856
+Mar 14 14:20:04 dropbear[25948]: Login attempt for nonexistent user
+Mar 14 14:20:04 dropbear[25948]: Exit before auth from <10.20.61.52:40856>: Exited normally
+Mar 14 14:20:43 dropbear[26022]: Child connection from 10.20.30.94:48560
+Mar 14 14:20:43 dropbear[26022]: Login attempt for nonexistent user
+Mar 14 14:20:44 dropbear[26022]: Exit before auth from <10.20.30.94:48560>: Exited normally
+Mar 14 14:20:44 dropbear[26023]: Child connection from 10.20.30.94:48576
+Mar 14 14:20:44 dropbear[26023]: Login attempt for nonexistent user
+Mar 14 14:20:44 dropbear[26023]: Exit before auth from <10.20.30.94:48576>: Exited normally
+Mar 14 14:22:23 dropbear[26215]: Child connection from 10.20.105.13:62904
+Mar 14 14:22:23 dropbear[26215]: Exit before auth from <10.20.105.13:62904>: (user 'root', 0 fails): Exited normally
+Mar 14 14:22:23 dropbear[26216]: Child connection from 10.20.105.13:62924
+Mar 14 14:22:24 dropbear[26216]: Exit before auth from <10.20.105.13:62924>: (user 'root', 0 fails): Exited normally
+Mar 14 14:23:34 dropbear[26344]: Child connection from 10.20.61.52:36954
+Mar 14 14:23:34 dropbear[26344]: Login attempt for nonexistent user
+Mar 14 14:23:34 dropbear[26344]: Exit before auth from <10.20.61.52:36954>: Exited normally
+Mar 14 14:23:43 dropbear[26362]: Child connection from 10.20.30.94:39566
+Mar 14 14:23:44 dropbear[26362]: Login attempt for nonexistent user
+Mar 14 14:23:44 dropbear[26362]: Exit before auth from <10.20.30.94:39566>: Exited normally
+Mar 14 14:23:44 dropbear[26366]: Child connection from 10.20.30.94:39576
+Mar 14 14:23:44 dropbear[26366]: Login attempt for nonexistent user
+Mar 14 14:23:44 dropbear[26366]: Exit before auth from <10.20.30.94:39576>: Exited normally
+Mar 14 14:25:03 dropbear[26520]: Child connection from 10.20.61.52:60566
+Mar 14 14:25:04 dropbear[26520]: Login attempt for nonexistent user
+Mar 14 14:25:04 dropbear[26520]: Exit before auth from <10.20.61.52:60566>: Exited normally
+Mar 14 14:25:43 dropbear[26591]: Child connection from 10.20.30.94:59290
+Mar 14 14:25:43 dropbear[26591]: Login attempt for nonexistent user
+Mar 14 14:25:44 dropbear[26591]: Exit before auth from <10.20.30.94:59290>: Exited normally
+Mar 14 14:25:44 dropbear[26593]: Child connection from 10.20.30.94:59298
+Mar 14 14:25:44 dropbear[26593]: Login attempt for nonexistent user
+Mar 14 14:25:44 dropbear[26593]: Exit before auth from <10.20.30.94:59298>: Exited normally
+Mar 14 14:27:23 dropbear[26784]: Child connection from 10.20.105.13:62972
+Mar 14 14:27:23 dropbear[26784]: Exit before auth from <10.20.105.13:62972>: (user 'root', 0 fails): Exited normally
+Mar 14 14:27:23 dropbear[26785]: Child connection from 10.20.105.13:62993
+Mar 14 14:27:23 dropbear[26785]: Exit before auth from <10.20.105.13:62993>: (user 'root', 0 fails): Exited normally
+Mar 14 14:30:03 dropbear[27077]: Child connection from 10.20.61.52:32792
+Mar 14 14:30:04 dropbear[27077]: Login attempt for nonexistent user
+Mar 14 14:30:04 dropbear[27077]: Exit before auth from <10.20.61.52:32792>: Exited normally
+Mar 14 14:30:43 dropbear[27151]: Child connection from 10.20.30.94:39128
+Mar 14 14:30:43 dropbear[27151]: Login attempt for nonexistent user
+Mar 14 14:30:44 dropbear[27152]: Child connection from 10.20.30.94:39144
+Mar 14 14:30:44 dropbear[27151]: Exit before auth from <10.20.30.94:39128>: Exited normally
+Mar 14 14:30:44 dropbear[27152]: Login attempt for nonexistent user
+Mar 14 14:30:44 dropbear[27152]: Exit before auth from <10.20.30.94:39144>: Exited normally
+Mar 14 14:35:03 dropbear[27636]: Child connection from 10.20.61.52:41460
+Mar 14 14:35:04 dropbear[27636]: Login attempt for nonexistent user
+Mar 14 14:35:04 dropbear[27636]: Exit before auth from <10.20.61.52:41460>: Exited normally
+Mar 14 14:35:43 dropbear[27710]: Child connection from 10.20.30.94:39854
+Mar 14 14:35:43 dropbear[27710]: Login attempt for nonexistent user
+Mar 14 14:35:44 dropbear[27710]: Exit before auth from <10.20.30.94:39854>: Exited normally
+Mar 14 14:35:44 dropbear[27711]: Child connection from 10.20.30.94:39866
+Mar 14 14:35:44 dropbear[27711]: Login attempt for nonexistent user
+Mar 14 14:35:44 dropbear[27711]: Exit before auth from <10.20.30.94:39866>: Exited normally
+Mar 14 14:40:03 dropbear[28193]: Child connection from 10.20.61.52:58680
+Mar 14 14:40:04 dropbear[28193]: Login attempt for nonexistent user
+Mar 14 14:40:04 dropbear[28193]: Exit before auth from <10.20.61.52:58680>: Exited normally
+Mar 14 14:40:43 dropbear[28265]: Child connection from 10.20.30.94:44114
+Mar 14 14:40:43 dropbear[28265]: Login attempt for nonexistent user
+Mar 14 14:40:44 dropbear[28265]: Exit before auth from <10.20.30.94:44114>: Exited normally
+Mar 14 14:40:44 dropbear[28266]: Child connection from 10.20.30.94:44122
+Mar 14 14:40:44 dropbear[28266]: Login attempt for nonexistent user
+Mar 14 14:40:44 dropbear[28266]: Exit before auth from <10.20.30.94:44122>: Exited normally
+Mar 14 14:45:03 dropbear[28749]: Child connection from 10.20.61.52:39042
+Mar 14 14:45:04 dropbear[28749]: Login attempt for nonexistent user
+Mar 14 14:45:04 dropbear[28749]: Exit before auth from <10.20.61.52:39042>: Exited normally
+Mar 14 14:45:43 dropbear[28823]: Child connection from 10.20.30.94:41936
+Mar 14 14:45:43 dropbear[28823]: Login attempt for nonexistent user
+Mar 14 14:45:44 dropbear[28823]: Exit before auth from <10.20.30.94:41936>: Exited normally
+Mar 14 14:45:44 dropbear[28824]: Child connection from 10.20.30.94:41946
+Mar 14 14:45:44 dropbear[28824]: Login attempt for nonexistent user
+Mar 14 14:45:44 dropbear[28824]: Exit before auth from <10.20.30.94:41946>: Exited normally
+Mar 14 14:46:37 dropbear[28930]: Child connection from 10.20.105.13:63145
+Mar 14 14:46:38 dropbear[28930]: Exit before auth from <10.20.105.13:63145>: (user 'root', 0 fails): Exited normally
+Mar 14 14:50:03 dropbear[29308]: Child connection from 10.20.61.52:46048
+Mar 14 14:50:04 dropbear[29308]: Login attempt for nonexistent user
+Mar 14 14:50:04 dropbear[29308]: Exit before auth from <10.20.61.52:46048>: Exited normally
+Mar 14 14:50:43 dropbear[29379]: Child connection from 10.20.30.94:46368
+Mar 14 14:50:43 dropbear[29379]: Login attempt for nonexistent user
+Mar 14 14:50:44 dropbear[29379]: Exit before auth from <10.20.30.94:46368>: Exited normally
+Mar 14 14:50:44 dropbear[29383]: Child connection from 10.20.30.94:46384
+Mar 14 14:50:44 dropbear[29383]: Login attempt for nonexistent user
+Mar 14 14:50:44 dropbear[29383]: Exit before auth from <10.20.30.94:46384>: Exited normally
+Mar 14 14:55:03 dropbear[29864]: Child connection from 10.20.61.52:52870
+Mar 14 14:55:04 dropbear[29864]: Login attempt for nonexistent user
+Mar 14 14:55:04 dropbear[29864]: Exit before auth from <10.20.61.52:52870>: Exited normally
+Mar 14 14:55:43 dropbear[29938]: Child connection from 10.20.30.94:55656
+Mar 14 14:55:43 dropbear[29938]: Login attempt for nonexistent user
+Mar 14 14:55:44 dropbear[29938]: Exit before auth from <10.20.30.94:55656>: Exited normally
+Mar 14 14:55:44 dropbear[29939]: Child connection from 10.20.30.94:55666
+Mar 14 14:55:44 dropbear[29939]: Login attempt for nonexistent user
+Mar 14 14:55:44 dropbear[29939]: Exit before auth from <10.20.30.94:55666>: Exited normally
+Mar 14 15:00:03 dropbear[30422]: Child connection from 10.20.61.52:38618
+Mar 14 15:00:04 dropbear[30422]: Login attempt for nonexistent user
+Mar 14 15:00:04 dropbear[30422]: Exit before auth from <10.20.61.52:38618>: Exited normally
+Mar 14 15:00:43 dropbear[30496]: Child connection from 10.20.30.94:37968
+Mar 14 15:00:43 dropbear[30496]: Login attempt for nonexistent user
+Mar 14 15:00:44 dropbear[30496]: Exit before auth from <10.20.30.94:37968>: Exited normally
+Mar 14 15:00:44 dropbear[30497]: Child connection from 10.20.30.94:37980
+Mar 14 15:00:44 dropbear[30497]: Login attempt for nonexistent user
+Mar 14 15:00:44 dropbear[30497]: Exit before auth from <10.20.30.94:37980>: Exited normally
+Mar 14 15:05:03 dropbear[30981]: Child connection from 10.20.61.52:33236
+Mar 14 15:05:04 dropbear[30981]: Login attempt for nonexistent user
+Mar 14 15:05:04 dropbear[30981]: Exit before auth from <10.20.61.52:33236>: Exited normally
+Mar 14 15:05:43 dropbear[31052]: Child connection from 10.20.30.94:47046
+Mar 14 15:05:43 dropbear[31052]: Login attempt for nonexistent user
+Mar 14 15:05:44 dropbear[31052]: Exit before auth from <10.20.30.94:47046>: Exited normally
+Mar 14 15:05:44 dropbear[31056]: Child connection from 10.20.30.94:47050
+Mar 14 15:05:44 dropbear[31056]: Login attempt for nonexistent user
+Mar 14 15:05:44 dropbear[31056]: Exit before auth from <10.20.30.94:47050>: Exited normally
+Mar 14 15:08:04 dropbear[31322]: Child connection from 10.20.61.52:46812
+Mar 14 15:08:04 dropbear[31322]: Exit before auth from <10.20.61.52:46812>: (user 'root', 1 fails): Exited normally
+Mar 14 15:08:04 dropbear[31323]: Child connection from 10.20.61.52:46826
+Mar 14 15:08:05 dropbear[31323]: Login attempt for nonexistent user
+Mar 14 15:08:05 dropbear[31323]: Exit before auth from <10.20.61.52:46826>: Exited normally
+Mar 14 15:10:04 dropbear[31547]: Child connection from 10.20.61.52:43220
+Mar 14 15:10:04 dropbear[31547]: Login attempt for nonexistent user
+Mar 14 15:10:04 dropbear[31547]: Exit before auth from <10.20.61.52:43220>: Exited normally
+Mar 14 15:10:43 dropbear[31621]: Child connection from 10.20.30.94:36710
+Mar 14 15:10:43 dropbear[31621]: Login attempt for nonexistent user
+Mar 14 15:10:44 dropbear[31621]: Exit before auth from <10.20.30.94:36710>: Exited normally
+Mar 14 15:10:44 dropbear[31622]: Child connection from 10.20.30.94:36714
+Mar 14 15:10:44 dropbear[31622]: Login attempt for nonexistent user
+Mar 14 15:10:44 dropbear[31622]: Exit before auth from <10.20.30.94:36714>: Exited normally
+Mar 14 15:15:03 dropbear[32105]: Child connection from 10.20.61.52:34460
+Mar 14 15:15:04 dropbear[32105]: Login attempt for nonexistent user
+Mar 14 15:15:04 dropbear[32105]: Exit before auth from <10.20.61.52:34460>: Exited normally
+Mar 14 15:15:43 dropbear[32180]: Child connection from 10.20.30.94:52320
+Mar 14 15:15:43 dropbear[32180]: Login attempt for nonexistent user
+Mar 14 15:15:44 dropbear[32180]: Exit before auth from <10.20.30.94:52320>: Exited normally
+Mar 14 15:15:44 dropbear[32181]: Child connection from 10.20.30.94:52324
+Mar 14 15:15:44 dropbear[32181]: Login attempt for nonexistent user
+Mar 14 15:15:44 dropbear[32181]: Exit before auth from <10.20.30.94:52324>: Exited normally
+Mar 14 15:20:03 dropbear[32667]: Child connection from 10.20.61.52:57722
+Mar 14 15:20:04 dropbear[32667]: Login attempt for nonexistent user
+Mar 14 15:20:04 dropbear[32667]: Exit before auth from <10.20.61.52:57722>: Exited normally
+Mar 14 15:20:43 dropbear[32739]: Child connection from 10.20.30.94:49714
+Mar 14 15:20:43 dropbear[32739]: Login attempt for nonexistent user
+Mar 14 15:20:44 dropbear[32739]: Exit before auth from <10.20.30.94:49714>: Exited normally
+Mar 14 15:20:44 dropbear[32740]: Child connection from 10.20.30.94:49718
+Mar 14 15:20:44 dropbear[32740]: Login attempt for nonexistent user
+Mar 14 15:20:44 dropbear[32740]: Exit before auth from <10.20.30.94:49718>: Exited normally
+Mar 14 15:24:04 dropbear[661]: Child connection from 10.20.61.52:41546
+Mar 14 15:24:04 dropbear[661]: Login attempt for nonexistent user
+Mar 14 15:24:04 dropbear[661]: Exit before auth from <10.20.61.52:41546>: Exited normally
+Mar 14 15:24:13 dropbear[682]: Child connection from 10.20.30.94:44338
+Mar 14 15:24:14 dropbear[682]: Login attempt for nonexistent user
+Mar 14 15:24:14 dropbear[682]: Exit before auth from <10.20.30.94:44338>: Exited normally
+Mar 14 15:24:14 dropbear[683]: Child connection from 10.20.30.94:44350
+Mar 14 15:24:14 dropbear[683]: Login attempt for nonexistent user
+Mar 14 15:24:14 dropbear[683]: Exit before auth from <10.20.30.94:44350>: Exited normally
+Mar 14 15:25:08 dropbear[788]: Child connection from 10.20.61.52:50340
+Mar 14 15:25:08 dropbear[788]: Login attempt for nonexistent user
+Mar 14 15:25:09 dropbear[788]: Exit before auth from <10.20.61.52:50340>: Exited normally
+Mar 14 15:25:43 dropbear[863]: Child connection from 10.20.30.94:48344
+Mar 14 15:25:43 dropbear[863]: Login attempt for nonexistent user
+Mar 14 15:25:44 dropbear[863]: Exit before auth from <10.20.30.94:48344>: Exited normally
+Mar 14 15:25:44 dropbear[864]: Child connection from 10.20.30.94:48360
+Mar 14 15:25:44 dropbear[864]: Login attempt for nonexistent user
+Mar 14 15:25:44 dropbear[864]: Exit before auth from <10.20.30.94:48360>: Exited normally
+Mar 14 15:30:03 dropbear[1401]: Child connection from 10.20.61.52:55054
+Mar 14 15:30:04 dropbear[1401]: Login attempt for nonexistent user
+Mar 14 15:30:04 dropbear[1401]: Exit before auth from <10.20.61.52:55054>: Exited normally
+Mar 14 15:30:43 dropbear[1473]: Child connection from 10.20.30.94:43028
+Mar 14 15:30:43 dropbear[1473]: Login attempt for nonexistent user
+Mar 14 15:30:44 dropbear[1473]: Exit before auth from <10.20.30.94:43028>: Exited normally
+Mar 14 15:30:44 dropbear[1477]: Child connection from 10.20.30.94:43044
+Mar 14 15:30:44 dropbear[1477]: Login attempt for nonexistent user
+Mar 14 15:30:44 dropbear[1477]: Exit before auth from <10.20.30.94:43044>: Exited normally
+Mar 14 15:35:03 dropbear[1960]: Child connection from 10.20.61.52:53238
+Mar 14 15:35:04 dropbear[1960]: Login attempt for nonexistent user
+Mar 14 15:35:04 dropbear[1960]: Exit before auth from <10.20.61.52:53238>: Exited normally
+Mar 14 15:35:43 dropbear[2032]: Child connection from 10.20.30.94:58692
+Mar 14 15:35:43 dropbear[2032]: Login attempt for nonexistent user
+Mar 14 15:35:44 dropbear[2032]: Exit before auth from <10.20.30.94:58692>: Exited normally
+Mar 14 15:35:44 dropbear[2033]: Child connection from 10.20.30.94:58698
+Mar 14 15:35:44 dropbear[2033]: Login attempt for nonexistent user
+Mar 14 15:35:44 dropbear[2033]: Exit before auth from <10.20.30.94:58698>: Exited normally
+Mar 14 15:40:03 dropbear[2517]: Child connection from 10.20.61.52:46138
+Mar 14 15:40:04 dropbear[2517]: Login attempt for nonexistent user
+Mar 14 15:40:04 dropbear[2517]: Exit before auth from <10.20.61.52:46138>: Exited normally
+Mar 14 15:40:43 dropbear[2591]: Child connection from 10.20.30.94:46194
+Mar 14 15:40:43 dropbear[2591]: Login attempt for nonexistent user
+Mar 14 15:40:44 dropbear[2591]: Exit before auth from <10.20.30.94:46194>: Exited normally
+Mar 14 15:40:44 dropbear[2592]: Child connection from 10.20.30.94:46198
+Mar 14 15:40:44 dropbear[2592]: Login attempt for nonexistent user
+Mar 14 15:40:44 dropbear[2592]: Exit before auth from <10.20.30.94:46198>: Exited normally
+Mar 14 15:45:03 dropbear[3075]: Child connection from 10.20.61.52:41240
+Mar 14 15:45:04 dropbear[3075]: Login attempt for nonexistent user
+Mar 14 15:45:04 dropbear[3075]: Exit before auth from <10.20.61.52:41240>: Exited normally
+Mar 14 15:45:43 dropbear[3147]: Child connection from 10.20.30.94:58414
+Mar 14 15:45:43 dropbear[3147]: Login attempt for nonexistent user
+Mar 14 15:45:44 dropbear[3147]: Exit before auth from <10.20.30.94:58414>: Exited normally
+Mar 14 15:45:44 dropbear[3151]: Child connection from 10.20.30.94:58430
+Mar 14 15:45:44 dropbear[3151]: Login attempt for nonexistent user
+Mar 14 15:45:44 dropbear[3151]: Exit before auth from <10.20.30.94:58430>: Exited normally
+Mar 14 15:47:58 miner: warning [Telemetry]: ping timeout
+Mar 14 15:50:03 dropbear[3631]: Child connection from 10.20.61.52:34128
+Mar 14 15:50:04 dropbear[3631]: Login attempt for nonexistent user
+Mar 14 15:50:04 dropbear[3631]: Exit before auth from <10.20.61.52:34128>: Exited normally
+Mar 14 15:50:43 dropbear[3705]: Child connection from 10.20.30.94:34080
+Mar 14 15:50:43 dropbear[3705]: Login attempt for nonexistent user
+Mar 14 15:50:44 dropbear[3705]: Exit before auth from <10.20.30.94:34080>: Exited normally
+Mar 14 15:50:44 dropbear[3706]: Child connection from 10.20.30.94:34082
+Mar 14 15:50:44 dropbear[3706]: Login attempt for nonexistent user
+Mar 14 15:50:44 dropbear[3706]: Exit before auth from <10.20.30.94:34082>: Exited normally
+Mar 14 15:50:53 miner: info [Telemetry]: Connected to license server 'golf.lic-ex.prod-usa.maratech.io'
+Mar 14 15:55:03 dropbear[4194]: Child connection from 10.20.61.52:51100
+Mar 14 15:55:04 dropbear[4194]: Login attempt for nonexistent user
+Mar 14 15:55:04 dropbear[4194]: Exit before auth from <10.20.61.52:51100>: Exited normally
+Mar 14 15:55:43 dropbear[4268]: Child connection from 10.20.30.94:50666
+Mar 14 15:55:43 dropbear[4268]: Login attempt for nonexistent user
+Mar 14 15:55:44 dropbear[4268]: Exit before auth from <10.20.30.94:50666>: Exited normally
+Mar 14 15:55:44 dropbear[4269]: Child connection from 10.20.30.94:50678
+Mar 14 15:55:44 dropbear[4269]: Login attempt for nonexistent user
+Mar 14 15:55:44 dropbear[4269]: Exit before auth from <10.20.30.94:50678>: Exited normally
+Mar 14 16:00:04 dropbear[4753]: Child connection from 10.20.61.52:53364
+Mar 14 16:00:04 dropbear[4753]: Login attempt for nonexistent user
+Mar 14 16:00:04 dropbear[4753]: Exit before auth from <10.20.61.52:53364>: Exited normally
+Mar 14 16:00:43 dropbear[4825]: Child connection from 10.20.30.94:55898
+Mar 14 16:00:43 dropbear[4825]: Login attempt for nonexistent user
+Mar 14 16:00:44 dropbear[4825]: Exit before auth from <10.20.30.94:55898>: Exited normally
+Mar 14 16:00:44 dropbear[4829]: Child connection from 10.20.30.94:55910
+Mar 14 16:00:44 dropbear[4829]: Login attempt for nonexistent user
+Mar 14 16:00:44 dropbear[4829]: Exit before auth from <10.20.30.94:55910>: Exited normally
+Mar 14 16:05:03 dropbear[5309]: Child connection from 10.20.61.52:45852
+Mar 14 16:05:04 dropbear[5309]: Login attempt for nonexistent user
+Mar 14 16:05:04 dropbear[5309]: Exit before auth from <10.20.61.52:45852>: Exited normally
+Mar 14 16:05:43 dropbear[5384]: Child connection from 10.20.30.94:37358
+Mar 14 16:05:43 dropbear[5384]: Login attempt for nonexistent user
+Mar 14 16:05:44 dropbear[5384]: Exit before auth from <10.20.30.94:37358>: Exited normally
+Mar 14 16:05:44 dropbear[5385]: Child connection from 10.20.30.94:37370
+Mar 14 16:05:44 dropbear[5385]: Login attempt for nonexistent user
+Mar 14 16:05:44 dropbear[5385]: Exit before auth from <10.20.30.94:37370>: Exited normally
+Mar 14 16:07:17 dropbear[5563]: Child connection from 10.20.30.94:48298
+Mar 14 16:07:17 dropbear[5563]: Exit before auth from <10.20.30.94:48298>: (user 'root', 1 fails): Exited normally
+Mar 14 16:07:17 dropbear[5564]: Child connection from 10.20.30.94:48300
+Mar 14 16:07:17 dropbear[5564]: Login attempt for nonexistent user
+Mar 14 16:07:18 dropbear[5564]: Exit before auth from <10.20.30.94:48300>: Exited normally
+Mar 14 16:08:04 dropbear[5660]: Child connection from 10.20.61.52:50938
+Mar 14 16:08:04 dropbear[5660]: Exit before auth from <10.20.61.52:50938>: (user 'root', 1 fails): Exited normally
+Mar 14 16:08:04 dropbear[5661]: Child connection from 10.20.61.52:50942
+Mar 14 16:08:04 dropbear[5661]: Login attempt for nonexistent user
+Mar 14 16:08:05 dropbear[5661]: Exit before auth from <10.20.61.52:50942>: Exited normally
+Mar 14 16:10:03 dropbear[5889]: Child connection from 10.20.61.52:56418
+Mar 14 16:10:04 dropbear[5889]: Login attempt for nonexistent user
+Mar 14 16:10:04 dropbear[5889]: Exit before auth from <10.20.61.52:56418>: Exited normally
+Mar 14 16:10:43 dropbear[5960]: Child connection from 10.20.30.94:43282
+Mar 14 16:10:43 dropbear[5960]: Login attempt for nonexistent user
+Mar 14 16:10:44 dropbear[5964]: Child connection from 10.20.30.94:43292
+Mar 14 16:10:44 dropbear[5960]: Exit before auth from <10.20.30.94:43282>: Exited normally
+Mar 14 16:10:44 dropbear[5964]: Login attempt for nonexistent user
+Mar 14 16:10:44 dropbear[5964]: Exit before auth from <10.20.30.94:43292>: Exited normally
+Mar 14 16:15:03 dropbear[6448]: Child connection from 10.20.61.52:45500
+Mar 14 16:15:04 dropbear[6448]: Login attempt for nonexistent user
+Mar 14 16:15:04 dropbear[6448]: Exit before auth from <10.20.61.52:45500>: Exited normally
+Mar 14 16:15:43 dropbear[6519]: Child connection from 10.20.30.94:48010
+Mar 14 16:15:43 dropbear[6519]: Login attempt for nonexistent user
+Mar 14 16:15:44 dropbear[6519]: Exit before auth from <10.20.30.94:48010>: Exited normally
+Mar 14 16:15:44 dropbear[6520]: Child connection from 10.20.30.94:48026
+Mar 14 16:15:44 dropbear[6520]: Login attempt for nonexistent user
+Mar 14 16:15:44 dropbear[6520]: Exit before auth from <10.20.30.94:48026>: Exited normally
+Mar 14 16:20:03 dropbear[7007]: Child connection from 10.20.61.52:35188
+Mar 14 16:20:04 dropbear[7007]: Login attempt for nonexistent user
+Mar 14 16:20:04 dropbear[7007]: Exit before auth from <10.20.61.52:35188>: Exited normally
+Mar 14 16:20:43 dropbear[7081]: Child connection from 10.20.30.94:49960
+Mar 14 16:20:43 dropbear[7081]: Login attempt for nonexistent user
+Mar 14 16:20:44 dropbear[7081]: Exit before auth from <10.20.30.94:49960>: Exited normally
+Mar 14 16:20:44 dropbear[7082]: Child connection from 10.20.30.94:49972
+Mar 14 16:20:44 dropbear[7082]: Login attempt for nonexistent user
+Mar 14 16:20:44 dropbear[7082]: Exit before auth from <10.20.30.94:49972>: Exited normally
+Mar 14 16:24:34 dropbear[7510]: Child connection from 10.20.61.52:41588
+Mar 14 16:24:34 dropbear[7510]: Login attempt for nonexistent user
+Mar 14 16:24:34 dropbear[7510]: Exit before auth from <10.20.61.52:41588>: Exited normally
+Mar 14 16:24:43 dropbear[7530]: Child connection from 10.20.30.94:60200
+Mar 14 16:24:44 dropbear[7530]: Login attempt for nonexistent user
+Mar 14 16:24:44 dropbear[7530]: Exit before auth from <10.20.30.94:60200>: Exited normally
+Mar 14 16:24:44 dropbear[7531]: Child connection from 10.20.30.94:60208
+Mar 14 16:24:44 dropbear[7531]: Login attempt for nonexistent user
+Mar 14 16:24:44 dropbear[7531]: Exit before auth from <10.20.30.94:60208>: Exited normally
+Mar 14 16:25:38 dropbear[7637]: Child connection from 10.20.61.52:34884
+Mar 14 16:25:38 dropbear[7637]: Login attempt for nonexistent user
+Mar 14 16:25:39 dropbear[7637]: Exit before auth from <10.20.61.52:34884>: Exited normally
+Mar 14 16:25:49 dropbear[7657]: Child connection from 10.20.30.94:56334
+Mar 14 16:25:49 dropbear[7657]: Login attempt for nonexistent user
+Mar 14 16:25:49 dropbear[7657]: Exit before auth from <10.20.30.94:56334>: Exited normally
+Mar 14 16:25:49 dropbear[7659]: Child connection from 10.20.30.94:56346
+Mar 14 16:25:49 dropbear[7659]: Login attempt for nonexistent user
+Mar 14 16:25:49 dropbear[7659]: Exit before auth from <10.20.30.94:56346>: Exited normally
+Mar 14 16:30:03 dropbear[8132]: Child connection from 10.20.61.52:51276
+Mar 14 16:30:04 dropbear[8132]: Login attempt for nonexistent user
+Mar 14 16:30:04 dropbear[8132]: Exit before auth from <10.20.61.52:51276>: Exited normally
+Mar 14 16:30:43 dropbear[8206]: Child connection from 10.20.30.94:41492
+Mar 14 16:30:43 dropbear[8206]: Login attempt for nonexistent user
+Mar 14 16:30:44 dropbear[8206]: Exit before auth from <10.20.30.94:41492>: Exited normally
+Mar 14 16:30:44 dropbear[8207]: Child connection from 10.20.30.94:41496
+Mar 14 16:30:44 dropbear[8207]: Login attempt for nonexistent user
+Mar 14 16:30:44 dropbear[8207]: Exit before auth from <10.20.30.94:41496>: Exited normally
+Mar 14 16:35:03 dropbear[8691]: Child connection from 10.20.61.52:40842
+Mar 14 16:35:04 dropbear[8691]: Login attempt for nonexistent user
+Mar 14 16:35:04 dropbear[8691]: Exit before auth from <10.20.61.52:40842>: Exited normally
+Mar 14 16:35:43 dropbear[8765]: Child connection from 10.20.30.94:45266
+Mar 14 16:35:43 dropbear[8765]: Login attempt for nonexistent user
+Mar 14 16:35:44 dropbear[8765]: Exit before auth from <10.20.30.94:45266>: Exited normally
+Mar 14 16:35:44 dropbear[8766]: Child connection from 10.20.30.94:45278
+Mar 14 16:35:44 dropbear[8766]: Login attempt for nonexistent user
+Mar 14 16:35:44 dropbear[8766]: Exit before auth from <10.20.30.94:45278>: Exited normally
+Mar 14 16:40:03 dropbear[9250]: Child connection from 10.20.61.52:41040
+Mar 14 16:40:04 dropbear[9250]: Login attempt for nonexistent user
+Mar 14 16:40:04 dropbear[9250]: Exit before auth from <10.20.61.52:41040>: Exited normally
+Mar 14 16:40:43 dropbear[9321]: Child connection from 10.20.30.94:53194
+Mar 14 16:40:43 dropbear[9321]: Login attempt for nonexistent user
+Mar 14 16:40:44 dropbear[9321]: Exit before auth from <10.20.30.94:53194>: Exited normally
+Mar 14 16:40:44 dropbear[9325]: Child connection from 10.20.30.94:53202
+Mar 14 16:40:44 dropbear[9325]: Login attempt for nonexistent user
+Mar 14 16:40:44 dropbear[9325]: Exit before auth from <10.20.30.94:53202>: Exited normally
+Mar 14 16:45:03 dropbear[9806]: Child connection from 10.20.61.52:37740
+Mar 14 16:45:04 dropbear[9806]: Login attempt for nonexistent user
+Mar 14 16:45:04 dropbear[9806]: Exit before auth from <10.20.61.52:37740>: Exited normally
+Mar 14 16:45:43 dropbear[9880]: Child connection from 10.20.30.94:42102
+Mar 14 16:45:43 dropbear[9880]: Login attempt for nonexistent user
+Mar 14 16:45:44 dropbear[9880]: Exit before auth from <10.20.30.94:42102>: Exited normally
+Mar 14 16:45:44 dropbear[9881]: Child connection from 10.20.30.94:42112
+Mar 14 16:45:44 dropbear[9881]: Login attempt for nonexistent user
+Mar 14 16:45:44 dropbear[9881]: Exit before auth from <10.20.30.94:42112>: Exited normally
+Mar 14 16:50:03 dropbear[10364]: Child connection from 10.20.61.52:52956
+Mar 14 16:50:04 dropbear[10364]: Login attempt for nonexistent user
+Mar 14 16:50:04 dropbear[10364]: Exit before auth from <10.20.61.52:52956>: Exited normally
+Mar 14 16:50:43 dropbear[10439]: Child connection from 10.20.30.94:48414
+Mar 14 16:50:43 dropbear[10439]: Login attempt for nonexistent user
+Mar 14 16:50:44 dropbear[10439]: Exit before auth from <10.20.30.94:48414>: Exited normally
+Mar 14 16:50:44 dropbear[10440]: Child connection from 10.20.30.94:48430
+Mar 14 16:50:44 dropbear[10440]: Login attempt for nonexistent user
+Mar 14 16:50:44 dropbear[10440]: Exit before auth from <10.20.30.94:48430>: Exited normally
+Mar 14 16:55:03 dropbear[10922]: Child connection from 10.20.61.52:41844
+Mar 14 16:55:04 dropbear[10922]: Login attempt for nonexistent user
+Mar 14 16:55:04 dropbear[10922]: Exit before auth from <10.20.61.52:41844>: Exited normally
+Mar 14 16:55:43 dropbear[10993]: Child connection from 10.20.30.94:32946
+Mar 14 16:55:43 dropbear[10993]: Login attempt for nonexistent user
+Mar 14 16:55:44 dropbear[10993]: Exit before auth from <10.20.30.94:32946>: Exited normally
+Mar 14 16:55:44 dropbear[10994]: Child connection from 10.20.30.94:32960
+Mar 14 16:55:44 dropbear[10994]: Login attempt for nonexistent user
+Mar 14 16:55:44 dropbear[10994]: Exit before auth from <10.20.30.94:32960>: Exited normally
+Mar 14 17:00:03 dropbear[11478]: Child connection from 10.20.61.52:50684
+Mar 14 17:00:04 dropbear[11478]: Login attempt for nonexistent user
+Mar 14 17:00:04 dropbear[11478]: Exit before auth from <10.20.61.52:50684>: Exited normally
+Mar 14 17:00:43 dropbear[11552]: Child connection from 10.20.30.94:46348
+Mar 14 17:00:43 dropbear[11552]: Login attempt for nonexistent user
+Mar 14 17:00:44 dropbear[11552]: Exit before auth from <10.20.30.94:46348>: Exited normally
+Mar 14 17:00:44 dropbear[11553]: Child connection from 10.20.30.94:46352
+Mar 14 17:00:44 dropbear[11553]: Login attempt for nonexistent user
+Mar 14 17:00:44 dropbear[11553]: Exit before auth from <10.20.30.94:46352>: Exited normally
+Mar 14 17:05:03 dropbear[12036]: Child connection from 10.20.61.52:50278
+Mar 14 17:05:04 dropbear[12036]: Login attempt for nonexistent user
+Mar 14 17:05:04 dropbear[12036]: Exit before auth from <10.20.61.52:50278>: Exited normally
+Mar 14 17:05:43 dropbear[12110]: Child connection from 10.20.30.94:53594
+Mar 14 17:05:43 dropbear[12110]: Login attempt for nonexistent user
+Mar 14 17:05:44 dropbear[12110]: Exit before auth from <10.20.30.94:53594>: Exited normally
+Mar 14 17:05:44 dropbear[12111]: Child connection from 10.20.30.94:53604
+Mar 14 17:05:44 dropbear[12111]: Login attempt for nonexistent user
+Mar 14 17:05:44 dropbear[12111]: Exit before auth from <10.20.30.94:53604>: Exited normally
+Mar 14 17:08:04 dropbear[12377]: Child connection from 10.20.61.52:53660
+Mar 14 17:08:04 dropbear[12377]: Exit before auth from <10.20.61.52:53660>: (user 'root', 1 fails): Exited normally
+Mar 14 17:08:04 dropbear[12378]: Child connection from 10.20.61.52:53668
+Mar 14 17:08:04 dropbear[12378]: Login attempt for nonexistent user
+Mar 14 17:08:04 dropbear[12378]: Exit before auth from <10.20.61.52:53668>: Exited normally
+Mar 14 17:10:03 dropbear[12605]: Child connection from 10.20.61.52:38368
+Mar 14 17:10:04 dropbear[12605]: Login attempt for nonexistent user
+Mar 14 17:10:04 dropbear[12605]: Exit before auth from <10.20.61.52:38368>: Exited normally
+Mar 14 17:10:43 dropbear[12676]: Child connection from 10.20.30.94:42708
+Mar 14 17:10:43 dropbear[12676]: Login attempt for nonexistent user
+Mar 14 17:10:44 dropbear[12676]: Exit before auth from <10.20.30.94:42708>: Exited normally
+Mar 14 17:10:44 dropbear[12677]: Child connection from 10.20.30.94:42714
+Mar 14 17:10:44 dropbear[12677]: Login attempt for nonexistent user
+Mar 14 17:10:44 dropbear[12677]: Exit before auth from <10.20.30.94:42714>: Exited normally
+Mar 14 17:15:03 dropbear[13160]: Child connection from 10.20.61.52:42798
+Mar 14 17:15:04 dropbear[13160]: Login attempt for nonexistent user
+Mar 14 17:15:04 dropbear[13160]: Exit before auth from <10.20.61.52:42798>: Exited normally
+Mar 14 17:15:43 dropbear[13234]: Child connection from 10.20.30.94:41114
+Mar 14 17:15:43 dropbear[13234]: Login attempt for nonexistent user
+Mar 14 17:15:44 dropbear[13234]: Exit before auth from <10.20.30.94:41114>: Exited normally
+Mar 14 17:15:44 dropbear[13235]: Child connection from 10.20.30.94:41120
+Mar 14 17:15:44 dropbear[13235]: Login attempt for nonexistent user
+Mar 14 17:15:44 dropbear[13235]: Exit before auth from <10.20.30.94:41120>: Exited normally
+Mar 14 17:17:24 miner: info [Miner]: 
+Mar 14 17:17:24 miner: PowerProfile:
+Mar 14 17:17:24 miner:     Vendor: Bitmain Technologies
+Mar 14 17:17:24 miner:     Model: APW11A1216-1 Ver.A (0x6a)
+Mar 14 17:17:24 miner:     MinVoltage: 12.40
+Mar 14 17:17:24 miner:     MaxVoltage: 16.00
+Mar 14 17:17:26 miner: info [Miner]: 
+Mar 14 17:17:26 miner: PowerProfile:
+Mar 14 17:17:26 miner:     Vendor: Bitmain Technologies
+Mar 14 17:17:26 miner:     Model: APW11A1216-1 Ver.A (0x6a)
+Mar 14 17:17:26 miner:     MinVoltage: 12.40
+Mar 14 17:17:26 miner:     MaxVoltage: 16.00

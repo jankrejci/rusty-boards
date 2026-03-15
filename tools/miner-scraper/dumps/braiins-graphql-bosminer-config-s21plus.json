@@ -1,0 +1,1 @@
+{"data":{"bosminer":{"config":{"groups":[{"name":"Default"}],"autotuning":{"enabled":true},"performanceScaling":{"enabled":false,"dpsMode":null,"minPowerTarget":null}}}}}

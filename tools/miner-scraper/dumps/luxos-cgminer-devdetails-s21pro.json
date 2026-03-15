@@ -1,1 +1,62 @@
-{"DEVDETAILS":[{"Board":"A3HB70601","Chips":65,"Cores":2040,"DEVDETAILS":2,"Device Path":"","Driver":"","Frequency":524,"ID":2,"Kernel":"","Model":"Antminer S21 Pro","Name":"Hash Chain 2","Profile":"default","SerialNumber":"JYZZYSCBDJEBE025X","Voltage":13.94},{"Board":"A3HB70601","Chips":65,"Cores":2040,"DEVDETAILS":0,"Device Path":"","Driver":"","Frequency":520,"ID":0,"Kernel":"","Model":"Antminer S21 Pro","Name":"Hash Chain 0","Profile":"default","SerialNumber":"JYZZYSCBDJEBE0291","Voltage":13.94},{"Board":"A3HB70601","Chips":65,"Cores":2040,"DEVDETAILS":1,"Device Path":"","Driver":"","Frequency":530,"ID":1,"Kernel":"","Model":"Antminer S21 Pro","Name":"Hash Chain 1","Profile":"default","SerialNumber":"JYZZYSCBDJEBE02A7","Voltage":13.94}],"STATUS":[{"Code":69,"Description":"LUXminer 2026.3.2.193145-42668da4d","Msg":"Device Details","STATUS":"S","When":1773425028}],"id":1}
+{
+  "DEVDETAILS": [
+    {
+      "Board": "A3HB70601",
+      "Chips": 65,
+      "Cores": 2040,
+      "DEVDETAILS": 1,
+      "Device Path": "",
+      "Driver": "",
+      "Frequency": 535,
+      "ID": 1,
+      "Kernel": "",
+      "Model": "Antminer S21 Pro",
+      "Name": "Hash Chain 1",
+      "Profile": "default",
+      "SerialNumber": "JYZZYSCBDJEBE02A7",
+      "Voltage": 13.84
+    },
+    {
+      "Board": "A3HB70601",
+      "Chips": 65,
+      "Cores": 2040,
+      "DEVDETAILS": 2,
+      "Device Path": "",
+      "Driver": "",
+      "Frequency": 533,
+      "ID": 2,
+      "Kernel": "",
+      "Model": "Antminer S21 Pro",
+      "Name": "Hash Chain 2",
+      "Profile": "default",
+      "SerialNumber": "JYZZYSCBDJEBE025X",
+      "Voltage": 13.84
+    },
+    {
+      "Board": "A3HB70601",
+      "Chips": 65,
+      "Cores": 2040,
+      "DEVDETAILS": 0,
+      "Device Path": "",
+      "Driver": "",
+      "Frequency": 533,
+      "ID": 0,
+      "Kernel": "",
+      "Model": "Antminer S21 Pro",
+      "Name": "Hash Chain 0",
+      "Profile": "default",
+      "SerialNumber": "JYZZYSCBDJEBE0291",
+      "Voltage": 13.84
+    }
+  ],
+  "STATUS": [
+    {
+      "Code": 69,
+      "Description": "LUXminer 2026.3.2.193145-42668da4d",
+      "Msg": "Device Details",
+      "STATUS": "S",
+      "When": 1773510045
+    }
+  ],
+  "id": 1
+}

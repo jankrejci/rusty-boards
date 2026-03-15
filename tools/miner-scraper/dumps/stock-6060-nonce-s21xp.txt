@@ -1,0 +1,45 @@
+
+ asic nonce number for chain[0]...
+domain 00 asic[000]=100336   asic[001]=99136    asic[002]=100505   asic[003]=87521    asic[004]=86149    asic[005]=87112    asic[006]=86424     total=647183  
+domain 01 asic[007]=86868    asic[008]=84195    asic[009]=96437    asic[010]=100825   asic[011]=85696    asic[012]=100465   asic[013]=100218    total=654704  
+domain 02 asic[014]=88154    asic[015]=98885    asic[016]=100428   asic[017]=89435    asic[018]=99366    asic[019]=98954    asic[020]=88275     total=663497  
+domain 03 asic[021]=84725    asic[022]=96114    asic[023]=99671    asic[024]=98981    asic[025]=100107   asic[026]=100466   asic[027]=93651     total=673715  
+domain 04 asic[028]=99761    asic[029]=99409    asic[030]=100123   asic[031]=100074   asic[032]=99124    asic[033]=85459    asic[034]=84605     total=668555  
+domain 05 asic[035]=84652    asic[036]=90687    asic[037]=98619    asic[038]=99818    asic[039]=98942    asic[040]=100167   asic[041]=100233    total=673118  
+domain 06 asic[042]=99655    asic[043]=90033    asic[044]=83629    asic[045]=100809   asic[046]=85354    asic[047]=100961   asic[048]=89472     total=649913  
+domain 07 asic[049]=98672    asic[050]=100353   asic[051]=84769    asic[052]=83338    asic[053]=84950    asic[054]=90575    asic[055]=100083    total=642740  
+domain 08 asic[056]=100421   asic[057]=99496    asic[058]=98735    asic[059]=99055    asic[060]=91017    asic[061]=83908    asic[062]=94538     total=667170  
+domain 09 asic[063]=89665    asic[064]=96878    asic[065]=87185    asic[066]=98189    asic[067]=99626    asic[068]=99408    asic[069]=101093    total=672044  
+domain 10 asic[070]=99344    asic[071]=99787    asic[072]=99342    asic[073]=96805    asic[074]=88828    asic[075]=90043    asic[076]=91627     total=665776  
+domain 11 asic[077]=84631    asic[078]=97804    asic[079]=84398    asic[080]=99877    asic[081]=99189    asic[082]=100605   asic[083]=98717     total=665221  
+domain 12 asic[084]=99081    asic[085]=99564    asic[086]=84928    asic[087]=84735    asic[088]=98966    asic[089]=96691    asic[090]=93038     total=657003  
+
+ asic nonce number for chain[1]...
+domain 00 asic[000]=96029    asic[001]=96529    asic[002]=96623    asic[003]=96517    asic[004]=96339    asic[005]=96996    asic[006]=85072     total=664105  
+domain 01 asic[007]=97010    asic[008]=85446    asic[009]=95727    asic[010]=95287    asic[011]=97643    asic[012]=96966    asic[013]=97514     total=665593  
+domain 02 asic[014]=95994    asic[015]=95946    asic[016]=97525    asic[017]=97557    asic[018]=96689    asic[019]=96512    asic[020]=95232     total=675455  
+domain 03 asic[021]=92538    asic[022]=95563    asic[023]=97401    asic[024]=95701    asic[025]=97484    asic[026]=96470    asic[027]=96996     total=672153  
+domain 04 asic[028]=97487    asic[029]=96329    asic[030]=97423    asic[031]=95166    asic[032]=97685    asic[033]=96184    asic[034]=84143     total=664417  
+domain 05 asic[035]=82982    asic[036]=96360    asic[037]=96083    asic[038]=95247    asic[039]=97458    asic[040]=96156    asic[041]=97481     total=661767  
+domain 06 asic[042]=97271    asic[043]=85634    asic[044]=96413    asic[045]=97745    asic[046]=96652    asic[047]=90902    asic[048]=89611     total=654228  
+domain 07 asic[049]=87527    asic[050]=95675    asic[051]=95999    asic[052]=97696    asic[053]=95996    asic[054]=97019    asic[055]=96695     total=666607  
+domain 08 asic[056]=97693    asic[057]=96942    asic[058]=83600    asic[059]=95462    asic[060]=95529    asic[061]=97391    asic[062]=85323     total=651940  
+domain 09 asic[063]=96212    asic[064]=95374    asic[065]=84616    asic[066]=97054    asic[067]=97117    asic[068]=96369    asic[069]=97193     total=663935  
+domain 10 asic[070]=95850    asic[071]=96160    asic[072]=88990    asic[073]=97345    asic[074]=95441    asic[075]=97414    asic[076]=96281     total=667481  
+domain 11 asic[077]=83423    asic[078]=97781    asic[079]=98004    asic[080]=94617    asic[081]=96750    asic[082]=97593    asic[083]=96657     total=664825  
+domain 12 asic[084]=96410    asic[085]=98095    asic[086]=94928    asic[087]=95417    asic[088]=95365    asic[089]=93880    asic[090]=96380     total=670475  
+
+ asic nonce number for chain[2]...
+domain 00 asic[000]=99056    asic[001]=99006    asic[002]=99283    asic[003]=91096    asic[004]=98731    asic[005]=95406    asic[006]=88991     total=671569  
+domain 01 asic[007]=98321    asic[008]=94645    asic[009]=99104    asic[010]=85076    asic[011]=97613    asic[012]=98900    asic[013]=99082     total=672741  
+domain 02 asic[014]=97707    asic[015]=98599    asic[016]=97802    asic[017]=96996    asic[018]=99440    asic[019]=84802    asic[020]=95098     total=670444  
+domain 03 asic[021]=97648    asic[022]=98845    asic[023]=97068    asic[024]=82987    asic[025]=98632    asic[026]=85002    asic[027]=97131     total=657313  
+domain 04 asic[028]=99508    asic[029]=98901    asic[030]=97844    asic[031]=98359    asic[032]=84799    asic[033]=97279    asic[034]=95869     total=672559  
+domain 05 asic[035]=82076    asic[036]=96571    asic[037]=95061    asic[038]=98743    asic[039]=97942    asic[040]=96775    asic[041]=97799     total=664967  
+domain 06 asic[042]=97472    asic[043]=99333    asic[044]=96975    asic[045]=94146    asic[046]=98884    asic[047]=97730    asic[048]=80102     total=664642  
+domain 07 asic[049]=96650    asic[050]=84297    asic[051]=98471    asic[052]=99225    asic[053]=84546    asic[054]=98881    asic[055]=97987     total=660057  
+domain 08 asic[056]=98242    asic[057]=98705    asic[058]=97214    asic[059]=99298    asic[060]=83367    asic[061]=96706    asic[062]=92082     total=665614  
+domain 09 asic[063]=82274    asic[064]=88000    asic[065]=98828    asic[066]=98726    asic[067]=98021    asic[068]=98846    asic[069]=99223     total=663918  
+domain 10 asic[070]=97318    asic[071]=98480    asic[072]=98500    asic[073]=97506    asic[074]=99988    asic[075]=96458    asic[076]=81871     total=670121  
+domain 11 asic[077]=84271    asic[078]=83438    asic[079]=99091    asic[080]=98646    asic[081]=98310    asic[082]=97968    asic[083]=99335     total=661059  
+domain 12 asic[084]=98878    asic[085]=98086    asic[086]=98565    asic[087]=98854    asic[088]=84303    asic[089]=96600    asic[090]=87707     total=662993  

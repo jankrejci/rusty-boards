@@ -1,0 +1,6 @@
+
+PowerProfile:
+    Vendor: Bitmain Technologies
+    Model: APW11A1216-1 Ver.A (0x6a)
+    MinVoltage: 12.40
+    MaxVoltage: 16.00

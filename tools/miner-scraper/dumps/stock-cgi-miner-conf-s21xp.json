@@ -1,0 +1,22 @@
+{
+  "pools": [
+    {
+      "url": "stratum+tcp://stratum.braiins.com:3333",
+      "user": "braiinstest.epicfw",
+      "pass": ""
+    },
+    {
+      "url": "",
+      "user": "",
+      "pass": ""
+    },
+    {
+      "url": "",
+      "user": "",
+      "pass": ""
+    }
+  ],
+  "bitmain-fan-ctrl": false,
+  "bitmain-fan-pwm": "100",
+  "bitmain-work-mode": "0"
+}

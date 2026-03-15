@@ -1,0 +1,12 @@
+{
+  "customerId": "MaraTech",
+  "isDevelopment": false,
+  "gitCommit": "5992a175d2b92e9d1a571b618a2939f7771f2ce6",
+  "gitBranch": "main",
+  "buildDate": "Tue 30 Sep 2025 01:11:53 AM UTC",
+  "buildTimeStamp": 1759194713,
+  "version": "rel 3.15",
+  "buildNumber": "968",
+  "buildHost": "kaonsu.jenkins.kingdra.com",
+  "compilerVersion": "go1.24.6 linux/amd64"
+}

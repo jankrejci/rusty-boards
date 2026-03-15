@@ -1,0 +1,21 @@
+{
+  "COIN": [
+    {
+      "Current Block Hash": "",
+      "Current Block Time": 0.0,
+      "Hash Method": "sha256",
+      "LP": true,
+      "Network Difficulty": 0.0
+    }
+  ],
+  "STATUS": [
+    {
+      "Code": 78,
+      "Description": "LUXminer 2026.3.2.193145-42668da4d",
+      "Msg": "LUXminer coin",
+      "STATUS": "S",
+      "When": 1773510063
+    }
+  ],
+  "id": 1
+}

@@ -1,1 +1,47 @@
-{"STATUS":[{"Code":11,"Description":"LUXminer 2026.3.2.193145-42668da4d","Msg":"Summary","STATUS":"S","When":1773425027}],"SUMMARY":[{"Accepted":1557,"Best Share":262144,"Device Hardware%":0.0,"Device Rejected%":0.0,"Difficulty Accepted":307123200,"Difficulty Rejected":0,"Difficulty Stale":0,"Discarded":0,"Elapsed":6916,"Found Blocks":0,"GHS 15m":207923.45,"GHS 1m":209018.93,"GHS 24h":198680.46,"GHS 30m":207601.47,"GHS 5m":208128.6,"GHS 5s":214839.1,"GHS av":201052.07,"Get Failures":0,"Getworks":636,"Hardware Errors":0,"Last getwork":1773425021,"Local Work":0,"Network Blocks":0,"Pool Rejected%":0.0,"Pool Stale%":0.0,"Rejected":0,"Remote Failures":0,"Stale":0,"Total MH":201052070.9371196,"Utility":13.53,"Work Utility":5.53}],"id":1}
+{
+  "STATUS": [
+    {
+      "Code": 11,
+      "Description": "LUXminer 2026.3.2.193145-42668da4d",
+      "Msg": "Summary",
+      "STATUS": "S",
+      "When": 1773510041
+    }
+  ],
+  "SUMMARY": [
+    {
+      "Accepted": 1396,
+      "Best Share": 262144,
+      "Device Hardware%": 0.0,
+      "Device Rejected%": 0.0,
+      "Difficulty Accepted": 92530688,
+      "Difficulty Rejected": 144384,
+      "Difficulty Stale": 0,
+      "Discarded": 0,
+      "Elapsed": 2111,
+      "Found Blocks": 0,
+      "GHS 15m": 210806.39,
+      "GHS 1m": 212064.32,
+      "GHS 24h": 179334.0,
+      "GHS 30m": 203670.55,
+      "GHS 5m": 210748.73,
+      "GHS 5s": 212223.93,
+      "GHS av": 188361.82,
+      "Get Failures": 0,
+      "Getworks": 125,
+      "Hardware Errors": 0,
+      "Last getwork": 1773510029,
+      "Local Work": 0,
+      "Network Blocks": 0,
+      "Pool Rejected%": 0.1557,
+      "Pool Stale%": 0.0,
+      "Rejected": 7,
+      "Remote Failures": 0,
+      "Stale": 0,
+      "Total MH": 188361820.25835258,
+      "Utility": 40.08,
+      "Work Utility": 3.57
+    }
+  ],
+  "id": 1
+}
