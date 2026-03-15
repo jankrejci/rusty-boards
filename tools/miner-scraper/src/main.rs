@@ -18,6 +18,9 @@ mod parser;
 mod scraper;
 mod store;
 
+/// Maximum number of pending metric batches from scrapers to the store.
+const METRICS_CHANNEL_SIZE: usize = 256;
+
 #[derive(Parser)]
 #[command(about = "Scrape Bitcoin mining hardware metrics for Prometheus")]
 struct Args {
@@ -71,23 +74,23 @@ async fn run() -> anyhow::Result<()> {
     let args = Args::parse();
 
     let (config_tx, config_rx) = watch::channel(config::Config::default());
-    let (metrics_tx, metrics_rx) = mpsc::channel(256);
+    let (metrics_tx, metrics_rx) = mpsc::channel(METRICS_CHANNEL_SIZE);
 
     let config_file = config::ConfigFile::new(args.config, config_tx);
-    let mut cfg = config_file.load().unwrap_or_else(|e| {
+    let mut config = config_file.load().unwrap_or_else(|e| {
         log::warn!("failed to load config: {e}, using defaults");
         config::Config::default()
     });
 
     // Hierarchy: defaults -> config -> cli.
-    let mut listen: SocketAddr = cfg.listen.parse()?;
+    let mut listen: SocketAddr = config.listen.parse()?;
     if let Some(ip) = args.ip {
         listen.set_ip(ip);
     }
     if !args.targets.is_empty() {
-        cfg.targets = args.targets;
+        config.targets = args.targets;
     }
-    config_file.publish(cfg);
+    config_file.publish(config);
 
     // Bind the listener early so we fail fast if the port is in use.
     let listener = TcpListener::bind(listen)
