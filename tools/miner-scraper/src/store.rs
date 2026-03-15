@@ -1,9 +1,7 @@
 //! Per-host Prometheus metrics storage.
 //!
-//! Metrics are stored as `Vec<Metric>` per host address. The inner `RwLock`
-//! allows concurrent reads from the HTTP handler while the receiver task
-//! writes. `Arc` enables shared ownership between the receiver task, the
-//! HTTP handler, and the scrape orchestrator.
+//! `Store` owns the channel receiver and writes incoming metrics. `StoreHandle`
+//! is a lightweight read-only clone handed to the HTTP layer.
 
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -16,17 +14,22 @@ use crate::metrics::Metric;
 #[path = "tests/store.rs"]
 mod tests;
 
-/// Thread-safe per-host metric storage.
+/// Read-only handle for the HTTP handler.
 #[derive(Clone)]
-pub struct Store {
+pub struct StoreHandle {
     inner: Arc<RwLock<HashMap<String, Vec<Metric>>>>,
 }
 
-impl Store {
-    pub fn new() -> Self {
-        Self {
-            inner: Arc::new(RwLock::new(HashMap::new())),
+impl StoreHandle {
+    /// Render all stored metrics into a single Prometheus-compatible response.
+    pub async fn render(&self) -> String {
+        let store = self.inner.read().await;
+        let mut output = String::new();
+        for metric in store.values().flatten() {
+            use std::fmt::Write;
+            let _ = writeln!(output, "{metric}");
         }
+        output
     }
 
     /// Replace all stored metrics for a host.
@@ -49,24 +52,35 @@ impl Store {
         let store = self.inner.read().await;
         store.keys().cloned().collect()
     }
+}
 
-    /// Render all stored metrics into a single Prometheus-compatible response.
-    pub async fn render(&self) -> String {
-        let store = self.inner.read().await;
-        let mut output = String::new();
-        for metric in store.values().flatten() {
-            use std::fmt::Write;
-            let _ = writeln!(output, "{metric}");
+/// Metric storage that receives batches from scrapers via a channel.
+pub struct Store {
+    inner: Arc<RwLock<HashMap<String, Vec<Metric>>>>,
+    rx: mpsc::Receiver<(String, Vec<Metric>)>,
+}
+
+impl Store {
+    pub fn new(rx: mpsc::Receiver<(String, Vec<Metric>)>) -> Self {
+        Self {
+            inner: Arc::new(RwLock::new(HashMap::new())),
+            rx,
         }
-        output
+    }
+
+    /// Return a read-only handle for the HTTP handler.
+    pub fn handle(&self) -> StoreHandle {
+        StoreHandle {
+            inner: Arc::clone(&self.inner),
+        }
     }
 
     /// Receive metrics from scrapers and write them to the store.
     ///
     /// Runs until the channel is closed (all senders dropped). An empty metrics
     /// vec removes the host from the store.
-    pub async fn run(self, mut rx: mpsc::Receiver<(String, Vec<Metric>)>) {
-        while let Some((host, metrics)) = rx.recv().await {
+    pub async fn run(mut self) {
+        while let Some((host, metrics)) = self.rx.recv().await {
             let mut store = self.inner.write().await;
             if metrics.is_empty() {
                 store.remove(&host);
