@@ -8,9 +8,10 @@ use std::net::IpAddr;
 use std::time::Duration;
 
 use anyhow::Result;
-
 use tokio::sync::{mpsc, watch};
 use tokio::task::JoinHandle;
+use tokio::time::{Instant, MissedTickBehavior};
+use tokio_stream::StreamMap;
 use tokio_util::sync::CancellationToken;
 
 use crate::config::ScrapingIntervals;
@@ -99,104 +100,109 @@ impl Scraper {
         );
     }
 
-    /// Run tier-based scrape loops until the channel is closed.
+    /// Run per-endpoint scrape loops until shutdown is signalled.
     ///
-    /// Groups endpoints by tier and uses `tokio::select!` with per-tier
-    /// intervals to scrape each tier at its configured rate. Only one tier
-    /// scrapes at a time to avoid overwhelming the miner.
+    /// Each endpoint gets its own interval at its tier's configured duration.
+    /// Endpoints within each tier are staggered evenly across the tier period
+    /// to avoid request bursts that overwhelm constrained miner hardware.
     pub async fn run(&self, intervals: &ScrapingIntervals, shutdown: CancellationToken) {
+        use tokio_stream::StreamExt;
+
         if self.endpoints.is_empty() {
             log::warn!("{}: no endpoints, nothing to scrape", self.host);
             return;
         }
 
-        let high: Vec<Endpoint> = self
-            .endpoints
-            .iter()
-            .copied()
-            .filter(|endpoint| endpoint.tier() == ScrapeTier::High)
-            .collect();
-        let mid: Vec<Endpoint> = self
-            .endpoints
-            .iter()
-            .copied()
-            .filter(|endpoint| endpoint.tier() == ScrapeTier::Mid)
-            .collect();
-        let low: Vec<Endpoint> = self
-            .endpoints
-            .iter()
-            .copied()
-            .filter(|endpoint| endpoint.tier() == ScrapeTier::Low)
-            .collect();
+        let mut streams: StreamMap<Endpoint, tokio_stream::wrappers::IntervalStream> =
+            StreamMap::new();
 
-        let mut high_interval = tokio::time::interval(intervals.tier_high_secs);
-        let mut mid_interval = tokio::time::interval(intervals.tier_mid_secs);
-        let mut low_interval = tokio::time::interval(intervals.tier_low_secs);
+        // Insert endpoints ordered by tier priority: high, mid, low.
+        // StreamMap polls in insertion order, so higher-priority tiers win ties.
+        let tier_order = [ScrapeTier::High, ScrapeTier::Mid, ScrapeTier::Low];
+        for &tier in &tier_order {
+            let tier_duration = match tier {
+                ScrapeTier::High => intervals.tier_high_secs,
+                ScrapeTier::Mid => intervals.tier_mid_secs,
+                ScrapeTier::Low => intervals.tier_low_secs,
+            };
+
+            let tier_endpoints: Vec<&Endpoint> = self
+                .endpoints
+                .iter()
+                .filter(|endpoint| endpoint.tier() == tier)
+                .collect();
+
+            let tier_count = tier_endpoints.len();
+            if tier_count == 0 {
+                continue;
+            }
+
+            let now = Instant::now();
+            for (index, &endpoint) in tier_endpoints.iter().enumerate() {
+                // ENDPOINTS has 21 entries, index and count always fit in u32.
+                #[allow(clippy::cast_possible_truncation)]
+                let offset = tier_duration * index as u32 / tier_count as u32;
+                let mut interval = tokio::time::interval(tier_duration);
+                interval.set_missed_tick_behavior(MissedTickBehavior::Skip);
+                interval.reset_at(now + offset);
+                streams.insert(
+                    *endpoint,
+                    tokio_stream::wrappers::IntervalStream::new(interval),
+                );
+            }
+        }
 
         loop {
-            let scrape_result = tokio::select! {
+            tokio::select! {
                 () = shutdown.cancelled() => return,
-                _ = high_interval.tick(), if !high.is_empty() => {
-                    self.scrape_tier(&high).await
+                Some((endpoint, _)) = streams.next() => {
+                    if let Err(err) = self.scrape_endpoint(&endpoint).await {
+                        log::warn!("{}: {err}", self.host);
+                        return;
+                    }
                 }
-                _ = mid_interval.tick(), if !mid.is_empty() => {
-                    self.scrape_tier(&mid).await
-                }
-                _ = low_interval.tick(), if !low.is_empty() => {
-                    self.scrape_tier(&low).await
-                }
-            };
-            if scrape_result.is_err() {
-                return;
             }
         }
     }
 
-    /// Scrape a set of endpoints and send the metrics through the channel.
+    /// Scrape a single endpoint and send the metrics through the channel.
     ///
     /// Returns an error if the channel is closed and the scraper should stop.
-    async fn scrape_tier(&self, endpoints: &[Endpoint]) -> Result<()> {
+    async fn scrape_endpoint(&self, endpoint: &Endpoint) -> Result<()> {
         let host_label = self.host.to_string();
-        let mut batch = Vec::new();
 
-        for &endpoint in endpoints {
-            let response = match endpoint.fetch(self.host).await {
-                Ok(response) => response,
-                Err(err) => {
-                    log::warn!("{host_label}/{}: {err}", endpoint.command());
-                    continue;
-                }
-            };
+        let response = match endpoint.fetch(self.host).await {
+            Ok(response) => response,
+            Err(err) => {
+                log::warn!("{host_label}/{}: {err}", endpoint.command());
+                return Ok(());
+            }
+        };
 
-            let lines = match response {
-                Response::Json(value) => JsonParser::new(value).parse(),
-                Response::Text(text) => {
-                    PlainParser::new(text, endpoint.command().to_string()).parse()
-                }
-            };
+        let lines = match response {
+            Response::Json(value) => JsonParser::new(value).parse(),
+            Response::Text(text) => PlainParser::new(text, endpoint.command().to_string()).parse(),
+        };
 
-            let metrics: Vec<Metric> = lines
-                .into_iter()
-                .map(|line| {
-                    MetricBuilder::default()
-                        .name(line.name)
-                        .label("host", &host_label)
-                        .extend_labels(line.labels)
-                        .value(line.value)
-                        .build()
-                        .expect("BUG: ParsedLine always has name and value")
-                })
-                .collect();
+        let metrics: Vec<Metric> = lines
+            .into_iter()
+            .map(|line| {
+                MetricBuilder::default()
+                    .name(line.name)
+                    .label("host", &host_label)
+                    .extend_labels(line.labels)
+                    .value(line.value)
+                    .build()
+                    .expect("BUG: ParsedLine always has name and value")
+            })
+            .collect();
 
-            batch.extend(metrics);
-        }
-
-        if batch.is_empty() {
+        if metrics.is_empty() {
             return Ok(());
         }
 
         self.metrics_sender
-            .send((host_label, batch))
+            .send((host_label, metrics))
             .await
             .map_err(|_| anyhow::anyhow!("channel closed"))?;
 
