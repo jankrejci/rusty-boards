@@ -69,7 +69,11 @@ async fn main() {
 
 async fn run() -> anyhow::Result<()> {
     let args = Args::parse();
-    let config_file = config::ConfigFile::new(args.config);
+
+    let (config_tx, config_rx) = watch::channel(config::Config::default());
+    let (metrics_tx, metrics_rx) = mpsc::channel(256);
+
+    let config_file = config::ConfigFile::new(args.config, config_tx);
     let mut cfg = config_file.load().unwrap_or_else(|e| {
         log::warn!("failed to load config: {e}, using defaults");
         config::Config::default()
@@ -83,6 +87,7 @@ async fn run() -> anyhow::Result<()> {
     if !args.targets.is_empty() {
         cfg.targets = args.targets;
     }
+    config_file.publish(cfg);
 
     // Bind the listener early so we fail fast if the port is in use.
     let listener = TcpListener::bind(listen)
@@ -90,39 +95,27 @@ async fn run() -> anyhow::Result<()> {
         .map_err(|e| anyhow::anyhow!("failed to bind {listen}: {e}"))?;
     log::info!("listening on {listen}");
 
-    let (config_tx, config_rx) = watch::channel(cfg);
-
-    // Channel for metric batches from scrapers to the store.
-    let (metrics_tx, metrics_rx) = mpsc::channel(256);
-
     let store = store::Store::new(metrics_rx);
-    let handle = store.handle();
+    let state = store.state();
 
-    // Receive metrics from scrapers and write to store.
-    let store_handle = tokio::spawn(async move {
-        store.run().await;
-    });
+    let tasks = vec![
+        tokio::spawn(async move { store.run().await }),
+        tokio::spawn(async move { config_file.watch().await }),
+        tokio::spawn(async move {
+            scraper::ScraperManager::new(config_rx, metrics_tx)
+                .run()
+                .await;
+        }),
+    ];
 
-    // Watch config file for hot reload.
-    let watcher_tx = config_tx.clone();
-    let watcher_handle = tokio::spawn(async move { config_file.watch(watcher_tx).await });
-
-    // Manage per-host scrapers: spawn on new targets, cancel on removed ones.
-    let manager = scraper::ScraperManager::new(config_rx, metrics_tx);
-    let scrape_handle = tokio::spawn(async move { manager.run().await });
-
-    let router = http::router(handle);
+    let router = http::router(state);
     axum::serve(listener, router)
         .with_graceful_shutdown(shutdown_signal())
         .await?;
 
-    // Drop the config sender to signal the scrape manager to stop.
-    drop(config_tx);
-    watcher_handle.abort();
-    if let Err(e) = scrape_handle.await {
-        log::error!("scrape manager panicked: {e}");
+    for task in &tasks {
+        task.abort();
     }
-    store_handle.abort();
 
     log::info!("shutting down");
     Ok(())
