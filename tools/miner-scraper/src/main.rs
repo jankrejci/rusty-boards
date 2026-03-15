@@ -116,8 +116,7 @@ async fn run() -> anyhow::Result<()> {
     });
 
     // Manage per-host scrapers: spawn on new targets, cancel on removed ones.
-    let scrape_store = store.clone();
-    let scrape_handle = tokio::spawn(manage_scrapers(config_rx, metrics_tx, scrape_store));
+    let scrape_handle = tokio::spawn(manage_scrapers(config_rx, metrics_tx));
 
     let router = http::router(store);
     axum::serve(listener, router)
@@ -143,7 +142,6 @@ async fn run() -> anyhow::Result<()> {
 async fn manage_scrapers(
     mut config_rx: watch::Receiver<config::Config>,
     tx: mpsc::Sender<(String, Vec<metrics::Metric>)>,
-    store: store::Store,
 ) {
     let mut tasks: HashMap<String, JoinHandle<()>> = HashMap::new();
 
@@ -160,7 +158,7 @@ async fn manage_scrapers(
             if let Some(handle) = tasks.remove(&host) {
                 handle.abort();
             }
-            store.remove(&host).await;
+            let _ = tx.send((host.clone(), Vec::new())).await;
             log::info!("removed stale host {host}");
         }
 
@@ -170,7 +168,7 @@ async fn manage_scrapers(
                 continue;
             }
             let tx = tx.clone();
-            let tiers = config.tiers.clone();
+            let intervals = config.scraping_intervals.clone();
             let target_owned = target.clone();
             let handle = tokio::spawn(async move {
                 let host: IpAddr = match target_owned.parse() {
@@ -185,7 +183,7 @@ async fn manage_scrapers(
                     log::warn!("{host}: {err}");
                     return;
                 }
-                scraper.run(&tiers).await;
+                scraper.run(&intervals).await;
             });
             tasks.insert(target.clone(), handle);
         }

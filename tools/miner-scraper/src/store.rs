@@ -30,12 +30,14 @@ impl Store {
     }
 
     /// Replace all stored metrics for a host.
+    #[cfg(test)]
     pub async fn update(&self, host: &str, metrics: Vec<Metric>) {
         let mut store = self.inner.write().await;
         store.insert(host.to_owned(), metrics);
     }
 
     /// Remove metrics for a host that is no longer in the target list.
+    #[cfg(test)]
     pub async fn remove(&self, host: &str) {
         let mut store = self.inner.write().await;
         store.remove(host);
@@ -52,21 +54,25 @@ impl Store {
     pub async fn render(&self) -> String {
         let store = self.inner.read().await;
         let mut output = String::new();
-        for metrics in store.values() {
-            for metric in metrics {
-                use std::fmt::Write;
-                let _ = writeln!(output, "{metric}");
-            }
+        for metric in store.values().flatten() {
+            use std::fmt::Write;
+            let _ = writeln!(output, "{metric}");
         }
         output
     }
 
     /// Receive metrics from scrapers and write them to the store.
     ///
-    /// Runs until the channel is closed (all senders dropped).
+    /// Runs until the channel is closed (all senders dropped). An empty metrics
+    /// vec removes the host from the store.
     pub async fn run(self, mut rx: mpsc::Receiver<(String, Vec<Metric>)>) {
         while let Some((host, metrics)) = rx.recv().await {
-            self.update(&host, metrics).await;
+            let mut store = self.inner.write().await;
+            if metrics.is_empty() {
+                store.remove(&host);
+            } else {
+                store.insert(host, metrics);
+            }
         }
     }
 }

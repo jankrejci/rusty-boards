@@ -4,6 +4,7 @@
 //! and scrape tier intervals. Watches the file with inotify for live changes.
 
 use std::path::{Path, PathBuf};
+use std::time::Duration;
 
 use futures_util::StreamExt;
 use inotify::{Inotify, WatchMask};
@@ -14,20 +15,29 @@ use tokio::sync::watch;
 #[path = "tests/config.rs"]
 mod tests;
 
-const DEFAULT_HIGH_INTERVAL_SECS: u64 = 1;
-const DEFAULT_MID_INTERVAL_SECS: u64 = 10;
-const DEFAULT_LOW_INTERVAL_SECS: u64 = 60;
+const DEFAULT_HIGH_INTERVAL: Duration = Duration::from_secs(1);
+const DEFAULT_MID_INTERVAL: Duration = Duration::from_secs(10);
+const DEFAULT_LOW_INTERVAL: Duration = Duration::from_secs(60);
 
-fn default_high_interval() -> u64 {
-    DEFAULT_HIGH_INTERVAL_SECS
+fn default_high_interval() -> Duration {
+    DEFAULT_HIGH_INTERVAL
 }
 
-fn default_mid_interval() -> u64 {
-    DEFAULT_MID_INTERVAL_SECS
+fn default_mid_interval() -> Duration {
+    DEFAULT_MID_INTERVAL
 }
 
-fn default_low_interval() -> u64 {
-    DEFAULT_LOW_INTERVAL_SECS
+fn default_low_interval() -> Duration {
+    DEFAULT_LOW_INTERVAL
+}
+
+/// Deserialize a u64 seconds value into Duration.
+fn deserialize_secs<'de, D>(deserializer: D) -> Result<Duration, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let secs: u64 = serde::Deserialize::deserialize(deserializer)?;
+    Ok(Duration::from_secs(secs))
 }
 
 /// Scrape intervals per tier.
@@ -36,25 +46,34 @@ fn default_low_interval() -> u64 {
 /// real-time data, mid tier covers aggregated data, and low tier covers
 /// stable configuration.
 #[derive(Debug, Clone, Deserialize)]
-// Suffix makes units explicit in config file.
+// User-specified naming convention for config file clarity.
 #[allow(clippy::struct_field_names)]
-pub struct TierIntervals {
-    #[serde(default = "default_high_interval")]
-    pub high_secs: u64,
+pub struct ScrapingIntervals {
+    #[serde(
+        default = "default_high_interval",
+        deserialize_with = "deserialize_secs"
+    )]
+    pub tier_high_secs: Duration,
 
-    #[serde(default = "default_mid_interval")]
-    pub mid_secs: u64,
+    #[serde(
+        default = "default_mid_interval",
+        deserialize_with = "deserialize_secs"
+    )]
+    pub tier_mid_secs: Duration,
 
-    #[serde(default = "default_low_interval")]
-    pub low_secs: u64,
+    #[serde(
+        default = "default_low_interval",
+        deserialize_with = "deserialize_secs"
+    )]
+    pub tier_low_secs: Duration,
 }
 
-impl Default for TierIntervals {
+impl Default for ScrapingIntervals {
     fn default() -> Self {
         Self {
-            high_secs: DEFAULT_HIGH_INTERVAL_SECS,
-            mid_secs: DEFAULT_MID_INTERVAL_SECS,
-            low_secs: DEFAULT_LOW_INTERVAL_SECS,
+            tier_high_secs: DEFAULT_HIGH_INTERVAL,
+            tier_mid_secs: DEFAULT_MID_INTERVAL,
+            tier_low_secs: DEFAULT_LOW_INTERVAL,
         }
     }
 }
@@ -68,7 +87,7 @@ pub struct Config {
     pub targets: Vec<String>,
 
     #[serde(default)]
-    pub tiers: TierIntervals,
+    pub scraping_intervals: ScrapingIntervals,
 }
 
 pub const DEFAULT_IP: &str = "127.0.0.1";
@@ -83,7 +102,7 @@ impl Default for Config {
         Self {
             listen: default_listen(),
             targets: Vec::new(),
-            tiers: TierIntervals::default(),
+            scraping_intervals: ScrapingIntervals::default(),
         }
     }
 }
