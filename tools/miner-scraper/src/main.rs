@@ -1,20 +1,23 @@
 //! Miner scraper entry point.
 //!
-//! Parses CLI arguments, starts the HTTP server, config watcher, and scrape
-//! loop, then waits for shutdown.
+//! Parses CLI arguments, starts the HTTP server, config watcher, and per-host
+//! scraper tasks, then waits for shutdown.
 
+use std::collections::HashMap;
 use std::net::{IpAddr, SocketAddr};
 use std::path::PathBuf;
 
 use clap::Parser;
 use tokio::net::TcpListener;
-use tokio::sync::watch;
+use tokio::sync::{mpsc, watch};
+use tokio::task::JoinHandle;
 
-mod cgminer;
 mod config;
+mod endpoint;
 mod http;
 mod metrics;
-mod scrape;
+mod parser;
+mod scraper;
 mod store;
 
 #[derive(Parser)]
@@ -92,9 +95,18 @@ async fn run() -> anyhow::Result<()> {
         .map_err(|e| anyhow::anyhow!("failed to bind {listen}: {e}"))?;
     log::info!("listening on {listen}");
 
-    let metrics_store = store::MetricsStore::new();
+    let store = store::Store::new();
 
     let (config_tx, config_rx) = watch::channel(cfg);
+
+    // Channel for metric batches from scrapers to the store.
+    let (metrics_tx, metrics_rx) = mpsc::channel(256);
+
+    // Receive metrics from scrapers and write to store.
+    let store_runner = store.clone();
+    let store_handle = tokio::spawn(async move {
+        store_runner.run(metrics_rx).await;
+    });
 
     // Watch config file for hot reload.
     let config_path = args.config;
@@ -103,26 +115,90 @@ async fn run() -> anyhow::Result<()> {
         config::watch_config(config_path, watcher_tx).await;
     });
 
-    // Start the scrape loop. Dropping config_tx signals it to stop.
-    let scrape_store = metrics_store.clone();
-    let scrape_handle = tokio::spawn(async move {
-        scrape::run(config_rx, scrape_store).await;
-    });
+    // Manage per-host scrapers: spawn on new targets, cancel on removed ones.
+    let scrape_store = store.clone();
+    let scrape_handle = tokio::spawn(manage_scrapers(config_rx, metrics_tx, scrape_store));
 
-    let router = http::router(metrics_store);
+    let router = http::router(store);
     axum::serve(listener, router)
         .with_graceful_shutdown(shutdown_signal())
         .await?;
 
-    // Drop the config sender to signal the scrape loop to stop.
+    // Drop the config sender to signal the scrape manager to stop.
     drop(config_tx);
     watcher_handle.abort();
     if let Err(e) = scrape_handle.await {
-        log::error!("scrape task panicked: {e}");
+        log::error!("scrape manager panicked: {e}");
     }
+    store_handle.abort();
 
     log::info!("shutting down");
     Ok(())
+}
+
+/// Manage per-host scraper lifecycles based on config changes.
+///
+/// Watches the config channel for target list changes. Spawns a new scraper
+/// task for each new target and cancels tasks for removed targets.
+async fn manage_scrapers(
+    mut config_rx: watch::Receiver<config::Config>,
+    tx: mpsc::Sender<(String, Vec<metrics::Metric>)>,
+    store: store::Store,
+) {
+    let mut tasks: HashMap<String, JoinHandle<()>> = HashMap::new();
+
+    loop {
+        let config = config_rx.borrow_and_update().clone();
+
+        // Cancel tasks for removed targets.
+        let stale: Vec<String> = tasks
+            .keys()
+            .filter(|host| !config.targets.contains(host))
+            .cloned()
+            .collect();
+        for host in stale {
+            if let Some(handle) = tasks.remove(&host) {
+                handle.abort();
+            }
+            store.remove(&host).await;
+            log::info!("removed stale host {host}");
+        }
+
+        // Spawn a scraper for each new target.
+        for target in &config.targets {
+            if tasks.contains_key(target) {
+                continue;
+            }
+            let tx = tx.clone();
+            let tiers = config.tiers.clone();
+            let target_owned = target.clone();
+            let handle = tokio::spawn(async move {
+                let host: IpAddr = match target_owned.parse() {
+                    Ok(ip) => ip,
+                    Err(err) => {
+                        log::error!("{target_owned}: invalid IP address: {err}");
+                        return;
+                    }
+                };
+                let mut scraper = scraper::Scraper::new(host, tx);
+                if let Err(err) = scraper.init().await {
+                    log::warn!("{host}: {err}");
+                    return;
+                }
+                scraper.run(&tiers).await;
+            });
+            tasks.insert(target.clone(), handle);
+        }
+
+        if config_rx.changed().await.is_err() {
+            log::info!("config channel closed, stopping scrapers");
+            break;
+        }
+    }
+
+    for (_, handle) in tasks {
+        handle.abort();
+    }
 }
 
 async fn shutdown_signal() {

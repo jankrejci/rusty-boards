@@ -1,7 +1,7 @@
 //! Configuration file parsing and hot reload.
 //!
-//! Reads a TOML config file specifying the listen address, scrape interval,
-//! and target miner IPs. Watches the file with inotify for live changes.
+//! Reads a TOML config file specifying the listen address, target miner IPs,
+//! and scrape tier intervals. Watches the file with inotify for live changes.
 
 use std::path::{Path, PathBuf};
 
@@ -14,16 +14,61 @@ use tokio::sync::watch;
 #[path = "tests/config.rs"]
 mod tests;
 
+const DEFAULT_HIGH_INTERVAL_SECS: u64 = 1;
+const DEFAULT_MID_INTERVAL_SECS: u64 = 10;
+const DEFAULT_LOW_INTERVAL_SECS: u64 = 60;
+
+fn default_high_interval() -> u64 {
+    DEFAULT_HIGH_INTERVAL_SECS
+}
+
+fn default_mid_interval() -> u64 {
+    DEFAULT_MID_INTERVAL_SECS
+}
+
+fn default_low_interval() -> u64 {
+    DEFAULT_LOW_INTERVAL_SECS
+}
+
+/// Scrape intervals per tier.
+///
+/// Controls how often each tier of endpoints is polled. High tier covers
+/// real-time data, mid tier covers aggregated data, and low tier covers
+/// stable configuration.
+#[derive(Debug, Clone, Deserialize)]
+// Suffix makes units explicit in config file.
+#[allow(clippy::struct_field_names)]
+pub struct TierIntervals {
+    #[serde(default = "default_high_interval")]
+    pub high_secs: u64,
+
+    #[serde(default = "default_mid_interval")]
+    pub mid_secs: u64,
+
+    #[serde(default = "default_low_interval")]
+    pub low_secs: u64,
+}
+
+impl Default for TierIntervals {
+    fn default() -> Self {
+        Self {
+            high_secs: DEFAULT_HIGH_INTERVAL_SECS,
+            mid_secs: DEFAULT_MID_INTERVAL_SECS,
+            low_secs: DEFAULT_LOW_INTERVAL_SECS,
+        }
+    }
+}
+
 #[derive(Debug, Clone, Deserialize)]
 pub struct Config {
     #[serde(default = "default_listen")]
     pub listen: String,
 
-    #[serde(default = "default_scrape_interval")]
-    pub scrape_interval_secs: u64,
-
     #[serde(default)]
     pub targets: Vec<String>,
+
+    #[serde(default)]
+    pub tiers: TierIntervals,
 }
 
 pub const DEFAULT_IP: &str = "127.0.0.1";
@@ -33,18 +78,12 @@ fn default_listen() -> String {
     format!("{DEFAULT_IP}:{DEFAULT_PORT}")
 }
 
-const DEFAULT_SCRAPE_INTERVAL_SECS: u64 = 5;
-
-fn default_scrape_interval() -> u64 {
-    DEFAULT_SCRAPE_INTERVAL_SECS
-}
-
 impl Default for Config {
     fn default() -> Self {
         Self {
             listen: default_listen(),
-            scrape_interval_secs: default_scrape_interval(),
             targets: Vec::new(),
+            tiers: TierIntervals::default(),
         }
     }
 }

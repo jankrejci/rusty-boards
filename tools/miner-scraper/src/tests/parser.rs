@@ -1,29 +1,9 @@
 use super::*;
-
-fn is_error(response: &Value) -> bool {
-    response
-        .get("STATUS")
-        .and_then(|s| s.as_array())
-        .and_then(|a| a.first())
-        .and_then(|s| s.get("STATUS"))
-        .and_then(|s| s.as_str())
-        == Some("E")
-}
-
-fn parse_raw(data: &[u8]) -> Result<Value> {
-    let trimmed = if data.last() == Some(&0) {
-        &data[..data.len() - 1]
-    } else {
-        data
-    };
-    let value: Value = serde_json::from_slice(trimmed)?;
-    Ok(value)
-}
+use crate::metrics::MetricBuilder;
 
 const STOCK_STATS: &str = include_str!("../../dumps/stock-cgminer-stats-s21xp.json");
 const STOCK_SUMMARY: &str = include_str!("../../dumps/stock-cgminer-summary-s21xp.json");
 const STOCK_VERSION: &str = include_str!("../../dumps/stock-cgminer-version-s21xp.json");
-const STOCK_DEVDETAILS: &str = include_str!("../../dumps/stock-cgminer-devdetails-s21xp.json");
 const BRAIINS_TEMPS: &str = include_str!("../../dumps/braiins-cgminer-temps-s21plus.json");
 const BRAIINS_FANS: &str = include_str!("../../dumps/braiins-cgminer-fans-s21plus.json");
 const BRAIINS_SUMMARY: &str = include_str!("../../dumps/braiins-cgminer-summary-s21plus.json");
@@ -39,7 +19,6 @@ const LUXOS_POWER: &str = include_str!("../../dumps/luxos-cgminer-power-s21pro.j
 const MARA_SUMMARY: &str = include_str!("../../dumps/mara-cgminer-summary-s21imm.json");
 const VNISH_SUMMARY: &str = include_str!("../../dumps/vnish-cgminer-summary-s21.json");
 
-/// Find all metric lines matching an exact metric name.
 fn find_metric<'a>(lines: &'a [String], name: &str) -> Vec<&'a String> {
     lines
         .iter()
@@ -47,13 +26,27 @@ fn find_metric<'a>(lines: &'a [String], name: &str) -> Vec<&'a String> {
         .collect()
 }
 
-fn parse_json(data: &str) -> Value {
+fn parse_json(data: &str) -> serde_json::Value {
     serde_json::from_str(data).expect("BUG: dump data is valid JSON")
 }
 
 fn parse_to_lines(host: &str, data: &str) -> Vec<String> {
     let mut value = parse_json(data);
-    parse_response(host, &mut value)
+    let metrics = parse_response(&mut value);
+    metrics
+        .into_iter()
+        .map(|m| {
+            // ParsedLine always has name and value.
+            MetricBuilder::default()
+                .name(m.name)
+                .label("host", host)
+                .extend_labels(m.labels)
+                .value(m.value)
+                .build()
+                .expect("BUG: ParsedLine always has name and value")
+                .to_string()
+        })
+        .collect()
 }
 
 // --- FieldName tests ---
@@ -101,7 +94,6 @@ fn field_name_indexed() {
 
 #[test]
 fn field_name_indexed_with_underscore() {
-    // temp2_1 → strip trailing "1", prefix "temp2_", strip underscores → "temp2".
     assert_eq!(
         FieldName::parse("temp2_1"),
         FieldName::Indexed {
@@ -119,7 +111,6 @@ fn field_name_fan() {
 
 #[test]
 fn field_name_spaces_and_dots() {
-    // "GHS 5s" → lowercase → "ghs 5s" → replace space → "ghs_5s" → ends in 's' → Plain.
     assert_eq!(
         FieldName::parse("GHS 5s"),
         FieldName::Plain("ghs_5s".into())
@@ -234,8 +225,7 @@ fn preprocess_all_zeros() {
 
 #[test]
 fn raw_parse_stock_stats() {
-    let data = STOCK_STATS.as_bytes();
-    let value = parse_raw(data).expect("BUG: sample data is valid JSON");
+    let value = parse_json(STOCK_STATS);
     assert!(value.get("STATS").is_some());
     let stats = value["STATS"].as_array().expect("BUG: STATS is array");
     assert_eq!(stats.len(), 2);
@@ -243,32 +233,16 @@ fn raw_parse_stock_stats() {
 
 #[test]
 fn raw_parse_stock_summary() {
-    let data = STOCK_SUMMARY.as_bytes();
-    let value = parse_raw(data).expect("BUG: sample data is valid JSON");
+    let value = parse_json(STOCK_SUMMARY);
     let summary = &value["SUMMARY"][0];
     assert!(summary["GHS 5s"].as_f64().is_some());
 }
 
 #[test]
 fn raw_parse_stock_version() {
-    let data = STOCK_VERSION.as_bytes();
-    let value = parse_raw(data).expect("BUG: sample data is valid JSON");
+    let value = parse_json(STOCK_VERSION);
     let version = &value["VERSION"][0];
     assert_eq!(version["Type"].as_str(), Some("Antminer S21 XP"));
-}
-
-#[test]
-fn devdetails_is_error() {
-    let data = STOCK_DEVDETAILS.as_bytes();
-    let value = parse_raw(data).expect("BUG: sample data is valid JSON");
-    assert!(is_error(&value));
-}
-
-#[test]
-fn stats_is_not_error() {
-    let data = STOCK_STATS.as_bytes();
-    let value = parse_raw(data).expect("BUG: sample data is valid JSON");
-    assert!(!is_error(&value));
 }
 
 // --- Integration tests: stock ---
@@ -332,7 +306,6 @@ fn braiins_summary_emits_hashrate() {
 fn luxos_stats_emits_chain_rates() {
     let lines = parse_to_lines("10.0.0.1", LUXOS_STATS);
     let rates = find_metric(&lines, "stats_chain_rate");
-    // 3 active boards + chain_rate4="0" (parseable as f64).
     assert_eq!(rates.len(), 4);
 }
 
@@ -350,7 +323,6 @@ fn luxos_fans_emits_rpm_with_idx() {
     assert_eq!(rpm.len(), 4);
     assert!(rpm[0].contains("idx=\"0\""));
     assert!(rpm[3].contains("idx=\"3\""));
-    // ID should not be emitted as its own metric.
     let id = find_metric(&lines, "fans_id");
     assert!(id.is_empty());
 }
@@ -368,7 +340,6 @@ fn mara_stats_emits_chain_rates() {
 fn mara_stats_emits_temperatures() {
     let lines = parse_to_lines("10.0.0.1", MARA_STATS);
     let pcb = find_metric(&lines, "stats_temp_pcb");
-    // Board 1 and 2 have 2 sensors each, boards 3 and 4 have 4 zeros each.
     assert!(!pcb.is_empty());
 }
 
@@ -396,7 +367,6 @@ fn vnish_stats_emits_temperatures() {
 fn stock_stats_hashrates_per_board() {
     let lines = parse_to_lines("10.0.0.1", STOCK_STATS);
     let rates = find_metric(&lines, "stats_chain_rate");
-    // 3 boards with rates, chain_rate4 is empty string.
     assert_eq!(rates.len(), 3);
     assert!(rates[0].contains("hashboard=\"1\""));
     assert!(rates[0].contains("90858.66"));
@@ -406,7 +376,6 @@ fn stock_stats_hashrates_per_board() {
 fn stock_stats_frequencies_per_board() {
     let lines = parse_to_lines("10.0.0.1", STOCK_STATS);
     let freqs = find_metric(&lines, "stats_freq");
-    // 4 boards including freq4=0.
     assert_eq!(freqs.len(), 4);
     assert!(freqs[0].contains("hashboard=\"1\""));
     assert!(freqs[0].contains(" 490 "));
@@ -448,56 +417,13 @@ fn stock_stats_host_label_present() {
     }
 }
 
-// --- Firmware detection tests ---
-
-#[test]
-fn detect_stock_firmware() {
-    let stats = parse_json(STOCK_STATS);
-    assert_eq!(Firmware::identify(&stats), Firmware::Stock);
-}
-
-#[test]
-fn detect_braiins_firmware() {
-    let resp = parse_json(BRAIINS_SUMMARY);
-    assert_eq!(Firmware::identify(&resp), Firmware::Braiins);
-}
-
-#[test]
-fn detect_luxos_firmware() {
-    let stats = parse_json(LUXOS_STATS);
-    assert_eq!(Firmware::identify(&stats), Firmware::LuxOS);
-}
-
-#[test]
-fn detect_mara_firmware() {
-    let stats = parse_json(MARA_STATS);
-    assert_eq!(Firmware::identify(&stats), Firmware::Mara);
-}
-
-#[test]
-fn detect_vnish_firmware() {
-    let stats = parse_json(VNISH_STATS);
-    assert_eq!(Firmware::identify(&stats), Firmware::Vnish);
-}
-
-#[test]
-fn detect_fallback_to_stock() {
-    let empty = serde_json::json!({
-        "STATUS": [{
-            "Description": ""
-        }]
-    });
-    assert_eq!(Firmware::identify(&empty), Firmware::Stock);
-}
-
 // --- Full dump parsing tests ---
 
 #[test]
 fn stock_all_dumps_produce_metrics() {
     let mut lines = Vec::new();
     for data in [STOCK_STATS, STOCK_SUMMARY] {
-        let mut value = parse_json(data);
-        lines.extend(parse_response("10.0.0.1", &mut value));
+        lines.extend(parse_to_lines("10.0.0.1", data));
     }
     assert!(
         lines.len() > 50,
@@ -516,9 +442,9 @@ fn braiins_all_dumps_produce_metrics() {
         BRAIINS_DEVS,
         BRAIINS_DEVDETAILS,
     ] {
-        let mut value = parse_json(data);
-        if !is_error(&value) {
-            lines.extend(parse_response("10.0.0.1", &mut value));
+        let value = parse_json(data);
+        if !crate::endpoint::is_error(&value) {
+            lines.extend(parse_to_lines("10.0.0.1", data));
         }
     }
     assert!(
@@ -532,9 +458,9 @@ fn braiins_all_dumps_produce_metrics() {
 fn luxos_all_dumps_produce_metrics() {
     let mut lines = Vec::new();
     for data in [LUXOS_STATS, LUXOS_TEMPS, LUXOS_FANS, LUXOS_POWER] {
-        let mut value = parse_json(data);
-        if !is_error(&value) {
-            lines.extend(parse_response("10.0.0.1", &mut value));
+        let value = parse_json(data);
+        if !crate::endpoint::is_error(&value) {
+            lines.extend(parse_to_lines("10.0.0.1", data));
         }
     }
     assert!(
@@ -548,8 +474,7 @@ fn luxos_all_dumps_produce_metrics() {
 fn vnish_all_dumps_produce_metrics() {
     let mut lines = Vec::new();
     for data in [VNISH_STATS, VNISH_SUMMARY] {
-        let mut value = parse_json(data);
-        lines.extend(parse_response("10.0.0.1", &mut value));
+        lines.extend(parse_to_lines("10.0.0.1", data));
     }
     assert!(
         lines.len() > 50,
@@ -562,8 +487,7 @@ fn vnish_all_dumps_produce_metrics() {
 fn mara_all_dumps_produce_metrics() {
     let mut lines = Vec::new();
     for data in [MARA_STATS, MARA_SUMMARY] {
-        let mut value = parse_json(data);
-        lines.extend(parse_response("10.0.0.1", &mut value));
+        lines.extend(parse_to_lines("10.0.0.1", data));
     }
     assert!(
         lines.len() > 50,
@@ -584,6 +508,5 @@ fn skips_status_and_id() {
             line
         );
     }
-    // The "id" field at the top level should not produce a metric.
     assert!(find_metric(&lines, "stats_id").is_empty());
 }
