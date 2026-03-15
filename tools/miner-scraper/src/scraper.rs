@@ -206,9 +206,23 @@ impl Scraper {
 ///
 /// Watches the config channel for target list changes. Spawns a new scraper
 /// task for each new target and cancels tasks for removed targets.
+/// Manages per-host scraper lifecycles based on config changes.
+///
+/// Watches the config channel for target list changes. Spawns a new scraper
+/// task for each new target and cancels tasks for removed targets. Child tasks
+/// are aborted on drop so no orphaned scrapers survive a shutdown.
 pub struct ScraperManager {
     config_rx: watch::Receiver<crate::config::Config>,
     tx: mpsc::Sender<(String, Vec<Metric>)>,
+    tasks: HashMap<String, JoinHandle<()>>,
+}
+
+impl Drop for ScraperManager {
+    fn drop(&mut self) {
+        for handle in self.tasks.values() {
+            handle.abort();
+        }
+    }
 }
 
 impl ScraperManager {
@@ -216,23 +230,26 @@ impl ScraperManager {
         config_rx: watch::Receiver<crate::config::Config>,
         tx: mpsc::Sender<(String, Vec<Metric>)>,
     ) -> Self {
-        Self { config_rx, tx }
+        Self {
+            config_rx,
+            tx,
+            tasks: HashMap::new(),
+        }
     }
 
     pub async fn run(mut self) {
-        let mut tasks: HashMap<String, JoinHandle<()>> = HashMap::new();
-
         loop {
             let config = self.config_rx.borrow_and_update().clone();
 
             // Cancel tasks for removed targets.
-            let stale: Vec<String> = tasks
+            let stale: Vec<String> = self
+                .tasks
                 .keys()
                 .filter(|host| !config.targets.contains(host))
                 .cloned()
                 .collect();
             for host in stale {
-                if let Some(handle) = tasks.remove(&host) {
+                if let Some(handle) = self.tasks.remove(&host) {
                     handle.abort();
                 }
                 let _ = self.tx.send((host.clone(), Vec::new())).await;
@@ -241,7 +258,7 @@ impl ScraperManager {
 
             // Spawn a scraper for each new target.
             for target in &config.targets {
-                if tasks.contains_key(target) {
+                if self.tasks.contains_key(target) {
                     continue;
                 }
                 let tx = self.tx.clone();
@@ -262,17 +279,13 @@ impl ScraperManager {
                     }
                     scraper.run(&intervals).await;
                 });
-                tasks.insert(target.clone(), handle);
+                self.tasks.insert(target.clone(), handle);
             }
 
             if self.config_rx.changed().await.is_err() {
                 log::info!("config channel closed, stopping scrapers");
                 break;
             }
-        }
-
-        for (_, handle) in tasks {
-            handle.abort();
         }
     }
 }
