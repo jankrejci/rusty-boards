@@ -95,18 +95,16 @@ async fn run() -> anyhow::Result<()> {
         .map_err(|e| anyhow::anyhow!("failed to bind {listen}: {e}"))?;
     log::info!("listening on {listen}");
 
+    let mut tasks = Vec::new();
+
     let store = store::Store::new(metrics_rx);
     let state = store.state();
+    tasks.push(tokio::spawn(async move { store.run().await }));
 
-    let tasks = vec![
-        tokio::spawn(async move { store.run().await }),
-        tokio::spawn(async move { config_file.watch().await }),
-        tokio::spawn(async move {
-            scraper::ScraperManager::new(config_rx, metrics_tx)
-                .run()
-                .await;
-        }),
-    ];
+    tasks.push(tokio::spawn(async move { config_file.watch().await }));
+
+    let manager = scraper::ScraperManager::new(config_rx, metrics_tx);
+    tasks.push(tokio::spawn(async move { manager.run().await }));
 
     let router = http::router(state);
     axum::serve(listener, router)
