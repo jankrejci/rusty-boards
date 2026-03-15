@@ -73,10 +73,10 @@ async fn main() {
 async fn run() -> anyhow::Result<()> {
     let args = Args::parse();
 
-    let (config_tx, config_rx) = watch::channel(config::Config::default());
-    let (metrics_tx, metrics_rx) = mpsc::channel(METRICS_CHANNEL_SIZE);
+    let (config_sender, config_receiver) = watch::channel(config::Config::default());
+    let (metrics_sender, metrics_receiver) = mpsc::channel(METRICS_CHANNEL_SIZE);
 
-    let config_file = config::ConfigFile::new(args.config, config_tx);
+    let config_file = config::ConfigFile::new(args.config, config_sender);
     let mut config = config_file.load().unwrap_or_else(|e| {
         log::warn!("failed to load config: {e}, using defaults");
         config::Config::default()
@@ -100,13 +100,13 @@ async fn run() -> anyhow::Result<()> {
 
     let mut tasks = Vec::new();
 
-    let store = store::Store::new(metrics_rx);
+    let store = store::Store::new(metrics_receiver);
     let state = store.state();
     tasks.push(tokio::spawn(async move { store.run().await }));
 
     tasks.push(tokio::spawn(async move { config_file.watch().await }));
 
-    let manager = scraper::ScraperManager::new(config_rx, metrics_tx);
+    let manager = scraper::ScraperManager::new(config_receiver, metrics_sender);
     tasks.push(tokio::spawn(async move { manager.run().await }));
 
     let router = http::router(state);

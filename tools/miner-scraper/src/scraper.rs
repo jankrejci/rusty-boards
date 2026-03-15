@@ -27,7 +27,7 @@ const FW_DETECT_ENDPOINT: Endpoint = Endpoint::Cgminer("stats", ScrapeTier::High
 pub struct Scraper {
     host: IpAddr,
     endpoints: Vec<Endpoint>,
-    tx: mpsc::Sender<(String, Vec<Metric>)>,
+    metrics_sender: mpsc::Sender<(String, Vec<Metric>)>,
 }
 
 impl Scraper {
@@ -35,11 +35,11 @@ impl Scraper {
     ///
     /// The scraper starts with no endpoints. Call `init()` to detect firmware
     /// and probe available endpoints before calling `run()`.
-    pub fn new(host: IpAddr, tx: mpsc::Sender<(String, Vec<Metric>)>) -> Self {
+    pub fn new(host: IpAddr, metrics_sender: mpsc::Sender<(String, Vec<Metric>)>) -> Self {
         Self {
             host,
             endpoints: Vec::new(),
-            tx,
+            metrics_sender,
         }
     }
 
@@ -193,7 +193,7 @@ impl Scraper {
             return Ok(());
         }
 
-        self.tx
+        self.metrics_sender
             .send((host_label, batch))
             .await
             .map_err(|_| anyhow::anyhow!("channel closed"))?;
@@ -212,8 +212,8 @@ impl Scraper {
 /// task for each new target and cancels tasks for removed targets. Child tasks
 /// are aborted on drop so no orphaned scrapers survive a shutdown.
 pub struct ScraperManager {
-    config_rx: watch::Receiver<crate::config::Config>,
-    tx: mpsc::Sender<(String, Vec<Metric>)>,
+    config_receiver: watch::Receiver<crate::config::Config>,
+    metrics_sender: mpsc::Sender<(String, Vec<Metric>)>,
     tasks: HashMap<String, JoinHandle<()>>,
 }
 
@@ -227,19 +227,19 @@ impl Drop for ScraperManager {
 
 impl ScraperManager {
     pub fn new(
-        config_rx: watch::Receiver<crate::config::Config>,
-        tx: mpsc::Sender<(String, Vec<Metric>)>,
+        config_receiver: watch::Receiver<crate::config::Config>,
+        metrics_sender: mpsc::Sender<(String, Vec<Metric>)>,
     ) -> Self {
         Self {
-            config_rx,
-            tx,
+            config_receiver,
+            metrics_sender,
             tasks: HashMap::new(),
         }
     }
 
     pub async fn run(mut self) {
         loop {
-            let config = self.config_rx.borrow_and_update().clone();
+            let config = self.config_receiver.borrow_and_update().clone();
 
             // Cancel tasks for removed targets.
             let stale: Vec<String> = self
@@ -252,7 +252,7 @@ impl ScraperManager {
                 if let Some(handle) = self.tasks.remove(&host) {
                     handle.abort();
                 }
-                let _ = self.tx.send((host.clone(), Vec::new())).await;
+                let _ = self.metrics_sender.send((host.clone(), Vec::new())).await;
                 log::info!("removed stale host {host}");
             }
 
@@ -261,7 +261,7 @@ impl ScraperManager {
                 if self.tasks.contains_key(target) {
                     continue;
                 }
-                let tx = self.tx.clone();
+                let metrics_sender = self.metrics_sender.clone();
                 let intervals = config.scraping_intervals.clone();
                 let target_owned = target.clone();
                 let handle = tokio::spawn(async move {
@@ -272,7 +272,7 @@ impl ScraperManager {
                             return;
                         }
                     };
-                    let mut scraper = Scraper::new(host, tx);
+                    let mut scraper = Scraper::new(host, metrics_sender);
                     if let Err(err) = scraper.init().await {
                         log::warn!("{host}: {err}");
                         return;
@@ -282,7 +282,7 @@ impl ScraperManager {
                 self.tasks.insert(target.clone(), handle);
             }
 
-            if self.config_rx.changed().await.is_err() {
+            if self.config_receiver.changed().await.is_err() {
                 log::info!("config channel closed, stopping scrapers");
                 break;
             }

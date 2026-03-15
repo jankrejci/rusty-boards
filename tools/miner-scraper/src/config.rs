@@ -110,15 +110,15 @@ impl Default for Config {
 /// Path-aware config file handle for loading and watching.
 pub struct ConfigFile {
     path: PathBuf,
-    tx: watch::Sender<Config>,
+    sender: watch::Sender<Config>,
 }
 
 /// Buffer size for inotify event reads.
 const INOTIFY_BUF_SIZE: usize = 256;
 
 impl ConfigFile {
-    pub fn new(path: PathBuf, tx: watch::Sender<Config>) -> Self {
-        Self { path, tx }
+    pub fn new(path: PathBuf, sender: watch::Sender<Config>) -> Self {
+        Self { path, sender }
     }
 
     /// Load configuration from the file.
@@ -130,7 +130,7 @@ impl ConfigFile {
 
     /// Publish a config to all subscribers.
     pub fn publish(&self, config: Config) {
-        self.tx.send_replace(config);
+        self.sender.send_replace(config);
     }
 
     /// Watch the config file for changes and send updates through the channel.
@@ -181,7 +181,7 @@ impl ConfigFile {
             match self.load() {
                 Ok(new_config) => {
                     log::info!("config reloaded from {}", self.path.display());
-                    let _ = self.tx.send(new_config);
+                    let _ = self.sender.send(new_config);
                 }
                 Err(e) => {
                     log::warn!("failed to reload config: {e}");

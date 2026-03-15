@@ -57,16 +57,16 @@ impl StoreState {
 /// Metric storage that receives batches from scrapers via a channel.
 pub struct Store {
     handle: StoreState,
-    rx: mpsc::Receiver<(String, Vec<Metric>)>,
+    receiver: mpsc::Receiver<(String, Vec<Metric>)>,
 }
 
 impl Store {
-    pub fn new(rx: mpsc::Receiver<(String, Vec<Metric>)>) -> Self {
+    pub fn new(receiver: mpsc::Receiver<(String, Vec<Metric>)>) -> Self {
         Self {
             handle: StoreState {
                 inner: Arc::new(RwLock::new(HashMap::new())),
             },
-            rx,
+            receiver,
         }
     }
 
@@ -80,7 +80,7 @@ impl Store {
     /// Runs until the channel is closed (all senders dropped). An empty metrics
     /// vec removes the host from the store.
     pub async fn run(mut self) {
-        while let Some((host, metrics)) = self.rx.recv().await {
+        while let Some((host, metrics)) = self.receiver.recv().await {
             let mut store = self.handle.inner.write().await;
             if metrics.is_empty() {
                 store.remove(&host);
