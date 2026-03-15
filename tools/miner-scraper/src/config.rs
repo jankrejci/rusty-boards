@@ -10,6 +10,7 @@ use futures_util::StreamExt;
 use inotify::{Inotify, WatchMask};
 use serde::Deserialize;
 use tokio::sync::watch;
+use tokio_util::sync::CancellationToken;
 
 #[cfg(test)]
 #[path = "tests/config.rs"]
@@ -136,21 +137,20 @@ impl ConfigFile {
     /// Watch the config file for changes and send updates through the channel.
     ///
     /// Uses inotify `CLOSE_WRITE` to detect when editors finish writing the file.
-    /// On inotify failure, logs a warning and parks forever.
-    pub async fn watch(self) {
+    /// On inotify failure, logs a warning and waits for shutdown.
+    pub async fn watch(self, shutdown: CancellationToken) {
         let inotify = match Inotify::init() {
             Ok(i) => i,
             Err(e) => {
                 log::warn!("failed to init inotify for config watch: {e}");
-                // Park forever so the caller does not need to handle None.
-                std::future::pending::<()>().await;
+                shutdown.cancelled().await;
                 return;
             }
         };
 
         if let Err(e) = inotify.watches().add(&self.path, WatchMask::CLOSE_WRITE) {
             log::warn!("failed to watch config file: {e}");
-            std::future::pending::<()>().await;
+            shutdown.cancelled().await;
             return;
         }
 
@@ -160,31 +160,36 @@ impl ConfigFile {
             Ok(s) => s,
             Err(e) => {
                 log::warn!("failed to create inotify event stream: {e}");
-                std::future::pending::<()>().await;
+                shutdown.cancelled().await;
                 return;
             }
         };
 
         loop {
-            match stream.next().await {
-                Some(Ok(_event)) => {}
-                Some(Err(e)) => {
-                    log::warn!("inotify error: {e}");
-                    return;
-                }
-                None => {
-                    log::warn!("inotify stream ended, stopping config watch");
-                    return;
-                }
-            }
+            tokio::select! {
+                () = shutdown.cancelled() => break,
+                event = stream.next() => {
+                    match event {
+                        Some(Ok(_event)) => {}
+                        Some(Err(e)) => {
+                            log::warn!("inotify error: {e}");
+                            return;
+                        }
+                        None => {
+                            log::warn!("inotify stream ended, stopping config watch");
+                            return;
+                        }
+                    }
 
-            match self.load() {
-                Ok(new_config) => {
-                    log::info!("config reloaded from {}", self.path.display());
-                    let _ = self.sender.send(new_config);
-                }
-                Err(e) => {
-                    log::warn!("failed to reload config: {e}");
+                    match self.load() {
+                        Ok(new_config) => {
+                            log::info!("config reloaded from {}", self.path.display());
+                            let _ = self.sender.send(new_config);
+                        }
+                        Err(e) => {
+                            log::warn!("failed to reload config: {e}");
+                        }
+                    }
                 }
             }
         }

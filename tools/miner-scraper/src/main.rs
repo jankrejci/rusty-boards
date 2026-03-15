@@ -9,6 +9,7 @@ use std::path::PathBuf;
 use clap::Parser;
 use tokio::net::TcpListener;
 use tokio::sync::{mpsc, watch};
+use tokio_util::sync::CancellationToken;
 
 mod config;
 mod endpoint;
@@ -98,24 +99,29 @@ async fn run() -> anyhow::Result<()> {
         .map_err(|e| anyhow::anyhow!("failed to bind {listen}: {e}"))?;
     log::info!("listening on {listen}");
 
+    let shutdown = CancellationToken::new();
     let mut tasks = Vec::new();
 
     let store = store::Store::new(metrics_receiver);
     let state = store.state();
-    tasks.push(tokio::spawn(async move { store.run().await }));
+    let token = shutdown.clone();
+    tasks.push(tokio::spawn(async move { store.run(token).await }));
 
-    tasks.push(tokio::spawn(async move { config_file.watch().await }));
+    let token = shutdown.clone();
+    tasks.push(tokio::spawn(async move { config_file.watch(token).await }));
 
     let manager = scraper::ScraperManager::new(config_receiver, metrics_sender);
-    tasks.push(tokio::spawn(async move { manager.run().await }));
+    let token = shutdown.clone();
+    tasks.push(tokio::spawn(async move { manager.run(token).await }));
 
     let router = http::router(state);
     axum::serve(listener, router)
         .with_graceful_shutdown(shutdown_signal())
         .await?;
 
-    for task in &tasks {
-        task.abort();
+    shutdown.cancel();
+    for task in tasks {
+        let _ = task.await;
     }
 
     log::info!("shutting down");

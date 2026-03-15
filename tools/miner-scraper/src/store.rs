@@ -7,6 +7,7 @@ use std::collections::HashMap;
 use std::sync::Arc;
 
 use tokio::sync::{mpsc, RwLock};
+use tokio_util::sync::CancellationToken;
 
 use crate::metrics::Metric;
 
@@ -79,13 +80,19 @@ impl Store {
     ///
     /// Runs until the channel is closed (all senders dropped). An empty metrics
     /// vec removes the host from the store.
-    pub async fn run(mut self) {
-        while let Some((host, metrics)) = self.receiver.recv().await {
-            let mut store = self.handle.inner.write().await;
-            if metrics.is_empty() {
-                store.remove(&host);
-            } else {
-                store.insert(host, metrics);
+    pub async fn run(mut self, shutdown: CancellationToken) {
+        loop {
+            tokio::select! {
+                () = shutdown.cancelled() => break,
+                message = self.receiver.recv() => {
+                    let Some((host, metrics)) = message else { break };
+                    let mut store = self.handle.inner.write().await;
+                    if metrics.is_empty() {
+                        store.remove(&host);
+                    } else {
+                        store.insert(host, metrics);
+                    }
+                }
             }
         }
     }

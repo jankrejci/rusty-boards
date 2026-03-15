@@ -11,6 +11,7 @@ use anyhow::Result;
 
 use tokio::sync::{mpsc, watch};
 use tokio::task::JoinHandle;
+use tokio_util::sync::CancellationToken;
 
 use crate::config::ScrapingIntervals;
 use crate::endpoint::{self, Endpoint, Firmware, Response, ScrapeTier, ENDPOINTS};
@@ -103,7 +104,7 @@ impl Scraper {
     /// Groups endpoints by tier and uses `tokio::select!` with per-tier
     /// intervals to scrape each tier at its configured rate. Only one tier
     /// scrapes at a time to avoid overwhelming the miner.
-    pub async fn run(&self, intervals: &ScrapingIntervals) {
+    pub async fn run(&self, intervals: &ScrapingIntervals, shutdown: CancellationToken) {
         if self.endpoints.is_empty() {
             log::warn!("{}: no endpoints, nothing to scrape", self.host);
             return;
@@ -133,7 +134,8 @@ impl Scraper {
         let mut low_interval = tokio::time::interval(intervals.tier_low_secs);
 
         loop {
-            let result = tokio::select! {
+            let scrape_result = tokio::select! {
+                () = shutdown.cancelled() => return,
                 _ = high_interval.tick(), if !high.is_empty() => {
                     self.scrape_tier(&high).await
                 }
@@ -144,7 +146,7 @@ impl Scraper {
                     self.scrape_tier(&low).await
                 }
             };
-            if result.is_err() {
+            if scrape_result.is_err() {
                 return;
             }
         }
@@ -205,24 +207,12 @@ impl Scraper {
 /// Manages per-host scraper lifecycles based on config changes.
 ///
 /// Watches the config channel for target list changes. Spawns a new scraper
-/// task for each new target and cancels tasks for removed targets.
-/// Manages per-host scraper lifecycles based on config changes.
-///
-/// Watches the config channel for target list changes. Spawns a new scraper
 /// task for each new target and cancels tasks for removed targets. Child tasks
-/// are aborted on drop so no orphaned scrapers survive a shutdown.
+/// are cancelled via `CancellationToken` for graceful shutdown.
 pub struct ScraperManager {
     config_receiver: watch::Receiver<crate::config::Config>,
     metrics_sender: mpsc::Sender<(String, Vec<Metric>)>,
     tasks: HashMap<String, JoinHandle<()>>,
-}
-
-impl Drop for ScraperManager {
-    fn drop(&mut self) {
-        for handle in self.tasks.values() {
-            handle.abort();
-        }
-    }
 }
 
 impl ScraperManager {
@@ -237,7 +227,7 @@ impl ScraperManager {
         }
     }
 
-    pub async fn run(mut self) {
+    pub async fn run(mut self, shutdown: CancellationToken) {
         loop {
             let config = self.config_receiver.borrow_and_update().clone();
 
@@ -264,6 +254,7 @@ impl ScraperManager {
                 let metrics_sender = self.metrics_sender.clone();
                 let intervals = config.scraping_intervals.clone();
                 let target_owned = target.clone();
+                let token = shutdown.child_token();
                 let handle = tokio::spawn(async move {
                     let host: IpAddr = match target_owned.parse() {
                         Ok(ip) => ip,
@@ -277,15 +268,27 @@ impl ScraperManager {
                         log::warn!("{host}: {err}");
                         return;
                     }
-                    scraper.run(&intervals).await;
+                    scraper.run(&intervals, token).await;
                 });
                 self.tasks.insert(target.clone(), handle);
             }
 
-            if self.config_receiver.changed().await.is_err() {
-                log::info!("config channel closed, stopping scrapers");
-                break;
+            tokio::select! {
+                () = shutdown.cancelled() => {
+                    log::info!("shutdown signal received, stopping scrapers");
+                    break;
+                }
+                result = self.config_receiver.changed() => {
+                    if result.is_err() {
+                        log::info!("config channel closed, stopping scrapers");
+                        break;
+                    }
+                }
             }
+        }
+
+        for (_, task) in self.tasks.drain() {
+            let _ = task.await;
         }
     }
 }
