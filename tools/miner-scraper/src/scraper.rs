@@ -118,8 +118,7 @@ impl Scraper {
 
         // Insert endpoints ordered by tier priority: high, mid, low.
         // StreamMap polls in insertion order, so higher-priority tiers win ties.
-        let tier_order = [ScrapeTier::High, ScrapeTier::Mid, ScrapeTier::Low];
-        for &tier in &tier_order {
+        for &tier in &ScrapeTier::priority_order() {
             let tier_duration = match tier {
                 ScrapeTier::High => intervals.tier_high_secs,
                 ScrapeTier::Mid => intervals.tier_mid_secs,
@@ -156,7 +155,7 @@ impl Scraper {
             tokio::select! {
                 () = shutdown.cancelled() => return,
                 Some((endpoint, _)) = streams.next() => {
-                    if let Err(err) = self.scrape_endpoint(&endpoint).await {
+                    if let Err(err) = self.scrape(&endpoint).await {
                         log::warn!("{}: {err}", self.host);
                         return;
                     }
@@ -168,7 +167,7 @@ impl Scraper {
     /// Scrape a single endpoint and send the metrics through the channel.
     ///
     /// Returns an error if the channel is closed and the scraper should stop.
-    async fn scrape_endpoint(&self, endpoint: &Endpoint) -> Result<()> {
+    async fn scrape(&self, endpoint: &Endpoint) -> Result<()> {
         let host_label = self.host.to_string();
 
         let response = match endpoint.fetch(self.host).await {

@@ -40,6 +40,13 @@ pub enum ScrapeTier {
     Low,
 }
 
+impl ScrapeTier {
+    /// Return tiers in priority order from highest to lowest.
+    pub const fn priority_order() -> [ScrapeTier; 3] {
+        [ScrapeTier::High, ScrapeTier::Mid, ScrapeTier::Low]
+    }
+}
+
 /// Response from a miner endpoint.
 pub enum Response {
     /// Parsed JSON from a cgminer TCP command.
