@@ -3,12 +3,14 @@
 //! Each miner target gets a `Scraper` that detects firmware, probes available
 //! endpoints, and scrapes metrics on a per-tier schedule using `tokio::select!`.
 
+use std::collections::HashMap;
 use std::net::IpAddr;
 use std::time::Duration;
 
 use anyhow::Result;
 
-use tokio::sync::mpsc;
+use tokio::sync::{mpsc, watch};
+use tokio::task::JoinHandle;
 
 use crate::config::ScrapingIntervals;
 use crate::endpoint::{self, Endpoint, Firmware, Response, ScrapeTier, ENDPOINTS};
@@ -197,5 +199,80 @@ impl Scraper {
             .map_err(|_| anyhow::anyhow!("channel closed"))?;
 
         Ok(())
+    }
+}
+
+/// Manages per-host scraper lifecycles based on config changes.
+///
+/// Watches the config channel for target list changes. Spawns a new scraper
+/// task for each new target and cancels tasks for removed targets.
+pub struct ScraperManager {
+    config_rx: watch::Receiver<crate::config::Config>,
+    tx: mpsc::Sender<(String, Vec<Metric>)>,
+}
+
+impl ScraperManager {
+    pub fn new(
+        config_rx: watch::Receiver<crate::config::Config>,
+        tx: mpsc::Sender<(String, Vec<Metric>)>,
+    ) -> Self {
+        Self { config_rx, tx }
+    }
+
+    pub async fn run(mut self) {
+        let mut tasks: HashMap<String, JoinHandle<()>> = HashMap::new();
+
+        loop {
+            let config = self.config_rx.borrow_and_update().clone();
+
+            // Cancel tasks for removed targets.
+            let stale: Vec<String> = tasks
+                .keys()
+                .filter(|host| !config.targets.contains(host))
+                .cloned()
+                .collect();
+            for host in stale {
+                if let Some(handle) = tasks.remove(&host) {
+                    handle.abort();
+                }
+                let _ = self.tx.send((host.clone(), Vec::new())).await;
+                log::info!("removed stale host {host}");
+            }
+
+            // Spawn a scraper for each new target.
+            for target in &config.targets {
+                if tasks.contains_key(target) {
+                    continue;
+                }
+                let tx = self.tx.clone();
+                let intervals = config.scraping_intervals.clone();
+                let target_owned = target.clone();
+                let handle = tokio::spawn(async move {
+                    let host: IpAddr = match target_owned.parse() {
+                        Ok(ip) => ip,
+                        Err(err) => {
+                            log::error!("{target_owned}: invalid IP address: {err}");
+                            return;
+                        }
+                    };
+                    let mut scraper = Scraper::new(host, tx);
+                    if let Err(err) = scraper.init().await {
+                        log::warn!("{host}: {err}");
+                        return;
+                    }
+                    scraper.run(&intervals).await;
+                });
+                tasks.insert(target.clone(), handle);
+            }
+
+            if self.config_rx.changed().await.is_err() {
+                log::info!("config channel closed, stopping scrapers");
+                break;
+            }
+        }
+
+        for (_, handle) in tasks {
+            handle.abort();
+        }
     }
 }
