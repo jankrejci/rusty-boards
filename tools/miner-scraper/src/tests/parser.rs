@@ -18,6 +18,7 @@ const BRAIINS_DEVDETAILS: &str =
 const LUXOS_POWER: &str = include_str!("../../dumps/luxos-cgminer-power-s21pro.json");
 const MARA_SUMMARY: &str = include_str!("../../dumps/mara-cgminer-summary-s21imm.json");
 const VNISH_SUMMARY: &str = include_str!("../../dumps/vnish-cgminer-summary-s21.json");
+const STOCK_READVOL: &str = include_str!("../../dumps/stock-6060-readvol-s21xp.txt");
 
 fn find_metric<'a>(lines: &'a [String], name: &str) -> Vec<&'a String> {
     lines
@@ -31,12 +32,11 @@ fn parse_json(data: &str) -> serde_json::Value {
 }
 
 fn parse_to_lines(host: &str, data: &str) -> Vec<String> {
-    let mut value = parse_json(data);
-    let metrics = parse_response(&mut value);
+    let value = parse_json(data);
+    let metrics = JsonParser::new(value).parse();
     metrics
         .into_iter()
         .map(|m| {
-            // ParsedLine always has name and value.
             MetricBuilder::default()
                 .name(m.name)
                 .label("host", host)
@@ -188,7 +188,7 @@ fn field_value_empty_array() {
 fn preprocess_dash_string_to_array() {
     let mut obj = serde_json::Map::new();
     obj.insert("temp_pcb1".into(), serde_json::json!("43-58-65-63"));
-    preprocess(&mut obj);
+    JsonParser::preprocess(&mut obj);
     assert_eq!(
         obj["temp_pcb1"],
         serde_json::json!([43.0, 58.0, 65.0, 63.0])
@@ -200,7 +200,7 @@ fn preprocess_leaves_non_dash_strings() {
     let mut obj = serde_json::Map::new();
     obj.insert("miner_id".into(), serde_json::json!("no miner id now"));
     obj.insert("chain_rate1".into(), serde_json::json!("90858.66"));
-    preprocess(&mut obj);
+    JsonParser::preprocess(&mut obj);
     assert_eq!(obj["miner_id"], serde_json::json!("no miner id now"));
     assert_eq!(obj["chain_rate1"], serde_json::json!("90858.66"));
 }
@@ -209,7 +209,7 @@ fn preprocess_leaves_non_dash_strings() {
 fn preprocess_leaves_numbers() {
     let mut obj = serde_json::Map::new();
     obj.insert("fan1".into(), serde_json::json!(3540));
-    preprocess(&mut obj);
+    JsonParser::preprocess(&mut obj);
     assert_eq!(obj["fan1"], serde_json::json!(3540));
 }
 
@@ -217,7 +217,7 @@ fn preprocess_leaves_numbers() {
 fn preprocess_all_zeros() {
     let mut obj = serde_json::Map::new();
     obj.insert("temp_pcb4".into(), serde_json::json!("0-0-0-0"));
-    preprocess(&mut obj);
+    JsonParser::preprocess(&mut obj);
     assert_eq!(obj["temp_pcb4"], serde_json::json!([0.0, 0.0, 0.0, 0.0]));
 }
 
@@ -443,7 +443,7 @@ fn braiins_all_dumps_produce_metrics() {
         BRAIINS_DEVDETAILS,
     ] {
         let value = parse_json(data);
-        if !crate::endpoint::is_error(&value) {
+        if !crate::endpoint::is_error(&crate::endpoint::Response::Json(value.clone())) {
             lines.extend(parse_to_lines("10.0.0.1", data));
         }
     }
@@ -459,7 +459,7 @@ fn luxos_all_dumps_produce_metrics() {
     let mut lines = Vec::new();
     for data in [LUXOS_STATS, LUXOS_TEMPS, LUXOS_FANS, LUXOS_POWER] {
         let value = parse_json(data);
-        if !crate::endpoint::is_error(&value) {
+        if !crate::endpoint::is_error(&crate::endpoint::Response::Json(value.clone())) {
             lines.extend(parse_to_lines("10.0.0.1", data));
         }
     }
@@ -509,4 +509,36 @@ fn skips_status_and_id() {
         );
     }
     assert!(find_metric(&lines, "stats_id").is_empty());
+}
+
+// --- PlainParser tests ---
+
+#[test]
+fn plain_readvol_extracts_voltage() {
+    let lines = PlainParser::new(STOCK_READVOL.to_string(), "readvol".to_string()).parse();
+    let voltage = lines.iter().find(|l| l.name == "readvol_voltage");
+    assert!(voltage.is_some(), "expected readvol_voltage metric");
+    assert_eq!(voltage.expect("BUG: checked above").value, 1390.0);
+}
+
+#[test]
+fn plain_readvol_extracts_feedback() {
+    let lines = PlainParser::new(STOCK_READVOL.to_string(), "readvol".to_string()).parse();
+    let feedback = lines.iter().find(|l| l.name == "readvol_feedback");
+    assert!(feedback.is_some(), "expected readvol_feedback metric");
+    assert!((feedback.expect("BUG: checked above").value - 13.875659).abs() < 0.0001);
+}
+
+#[test]
+fn plain_readvol_extracts_power_status() {
+    let lines = PlainParser::new(STOCK_READVOL.to_string(), "readvol".to_string()).parse();
+    let power = lines.iter().find(|l| l.name == "readvol_power_status");
+    assert!(power.is_some(), "expected readvol_power_status metric");
+    assert_eq!(power.expect("BUG: checked above").value, 0.0);
+}
+
+#[test]
+fn plain_unknown_command_returns_empty() {
+    let lines = PlainParser::new("random text".to_string(), "unknown".to_string()).parse();
+    assert!(lines.is_empty());
 }

@@ -7,12 +7,13 @@ use std::net::IpAddr;
 use std::time::Duration;
 
 use anyhow::Result;
+
 use tokio::sync::mpsc;
 
-use crate::config::TierIntervals;
-use crate::endpoint::{self, Endpoint, Firmware, ScrapeTier, ENDPOINTS};
+use crate::config::ScrapingIntervals;
+use crate::endpoint::{self, Endpoint, Firmware, Response, ScrapeTier, ENDPOINTS};
 use crate::metrics::{Metric, MetricBuilder};
-use crate::parser;
+use crate::parser::{JsonParser, Parser, PlainParser};
 
 /// Delay between probing individual endpoints to avoid overwhelming the miner.
 const PROBE_DELAY: Duration = Duration::from_secs(1);
@@ -44,17 +45,15 @@ impl Scraper {
     ///
     /// Returns an error if no endpoints are available after probing.
     pub async fn init(&mut self) -> Result<()> {
-        let host_str = self.host.to_string();
-
         match self.detect_firmware().await {
-            Ok(firmware) => log::info!("{host_str}: detected {firmware} firmware"),
-            Err(err) => log::warn!("{host_str}: firmware detection failed: {err}"),
+            Ok(firmware) => log::info!("{}: detected {firmware} firmware", self.host),
+            Err(err) => log::warn!("{}: firmware detection failed: {err}", self.host),
         }
 
         self.probe_endpoints().await;
 
         if self.endpoints.is_empty() {
-            anyhow::bail!("{host_str}: no endpoints available");
+            anyhow::bail!("{}: no endpoints available", self.host);
         }
 
         Ok(())
@@ -62,9 +61,8 @@ impl Scraper {
 
     /// Detect the firmware running on a miner by sending a stats command.
     async fn detect_firmware(&self) -> Result<Firmware> {
-        let host_str = self.host.to_string();
-        let stats = FW_DETECT_ENDPOINT.fetch(&host_str).await?;
-        Ok(Firmware::identify(&stats))
+        let response = FW_DETECT_ENDPOINT.fetch(self.host).await?;
+        Ok(Firmware::identify(&response))
     }
 
     /// Probe all known endpoints sequentially and keep the supported ones.
@@ -72,23 +70,24 @@ impl Scraper {
     /// Sends each endpoint command with a delay between probes to avoid
     /// overwhelming the miner.
     async fn probe_endpoints(&mut self) {
-        let host_str = self.host.to_string();
         for &endpoint in ENDPOINTS {
-            match endpoint.fetch(&host_str).await {
-                Ok(ref resp) if !endpoint::is_error(resp) => {
+            match endpoint.fetch(self.host).await {
+                Ok(ref response) if !endpoint::is_error(response) => {
+                    log::info!("{}: {} supported", self.host, endpoint.command());
                     self.endpoints.push(endpoint);
                 }
                 Ok(_) => {
-                    log::debug!("{} returned error on {host_str}", endpoint.command());
+                    log::debug!("{}: {} returned error", self.host, endpoint.command());
                 }
                 Err(_) => {
-                    log::debug!("{} not supported on {host_str}", endpoint.command());
+                    log::debug!("{}: {} not supported", self.host, endpoint.command());
                 }
             }
             tokio::time::sleep(PROBE_DELAY).await;
         }
         log::info!(
-            "{host_str}: probed {} endpoints: {:?}",
+            "{}: probed {} endpoints: {:?}",
+            self.host,
             self.endpoints.len(),
             self.endpoints
                 .iter()
@@ -102,7 +101,7 @@ impl Scraper {
     /// Groups endpoints by tier and uses `tokio::select!` with per-tier
     /// intervals to scrape each tier at its configured rate. Only one tier
     /// scrapes at a time to avoid overwhelming the miner.
-    pub async fn run(&self, tiers: &TierIntervals) {
+    pub async fn run(&self, intervals: &ScrapingIntervals) {
         if self.endpoints.is_empty() {
             log::warn!("{}: no endpoints, nothing to scrape", self.host);
             return;
@@ -127,64 +126,76 @@ impl Scraper {
             .filter(|endpoint| endpoint.tier() == ScrapeTier::Low)
             .collect();
 
-        let mut high_interval = tokio::time::interval(Duration::from_secs(tiers.high_secs));
-        let mut mid_interval = tokio::time::interval(Duration::from_secs(tiers.mid_secs));
-        let mut low_interval = tokio::time::interval(Duration::from_secs(tiers.low_secs));
+        let mut high_interval = tokio::time::interval(intervals.tier_high_secs);
+        let mut mid_interval = tokio::time::interval(intervals.tier_mid_secs);
+        let mut low_interval = tokio::time::interval(intervals.tier_low_secs);
 
         loop {
-            tokio::select! {
+            let result = tokio::select! {
                 _ = high_interval.tick(), if !high.is_empty() => {
-                    if !self.scrape_tier(&high).await {
-                        return;
-                    }
+                    self.scrape_tier(&high).await
                 }
                 _ = mid_interval.tick(), if !mid.is_empty() => {
-                    if !self.scrape_tier(&mid).await {
-                        return;
-                    }
+                    self.scrape_tier(&mid).await
                 }
                 _ = low_interval.tick(), if !low.is_empty() => {
-                    if !self.scrape_tier(&low).await {
-                        return;
-                    }
+                    self.scrape_tier(&low).await
                 }
+            };
+            if result.is_err() {
+                return;
             }
         }
     }
 
     /// Scrape a set of endpoints and send the metrics through the channel.
     ///
-    /// Returns `false` if the channel is closed and the scraper should stop.
-    async fn scrape_tier(&self, endpoints: &[Endpoint]) -> bool {
-        let host_str = self.host.to_string();
-        let mut metrics = Vec::new();
+    /// Returns an error if the channel is closed and the scraper should stop.
+    async fn scrape_tier(&self, endpoints: &[Endpoint]) -> Result<()> {
+        let host_label = self.host.to_string();
+        let mut batch = Vec::new();
 
         for &endpoint in endpoints {
-            match endpoint.fetch(&host_str).await {
-                Ok(mut resp) => {
-                    let parsed = parser::parse_response(&mut resp);
-                    for line in parsed {
-                        // ParsedLine always has name and value.
-                        let metric = MetricBuilder::default()
-                            .name(line.name)
-                            .label("host", &host_str)
-                            .extend_labels(line.labels)
-                            .value(line.value)
-                            .build()
-                            .expect("BUG: ParsedLine always has name and value");
-                        metrics.push(metric);
-                    }
-                }
+            let response = match endpoint.fetch(self.host).await {
+                Ok(response) => response,
                 Err(err) => {
-                    log::warn!("{host_str}/{}: {err}", endpoint.command());
+                    log::warn!("{host_label}/{}: {err}", endpoint.command());
+                    continue;
                 }
-            }
+            };
+
+            let lines = match response {
+                Response::Json(value) => JsonParser::new(value).parse(),
+                Response::Text(text) => {
+                    PlainParser::new(text, endpoint.command().to_string()).parse()
+                }
+            };
+
+            let metrics: Vec<Metric> = lines
+                .into_iter()
+                .map(|line| {
+                    MetricBuilder::default()
+                        .name(line.name)
+                        .label("host", &host_label)
+                        .extend_labels(line.labels)
+                        .value(line.value)
+                        .build()
+                        .expect("BUG: ParsedLine always has name and value")
+                })
+                .collect();
+
+            batch.extend(metrics);
         }
 
-        if metrics.is_empty() {
-            return true;
+        if batch.is_empty() {
+            return Ok(());
         }
 
-        self.tx.send((host_str, metrics)).await.is_ok()
+        self.tx
+            .send((host_label, batch))
+            .await
+            .map_err(|_| anyhow::anyhow!("channel closed"))?;
+
+        Ok(())
     }
 }
