@@ -15,7 +15,7 @@ fn test_metric(name: &str, value: f64) -> Metric {
 /// The store itself is not started since tests interact through the handle.
 fn test_handle() -> StoreState {
     let (_tx, rx) = mpsc::channel(1);
-    Store::new(rx).handle()
+    Store::new(rx).state()
 }
 
 #[tokio::test]

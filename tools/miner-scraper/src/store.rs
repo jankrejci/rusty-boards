@@ -70,8 +70,8 @@ impl Store {
         }
     }
 
-    /// Return a read-only handle for the HTTP handler.
-    pub fn handle(&self) -> StoreState {
+    /// Return a read-only view for the HTTP handler.
+    pub fn state(&self) -> StoreState {
         self.handle.clone()
     }
 
